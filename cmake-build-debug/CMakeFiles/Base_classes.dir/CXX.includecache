@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
+iostream
+-
+iterator
+-
+cstring
+-
+
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+../DynamicArray/myDynamicArray.h
+/cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
+
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+
+/cygdrive/c/cc++ labs/Base classes/main.cpp
+iostream
+-
+tuple
+-
+vector
+-
+iterator
+-
+DynamicArray/myDynamicArray.h
+/cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
+Sequence/myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+
