@@ -21,6 +21,22 @@ mySequence.h
 /cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
 
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+iostream
+-
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 
 /cygdrive/c/cc++ labs/Base classes/main.cpp
 iostream
@@ -35,4 +51,8 @@ DynamicArray/myDynamicArray.h
 /cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
 Sequence/myArraySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+Sorting/BubbleSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
+Sorting/SheikerSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
 

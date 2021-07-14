@@ -5,7 +5,9 @@
 #ifndef BASE_CLASSES_MYSEQUENCE_H
 #define BASE_CLASSES_MYSEQUENCE_H
 
-template<class T>
+#include <iostream>
+
+template<typename T>
 class mySequence {
 public:
     class IndexOutOfRange{
@@ -16,11 +18,16 @@ public:
         IndexOutOfRange() = default;
     };
 
+    class iterator {
+
+    };
+
     virtual T getFirst() const = 0;
     virtual T getLast() const = 0;
     virtual T get(size_t index) const = 0;
     virtual void set(T item, size_t index) = 0;
     virtual T& operator [] (size_t index) const = 0;
+    virtual void swap(size_t index1, size_t index2) = 0;
 
     virtual mySequence<T>& getSubSequence(
             size_t startIndex, size_t endIndex) const = 0;

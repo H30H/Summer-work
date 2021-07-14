@@ -92,6 +92,21 @@
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h">
 			<Option target="Base_classes"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.cpp">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.cpp">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h">
+			<Option target="Base_classes"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/main.cpp">
 			<Option target="Base_classes"/>
 		</Unit>

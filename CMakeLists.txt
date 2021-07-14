@@ -3,4 +3,4 @@ project(Base_classes)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Base_classes main.cpp DynamicArray/myDynamicArray.cpp DynamicArray/myDynamicArray.h Sequence/mySequence.h Sequence/myArraySequence.h)
+add_executable(Base_classes main.cpp DynamicArray/myDynamicArray.cpp DynamicArray/myDynamicArray.h Sequence/mySequence.h Sequence/myArraySequence.h Sorting/BubbleSort.cpp Sorting/SheikerSort.cpp Sorting/isLessDefault.h)

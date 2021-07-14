@@ -110,6 +110,15 @@ public:
         return dynamicArray[index];
     }
 
+    void swap(size_t index1, size_t index2) {
+        if (index1 >= size)
+            throw typename mySequence<T>::IndexOutOfRange();
+        if (index2 >= size)
+            throw typename mySequence<T>::IndexOutOfRange();
+
+        dynamicArray.swap(index1, index2);
+    }
+
     myArraySequence<T>& getSubSequence(
             size_t startIndex, size_t endIndex) const {
         if (startIndex >= size)
