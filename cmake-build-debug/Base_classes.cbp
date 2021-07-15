@@ -92,10 +92,13 @@
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h">
 			<Option target="Base_classes"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/ChoiceSort.h">
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h">
 			<Option target="Base_classes"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h">
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h">
 			<Option target="Base_classes"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h">

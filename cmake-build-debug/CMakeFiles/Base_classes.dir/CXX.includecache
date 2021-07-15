@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.cpp
-myDynamicArray.h
-/cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
-
 /cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
 iostream
 -
@@ -34,17 +30,25 @@ iostream
 isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 
-/cygdrive/c/cc++ labs/Base classes/Sorting/ChoiceSort.h
-isLessDefault.h
-/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
-../Sequence/mySequence.h
-/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
-
 /cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
 isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 ../Sequence/mySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+iostream
+/cygdrive/c/cc++ labs/Base classes/Sorting/iostream
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
 ../Sequence/mySequence.h
@@ -59,8 +63,10 @@ InsertSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
 SheikerSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
-ChoiceSort.h
-/cygdrive/c/cc++ labs/Base classes/Sorting/ChoiceSort.h
+SelectionSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
+SelectionSortMod.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 

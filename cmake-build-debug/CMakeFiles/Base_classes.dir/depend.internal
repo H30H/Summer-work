@@ -9,8 +9,9 @@ CMakeFiles/Base_classes.dir/main.cpp.o
  /cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
  /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
- /cygdrive/c/cc++ labs/Base classes/Sorting/ChoiceSort.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
