@@ -4,21 +4,14 @@
 CMakeFiles/Base_classes.dir/DynamicArray/myDynamicArray.cpp.o
  /cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.cpp
  /cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
-CMakeFiles/Base_classes.dir/Sorting/BubbleSort.cpp.o
- /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
- /cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.cpp
- /cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
- /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
-CMakeFiles/Base_classes.dir/Sorting/SheikerSort.cpp.o
- /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
- /cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.cpp
- /cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
- /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 CMakeFiles/Base_classes.dir/main.cpp.o
  /cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
  /cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
  /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/ChoiceSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
  /cygdrive/c/cc++ labs/Base classes/main.cpp

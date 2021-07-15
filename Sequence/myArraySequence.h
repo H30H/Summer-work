@@ -116,6 +116,9 @@ public:
         if (index2 >= size)
             throw typename mySequence<T>::IndexOutOfRange();
 
+        if (index1 == index2)
+            return;
+
         dynamicArray.swap(index1, index2);
     }
 

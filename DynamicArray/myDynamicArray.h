@@ -239,6 +239,9 @@ public:
         if (index2 >= size)
             throw indexOutOfRange();
 
+        if (index1 == index2)
+            return;
+
         T* item = new T(array[index1]);
         memcpy(array + index1, array + index2, sizeof(T));
         memcpy(array + index2, item, sizeof(T));

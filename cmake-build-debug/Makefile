@@ -169,60 +169,6 @@ DynamicArray/myDynamicArray.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/DynamicArray/myDynamicArray.cpp.s
 .PHONY : DynamicArray/myDynamicArray.cpp.s
 
-Sorting/BubbleSort.o: Sorting/BubbleSort.cpp.o
-
-.PHONY : Sorting/BubbleSort.o
-
-# target to build an object file
-Sorting/BubbleSort.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sorting/BubbleSort.cpp.o
-.PHONY : Sorting/BubbleSort.cpp.o
-
-Sorting/BubbleSort.i: Sorting/BubbleSort.cpp.i
-
-.PHONY : Sorting/BubbleSort.i
-
-# target to preprocess a source file
-Sorting/BubbleSort.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sorting/BubbleSort.cpp.i
-.PHONY : Sorting/BubbleSort.cpp.i
-
-Sorting/BubbleSort.s: Sorting/BubbleSort.cpp.s
-
-.PHONY : Sorting/BubbleSort.s
-
-# target to generate assembly for a file
-Sorting/BubbleSort.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sorting/BubbleSort.cpp.s
-.PHONY : Sorting/BubbleSort.cpp.s
-
-Sorting/SheikerSort.o: Sorting/SheikerSort.cpp.o
-
-.PHONY : Sorting/SheikerSort.o
-
-# target to build an object file
-Sorting/SheikerSort.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sorting/SheikerSort.cpp.o
-.PHONY : Sorting/SheikerSort.cpp.o
-
-Sorting/SheikerSort.i: Sorting/SheikerSort.cpp.i
-
-.PHONY : Sorting/SheikerSort.i
-
-# target to preprocess a source file
-Sorting/SheikerSort.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sorting/SheikerSort.cpp.i
-.PHONY : Sorting/SheikerSort.cpp.i
-
-Sorting/SheikerSort.s: Sorting/SheikerSort.cpp.s
-
-.PHONY : Sorting/SheikerSort.s
-
-# target to generate assembly for a file
-Sorting/SheikerSort.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sorting/SheikerSort.cpp.s
-.PHONY : Sorting/SheikerSort.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -262,12 +208,6 @@ help:
 	@echo "... DynamicArray/myDynamicArray.o"
 	@echo "... DynamicArray/myDynamicArray.i"
 	@echo "... DynamicArray/myDynamicArray.s"
-	@echo "... Sorting/BubbleSort.o"
-	@echo "... Sorting/BubbleSort.i"
-	@echo "... Sorting/BubbleSort.s"
-	@echo "... Sorting/SheikerSort.o"
-	@echo "... Sorting/SheikerSort.i"
-	@echo "... Sorting/SheikerSort.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -4,8 +4,7 @@
 #include <iterator>
 #include "DynamicArray/myDynamicArray.h"
 #include "Sequence/myArraySequence.h"
-#include "Sorting/BubbleSort.h"
-#include "Sorting/SheikerSort.h"
+#include "Sorting/allSorts.h"
 
 template <class...Args>
 int sum(Args&&... args) {
@@ -50,7 +49,7 @@ int main() {
          << ' ' << arraySequence.find(arraySequence1) << ' ' << arraySequence.find(myArraySequence<int>{7, 8, 9}) << endl;
     arraySequence.reverse();
     cout << arraySequence << endl;
-    SheikerSort(arraySequence);
+    ChoiceSort(arraySequence);
     cout << arraySequence << endl;
 
     return 0;
