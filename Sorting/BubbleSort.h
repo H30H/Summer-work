@@ -9,12 +9,7 @@
 #include "isLessDefault.h"
 
 template<typename T>
-void bubbleSort(mySequence<T>& sequence) {
-    bubbleSort(sequence, isLessDefault);
-}
-
-template<typename T>
-void bubbleSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+void BubbleSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
     bool isChanged = true;
     int count = sequence.length();
     while(isChanged) {
@@ -27,6 +22,11 @@ void bubbleSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& 
         }
         count--;
     }
+}
+
+template<typename T>
+void BubbleSort(mySequence<T>& sequence) {
+    BubbleSort(sequence, isLessDefault);
 }
 
 #endif //BASE_CLASSES_BUBBLESORT_H
