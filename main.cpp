@@ -49,7 +49,7 @@ int main() {
          << ' ' << arraySequence.find(arraySequence1) << ' ' << arraySequence.find(myArraySequence<int>{7, 8, 9}) << endl;
     arraySequence.reverse();
     cout << arraySequence << endl;
-    ChoiceSort(arraySequence);
+    SelectionSort(arraySequence);
     cout << arraySequence << endl;
 
     return 0;

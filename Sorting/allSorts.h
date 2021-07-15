@@ -8,7 +8,7 @@
 #include "BubbleSort.h"
 #include "InsertSort.h"
 #include "SheikerSort.h"
-#include "ChoiceSort.h"
+#include "SelectionSort.h"
 
 
 #endif //BASE_CLASSES_ALLSORTS_H
