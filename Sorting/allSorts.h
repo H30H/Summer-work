@@ -9,6 +9,7 @@
 #include "InsertSort.h"
 #include "SheikerSort.h"
 #include "SelectionSort.h"
+#include "SelectionSortMod.h"
 
 
 #endif //BASE_CLASSES_ALLSORTS_H
