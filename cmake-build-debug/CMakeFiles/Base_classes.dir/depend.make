@@ -7,8 +7,11 @@ CMakeFiles/Base_classes.dir/DynamicArray/myDynamicArray.cpp.o: ../DynamicArray/m
 CMakeFiles/Base_classes.dir/main.cpp.o: ../DynamicArray/myDynamicArray.h
 CMakeFiles/Base_classes.dir/main.cpp.o: ../Sequence/myArraySequence.h
 CMakeFiles/Base_classes.dir/main.cpp.o: ../Sequence/mySequence.h
+CMakeFiles/Base_classes.dir/main.cpp.o: ../Sorting/BinInsertSort.h
 CMakeFiles/Base_classes.dir/main.cpp.o: ../Sorting/BubbleSort.h
+CMakeFiles/Base_classes.dir/main.cpp.o: ../Sorting/CountingSort.h
 CMakeFiles/Base_classes.dir/main.cpp.o: ../Sorting/InsertSort.h
+CMakeFiles/Base_classes.dir/main.cpp.o: ../Sorting/MergeSort.h
 CMakeFiles/Base_classes.dir/main.cpp.o: ../Sorting/SelectionSort.h
 CMakeFiles/Base_classes.dir/main.cpp.o: ../Sorting/SelectionSortMod.h
 CMakeFiles/Base_classes.dir/main.cpp.o: ../Sorting/SheikerSort.h

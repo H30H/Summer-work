@@ -24,17 +24,39 @@ mySequence.h
 iostream
 -
 
+/cygdrive/c/cc++ labs/Base classes/Sorting/BinInsertSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+
 /cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
 ../Sequence/mySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
 isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 
+/cygdrive/c/cc++ labs/Base classes/Sorting/CountingSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+map
+-
+
 /cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
 isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 ../Sequence/mySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/MergeSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+iostream
+/cygdrive/c/cc++ labs/Base classes/Sorting/iostream
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
 isLessDefault.h
@@ -47,8 +69,6 @@ isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 ../Sequence/mySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
-iostream
-/cygdrive/c/cc++ labs/Base classes/Sorting/iostream
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
 ../Sequence/mySequence.h
@@ -57,16 +77,22 @@ isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
+BinInsertSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/BinInsertSort.h
 BubbleSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
+CountingSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/CountingSort.h
 InsertSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
-SheikerSort.h
-/cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
+MergeSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/MergeSort.h
 SelectionSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
 SelectionSortMod.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h
+SheikerSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 

@@ -9,7 +9,7 @@
 #include "isLessDefault.h"
 
 template<typename T>
-void SheikerSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>& SheikerSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
     bool isChanged = true;
     size_t min = 0, max = sequence.length() - 1;
     while (isChanged) {
@@ -31,11 +31,12 @@ void SheikerSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T&
             }
         }
     }
+    return sequence;
 }
 
 template<typename T>
-void SheikerSort(mySequence<T>& sequence) {
-    SheikerSort(sequence, isLessDefault);
+mySequence<T>& SheikerSort(mySequence<T>& sequence) {
+    return SheikerSort(sequence, isLessDefault);
 }
 
 #endif //BASE_CLASSES_SHEIKERSORT_H

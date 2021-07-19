@@ -18,9 +18,7 @@ public:
         IndexOutOfRange() = default;
     };
 
-    class iterator {
-
-    };
+    class iterator;
 
     virtual T getFirst() const = 0;
     virtual T getLast() const = 0;
@@ -37,6 +35,7 @@ public:
     virtual void append (T item) = 0;
     virtual void prepend(T item) = 0;
     virtual void insert (T item, size_t index) = 0;
+    virtual void pop(size_t index) = 0;
 
     virtual mySequence<T>& concat (const mySequence<T>& sequence) = 0;
     virtual mySequence<T>& reverse() = 0;
@@ -45,5 +44,17 @@ public:
     virtual size_t find(const mySequence<T>& sequence) const = 0;
 };
 
+template<typename T>
+std::ostream& operator << (std::ostream& cout, const mySequence<T>& arraySequence) {
+    cout << "{";
+    for (int i = 0; i < arraySequence.length(); i++) {
+        cout << arraySequence[i];
+        if (i == arraySequence.length() - 1)
+            break;
+
+        cout << ", ";
+    }
+    return cout << "}";
+}
 
 #endif //BASE_CLASSES_MYSEQUENCE_H

@@ -58,6 +58,12 @@ public:
         resizePrivate(dynamicArray.length());
     }
 
+    explicit myArraySequence(const mySequence<T>& sequence) {
+        for (size_t i = 0; i < sequence.length(); i++) {
+            append(sequence[i]);
+        }
+    }
+
     myArraySequence(T* arr, size_t count) {
         resizePrivate(count);
         for (int i = 0; i < count; i++) {
@@ -155,6 +161,13 @@ public:
         dynamicArray[index] = item;
     }
 
+    void pop(size_t index) {
+        if (index >= size)
+            throw typename mySequence<T>::IndexOutOfRange();
+
+        resizePrivate(size - 1, -1, index);
+    }
+
     myArraySequence<T>& concat(const mySequence<T>& sequence) {
         auto startInd = size;
         resizePrivate(size + sequence.length());
@@ -196,18 +209,5 @@ public:
         return -1;
     }
 };
-
-template<typename T>
-std::ostream& operator << (std::ostream& cout, const myArraySequence<T>& arraySequence) {
-    cout << "{";
-    for (int i = 0; i < arraySequence.length(); i++) {
-        cout << arraySequence[i];
-        if (i == arraySequence.length() - 1)
-            break;
-
-        cout << ", ";
-    }
-    return cout << "}";
-}
 
 #endif //BASE_CLASSES_MYARRAYSEQUENCE_H

@@ -9,7 +9,7 @@
 #include "../Sequence/mySequence.h"
 
 template<typename T>
-void SelectionSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>& SelectionSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
     for (size_t i = 1; i < sequence.length(); i++) {
         size_t index_min = i-1;
         for (size_t j = i; j < sequence.length(); j++) {
@@ -20,11 +20,12 @@ void SelectionSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const 
         if (i-1 != index_min)
             sequence.swap(i-1, index_min);
     }
+    return sequence;
 }
 
 template<typename T>
-void SelectionSort(mySequence<T>& sequence) {
-    SelectionSort(sequence, isLessDefault);
+mySequence<T>& SelectionSort(mySequence<T>& sequence) {
+    return SelectionSort(sequence, isLessDefault);
 }
 
 #endif //BASE_CLASSES_SELECTIONSORT_H

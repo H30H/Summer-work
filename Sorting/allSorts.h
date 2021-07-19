@@ -5,11 +5,14 @@
 #ifndef BASE_CLASSES_ALLSORTS_H
 #define BASE_CLASSES_ALLSORTS_H
 
+#include "BinInsertSort.h"
 #include "BubbleSort.h"
+#include "CountingSort.h"
 #include "InsertSort.h"
-#include "SheikerSort.h"
+#include "MergeSort.h"
 #include "SelectionSort.h"
 #include "SelectionSortMod.h"
+#include "SheikerSort.h"
 
 
 #endif //BASE_CLASSES_ALLSORTS_H
