@@ -35,8 +35,15 @@ void testSort(size_t length, size_t count, int maxElem,
               mySequence<int>& (*sort)(mySequence<int>&, bool (*a)(const int&, const int&))) {
     size_t countErr = 0;
     for (size_t i = 0; i < count; i++) {
+        if (i%100 == 0) {
+            std::cout << i << std::endl;
+        }
         myArraySequence<int> sequence;
-        for (size_t j = 0; j < length; j++) {
+        size_t len = length;
+        if (len == -1) {
+            len = random()%1025;
+        }
+        for (size_t j = 0; j < len; j++) {
             sequence.append(random()%maxElem);
         }
         auto seq = sequence;
@@ -80,12 +87,7 @@ int main() {
 //    arraySequence.reverse();
 //    cout << arraySequence << endl;
 //    cout << BatcherSort(arraySequence) << endl;
-    cin >> u;
-    for (size_t i = 0; i < 10000000; i++) {
-        arraySequence.swap(0, 1);
-    }
-    cin >> u;
-    testSort(4096, 10000, 100, BatcherSort<int>);
-    cin >> u;
+
+    testSort(-1, 10000, 100, BatcherSort<int>);
     return 0;
 }

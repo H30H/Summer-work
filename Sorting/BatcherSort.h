@@ -14,6 +14,7 @@
 namespace sortFuncPrivate {
     bool checkLog2(size_t num) {
         auto res = log2((double) num);
+
         return fmod(res, 1) == 0;
     }
 
@@ -47,31 +48,57 @@ namespace sortFuncPrivate {
                 sequence.swap(i, j);
         }
     }
+
+    template<typename T>
+    void mergeSequence(mySequence<T>& sequence, size_t from, size_t to, size_t index,
+                       bool (*isLess)(const T& obj1, const T& obj2)) {
+        size_t ind1 = from, ind2 = index;
+        while(ind1 != index && ind2 != to) {
+            if (isLess(sequence[ind2], sequence[ind1])) {
+                sequence.insert(sequence[ind2], ind1);
+                sequence.pop(ind2+1);
+                ind1++;
+                ind2++;
+                index++;
+            }
+            else {
+                ind1++;
+            }
+        }
+    }
 }
 
 template<typename T>
-mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
+mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t from, size_t to,
+                           bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
     if (to <= from || to - from < 2) {
         return sequence;
     }
 
     size_t size = to - from;
-    for (size_t i = 2; i <= size; i*=2) {
+
+    if (!sortFuncPrivate::checkLog2(size)) { //если размер отрезка не равен степени двойки
+        myArraySequence<size_t> indexes(from);
+        while (size != 0) {                  //сортировка вложенных отрезков, длиной степени двойки
+            auto index = (size_t) pow(2, (size_t) log2(size));
+            size -= index;
+            index += indexes.getLast();
+            BatcherSort(sequence, indexes.getLast(), index, isLess);
+            indexes.append(index);
+        }
+
+        for (size_t i = indexes.length() - 1, j = 1; i >= 2; i--, j++) { //сортировка отсортированных отрезков
+            sortFuncPrivate::mergeSequence(sequence, indexes[i-2], indexes.getLast(), indexes[i-1], isLess);
+        }
+        return sequence;
+    }
+
+    for (size_t i = 2; i <= size; i*=2) { //сортировка отрезков, длина которых равна степени двойки
         for (size_t j = from; j + i <= to; j += i) {
             sortFuncPrivate::getBitonicSequence(sequence, j, j+i, isLess);             //преобразование отрезка к битонической последовательности
             sortFuncPrivate::sortBitonicSequence(sequence, j, j + i/2, isLess);        //сортировка левой части
             sortFuncPrivate::sortBitonicSequence(sequence, j + i/2, j+i, isLess);      //сортировка правой части
         }
-    }
-//    std::cout << sequence << std::endl;
-    if (!sortFuncPrivate::checkLog2(to - from)) { //когда количество элементов не равно степени двойки
-        //TODO приоритет: хуй знвет почему не работает (потом доделаю)
-        sortFuncPrivate::getBitonicSequence(sequence, from, to, isLess);               //преобразование отрезка к битонической последовательности
-//        std::cout << '-' << sequence << std::endl;
-        sortFuncPrivate::sortBitonicSequence(sequence, from, from + size/2, isLess);   //сортировка левой части
-//        std::cout << '-' << sequence << std::endl;
-        sortFuncPrivate::sortBitonicSequence(sequence, from + size/2, to, isLess);     //сортировка правой части
-//        std::cout << '-' << sequence << std::endl;
     }
 
     return sequence;

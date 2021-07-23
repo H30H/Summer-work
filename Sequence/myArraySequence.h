@@ -81,39 +81,67 @@ public:
         resizePrivate(dynamicArray.length());
     }
 
-    T getFirst() const {
+    T& getFirst() {
         if (size == 0)
             throw typename mySequence<T>::IndexOutOfRange();
 
         return dynamicArray[0];
     }
 
-    T getLast() const {
+    const T& getFirst() const {
+        if (size == 0)
+            throw typename mySequence<T>::IndexOutOfRange();
+
+        return dynamicArray[0];
+    }
+
+    T& getLast() {
         if (size == 0)
             throw typename mySequence<T>::IndexOutOfRange();
 
         return dynamicArray[size - 1];
     }
 
-    T get(size_t index) const {
+    const T& getLast() const {
+        if (size == 0)
+            throw typename mySequence<T>::IndexOutOfRange();
+
+        return dynamicArray[size - 1];
+    }
+
+    T& get(size_t index) {
         if (index >= size)
             throw typename mySequence<T>::IndexOutOfRange();
 
         return dynamicArray.get(index);
-    };
+    }
+
+    const T& get(size_t index) const {
+        if (index >= size)
+            throw typename mySequence<T>::IndexOutOfRange();
+
+        return dynamicArray.get(index);
+    }
+
+    T& operator [] (size_t index) {
+        if (index >= size)
+            throw typename mySequence<T>::IndexOutOfRange();
+
+        return dynamicArray[index];
+    }
+
+    const T& operator [] (size_t index) const {
+        if (index >= size)
+            throw typename mySequence<T>::IndexOutOfRange();
+
+        return dynamicArray[index];
+    }
 
     void set(T item, size_t index) {
         if (index >= size)
             throw typename mySequence<T>::IndexOutOfRange();
 
         dynamicArray.set(item, index);
-    }
-
-    T& operator [] (size_t index) const {
-        if (index >= size)
-            throw typename mySequence<T>::IndexOutOfRange();
-
-        return dynamicArray[index];
     }
 
     void swap(size_t index1, size_t index2) {

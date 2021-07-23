@@ -20,11 +20,19 @@ public:
 
     class iterator;
 
-    virtual T getFirst() const = 0;
-    virtual T getLast() const = 0;
-    virtual T get(size_t index) const = 0;
+    virtual T& getFirst() = 0;
+    virtual const T& getFirst() const = 0;
+
+    virtual T& getLast() = 0;
+    virtual const T& getLast() const = 0;
+
+    virtual T& get(size_t index) = 0;
+    virtual const T& get(size_t index) const = 0;
+
+    virtual T& operator [] (size_t index) = 0;
+    virtual const T& operator [] (size_t index) const = 0;
+
     virtual void set(T item, size_t index) = 0;
-    virtual T& operator [] (size_t index) const = 0;
     virtual void swap(size_t index1, size_t index2) = 0;
 
     virtual mySequence<T>& getSubSequence(

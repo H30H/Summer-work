@@ -149,7 +149,14 @@ public:
         delete[] array;
     }
 
-    T get(size_t index) const {
+    T& get(size_t index) {
+        if (index >= size)
+            throw indexOutOfRange();
+
+        return array[index];
+    }
+
+    const T& get(size_t index) const {
         if (index >= size)
             throw indexOutOfRange();
 
@@ -163,7 +170,14 @@ public:
         array[index] = size;
     }
 
-    T& operator [] (size_t index) const {
+    T& operator [] (size_t index) {
+        if (index >= size)
+            throw indexOutOfRange();
+
+        return array[index];
+    }
+
+    const T& operator [] (size_t index) const {
         if (index >= size)
             throw indexOutOfRange();
 
