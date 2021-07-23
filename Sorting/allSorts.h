@@ -5,6 +5,7 @@
 #ifndef BASE_CLASSES_ALLSORTS_H
 #define BASE_CLASSES_ALLSORTS_H
 
+#include "BatcerSort.h"
 #include "BinInsertSort.h"
 #include "BubbleSort.h"
 #include "CountingSort.h"

@@ -23,12 +23,12 @@ private:
 
     static void copyArr(size_t count, T* from, T* to, long intent) {
         if (intent < 0) {
-            for (size_t i = -intent, j = 0; i < count; i++, j++) {
-                to[j] = from[i];
+            for (size_t i = 0, j = -intent; j < count; i++, j++) {
+                to[i] = from[j];
             }
         }
         else {
-            for (size_t i = intent, j = 0; i < count; i++, j++) {
+            for (size_t i = intent, j = 0; j < count; i++, j++) {
                 to[i] = from[j];
             }
         }
@@ -194,7 +194,7 @@ public:
     }
 
     void resize(size_t newSize, long intent, size_t index) {
-        if ((index >= newSize && index + intent >= newSize) || index >= size) {
+        if ((index >= newSize && index + intent >= newSize) || index > size) {
             throw indexOutOfRange();
         }
 

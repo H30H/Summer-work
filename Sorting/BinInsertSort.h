@@ -9,7 +9,7 @@
 #include "../Sequence/mySequence.h"
 
 template<typename T>
-mySequence<T>& BinInsertSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>& BinInsertSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
     if (sequence.length() < 2)
         return sequence;
 
@@ -37,11 +37,6 @@ mySequence<T>& BinInsertSort(mySequence<T>& sequence, bool (*isLess)(const T& ob
         }
     }
     return sequence;
-}
-
-template<typename T>
-mySequence<T>& BinInsertSort(mySequence<T>& sequence) {
-    return BinInsertSort(sequence, isLessDefault);
 }
 
 #endif //BASE_CLASSES_BININSERTSORT_H
