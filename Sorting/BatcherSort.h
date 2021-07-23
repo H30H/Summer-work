@@ -2,8 +2,8 @@
 // Created by Grisha on 22.07.2021.
 //
 
-#ifndef BASE_CLASSES_BATCERSORT_H
-#define BASE_CLASSES_BATCERSORT_H
+#ifndef BASE_CLASSES_BATCHERSORT_H
+#define BASE_CLASSES_BATCHERSORT_H
 
 #include "isLessDefault.h"
 #include "../Sequence/mySequence.h"
@@ -85,4 +85,4 @@ mySequence<T>& BatcherSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1
     return BatcherSort(sequence, 0, sequence.length(), isLess);
 }
 
-#endif //BASE_CLASSES_BATCERSORT_H
+#endif //BASE_CLASSES_BATCHERSORT_H

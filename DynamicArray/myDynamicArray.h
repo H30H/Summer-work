@@ -242,9 +242,11 @@ public:
         if (index1 == index2)
             return;
 
-        T* item = new T(array[index1]);
+        T* item = (T*) malloc(sizeof(T));
+        memcpy(item, array + index1, sizeof(T));
         memcpy(array + index1, array + index2, sizeof(T));
         memcpy(array + index2, item, sizeof(T));
+        free(item);
     }
 
     iterator begin() const { //Функция для итератора, возвращает итератор, указывающий на начало

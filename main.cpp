@@ -31,7 +31,8 @@ bool checkCorrect(mySequence<T>& sequence) {
     return true;
 }
 
-void testSort(size_t length, size_t count, int maxElem) {
+void testSort(size_t length, size_t count, int maxElem,
+              mySequence<int>& (*sort)(mySequence<int>&, bool (*a)(const int&, const int&))) {
     size_t countErr = 0;
     for (size_t i = 0; i < count; i++) {
         myArraySequence<int> sequence;
@@ -52,7 +53,7 @@ using namespace std;
 int main() {
     vector<int> v{1, 2, 3, 4, 5};
     vector<int> v1(v.begin(), v.end());
-
+    int u;
     myDynamicArray<int> dynamicArray(v.begin(), v.end());
     cout << dynamicArray << ' ' << dynamicArray.length() << endl;
 
@@ -79,8 +80,12 @@ int main() {
 //    arraySequence.reverse();
 //    cout << arraySequence << endl;
 //    cout << BatcherSort(arraySequence) << endl;
-
-    testSort(18, 100, 100);
-
+    cin >> u;
+    for (size_t i = 0; i < 10000000; i++) {
+        arraySequence.swap(0, 1);
+    }
+    cin >> u;
+    testSort(4096, 10000, 100, BatcherSort<int>);
+    cin >> u;
     return 0;
 }

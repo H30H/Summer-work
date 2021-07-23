@@ -24,6 +24,18 @@ mySequence.h
 iostream
 -
 
+/cygdrive/c/cc++ labs/Base classes/Sorting/BatcerSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+../Sequence/myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+cmath
+-
+iostream
+-
+
 /cygdrive/c/cc++ labs/Base classes/Sorting/BinInsertSort.h
 isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
@@ -77,6 +89,8 @@ isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
+BatcerSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/BatcerSort.h
 BinInsertSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/BinInsertSort.h
 BubbleSort.h
@@ -111,4 +125,6 @@ Sequence/myArraySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
 Sorting/allSorts.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
+random
+/cygdrive/c/cc++ labs/Base classes/random
 
