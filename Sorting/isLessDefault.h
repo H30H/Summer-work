@@ -8,7 +8,7 @@
 namespace sortFuncPrivate {
 
     template<typename T>
-    bool isLessDefault(const T &obj1, const T &obj2) {
+    bool isLessDefault(const T& obj1, const T& obj2) {
         return obj1 < obj2;
     }
 

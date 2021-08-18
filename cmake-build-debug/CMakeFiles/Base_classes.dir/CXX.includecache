@@ -6,6 +6,20 @@
 
 #IncludeRegexTransform: 
 
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h
+myBinaryTree.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
+../Sequence/myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+iostream
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/iostream
+
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
+random
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/random
+../LinkedList/myQueue.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
+
 /cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
 iostream
 -
@@ -13,6 +27,16 @@ iterator
 -
 cstring
 -
+
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
+cstring
+/cygdrive/c/cc++ labs/Base classes/LinkedList/cstring
+iostream
+/cygdrive/c/cc++ labs/Base classes/LinkedList/iostream
+
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
+myLinkedList.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
 
 /cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
 mySequence.h
@@ -56,6 +80,14 @@ isLessDefault.h
 map
 -
 
+/cygdrive/c/cc++ labs/Base classes/Sorting/HeapSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+../BinaryTree/myBinaryHeap.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h
+
 /cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
 isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
@@ -97,6 +129,8 @@ BubbleSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
 CountingSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/CountingSort.h
+HeapSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/HeapSort.h
 InsertSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
 MergeSort.h
@@ -127,4 +161,8 @@ Sorting/allSorts.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
 random
 /cygdrive/c/cc++ labs/Base classes/random
+BinaryTree/myBinaryHeap.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h
+LinkedList/myLinkedList.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
 

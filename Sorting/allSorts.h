@@ -9,6 +9,7 @@
 #include "BinInsertSort.h"
 #include "BubbleSort.h"
 #include "CountingSort.h"
+#include "HeapSort.h"
 #include "InsertSort.h"
 #include "MergeSort.h"
 #include "SelectionSort.h"

@@ -45,6 +45,88 @@ private:
     }
 
 public:
+    class iterator: std::iterator<std::bidirectional_iterator_tag, T> { //класс итератора
+    private:
+        T* item = nullptr;
+    public:
+        explicit iterator(T* item): item(item) {}
+
+        iterator(const iterator &other): item(other.item) {}
+
+        explicit iterator(const typename myDynamicArray<T>::iterator& other): item(other.item) {}
+
+        iterator& operator = (const iterator &other) {
+            item(other.item);
+            return *this;
+        }
+
+        T& operator*() {
+            return *item;
+        }
+
+        const T& operator*() const {
+            return *item;
+        }
+
+        T* operator&() {
+            return item;
+        }
+
+        const T* operator&() const {
+            return item;
+        }
+
+        bool operator==(const iterator &other) const {
+            return item == other.item;
+        }
+
+        bool operator!=(const iterator &other) const {
+            return item != other.item;
+        }
+
+        iterator& operator + (int num) const {
+            if (num < 0)
+                return operator-(-num);
+
+            for (int i = 0; i < num; i++) {
+                operator++();
+            }
+            return *this;
+        }
+
+        iterator& operator - (int num) const {
+            if (num < 0)
+                return operator+(-num);
+
+            for (int i = 0; i < num; i++) {
+                operator--();
+            }
+            return *this;
+        }
+
+        iterator& operator++() const {
+            item++;
+            return *this;
+        }
+
+        iterator& operator++(int) const {
+            T* res = item;
+            ++item;
+            return *(new iterator(res));
+        }
+
+        iterator& operator--() const {
+            item--;
+            return *this;
+        }
+
+        iterator& operator--(int) const {
+            T* res = item;
+            --item;
+            return *(new iterator(res));
+        }
+    }; //Класс итератора
+
     myArraySequence() = default;
 
     explicit myArraySequence(T item): size(1), dynamicArray(item) {}
@@ -56,12 +138,6 @@ public:
     explicit myArraySequence(const myDynamicArray<T>& dynamicArray1) {
         dynamicArray = dynamicArray1;
         resizePrivate(dynamicArray.length());
-    }
-
-    explicit myArraySequence(const mySequence<T>& sequence) {
-        for (size_t i = 0; i < sequence.length(); i++) {
-            append(sequence[i]);
-        }
     }
 
     myArraySequence(T* arr, size_t count) {
@@ -79,6 +155,12 @@ public:
     explicit myArraySequence(U begin, U end) {
         dynamicArray = myDynamicArray<T>(begin, end);
         resizePrivate(dynamicArray.length());
+    }
+
+    explicit myArraySequence(const mySequence<T>& sequence) {
+        for (size_t i = 0; i < sequence.length(); i++) {
+            append(sequence[i]);
+        }
     }
 
     T& getFirst() {
@@ -137,7 +219,7 @@ public:
         return dynamicArray[index];
     }
 
-    void set(T item, size_t index) {
+    void set(const T& item, size_t index) {
         if (index >= size)
             throw typename mySequence<T>::IndexOutOfRange();
 
@@ -171,17 +253,17 @@ public:
         return size;
     }
 
-    void append (T item) {
+    void append (const T& item) {
         resizePrivate(size+1);
         dynamicArray[size-1] = item;
     }
 
-    void prepend(T item) {
+    void prepend(const T& item) {
         resizePrivate(size+1, 1);
         dynamicArray[0] = item;
     }
 
-    void insert (T item, size_t index) {
+    void insert (const T& item, size_t index) {
         if (index >= size)
             throw typename mySequence<T>::IndexOutOfRange();
 
@@ -189,11 +271,18 @@ public:
         dynamicArray[index] = item;
     }
 
-    void pop(size_t index) {
+    T& pop() {
+        return pop(size - 1);
+    }
+
+    T& pop(size_t index) {
         if (index >= size)
             throw typename mySequence<T>::IndexOutOfRange();
 
+        T& res = dynamicArray[index];
+
         resizePrivate(size - 1, -1, index);
+        return res;
     }
 
     myArraySequence<T>& concat(const mySequence<T>& sequence) {
@@ -212,7 +301,7 @@ public:
          return *this;
     }
 
-    size_t find(T item) const {
+    size_t find(const T& item) const {
         for (size_t i = 0; i < size; i++) {
             if (item == dynamicArray[i])
                 return i;
@@ -235,6 +324,21 @@ public:
         }
 
         return -1;
+    }
+
+    iterator& begin() {
+        return iterator(&dynamicArray.begin());
+    }
+
+    const iterator& begin() const {
+        return iterator(&dynamicArray.begin());
+    }
+
+    iterator& end() {
+        return iterator(&dynamicArray.begin() + size);
+    }
+    const iterator& end() const {
+        return iterator(&dynamicArray.begin() + size);
     }
 };
 

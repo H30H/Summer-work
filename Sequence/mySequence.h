@@ -18,8 +18,88 @@ public:
         IndexOutOfRange() = default;
     };
 
-    class iterator;
+    mySequence<T>& operator = (const mySequence<T>& sequence) {
+        if (length() < sequence.length()) {
+            size_t i = 0;
+            for (i; i < length(); i++) {
+                operator[](i) = sequence[i];
+            }
+            for (i; i < sequence.length(); i++) {
+                append(sequence[i]);
+            }
+        }
+        else {
+            size_t i = 0;
+            for (i; i < sequence.length(); i++) {
+                operator[](i) = sequence[i];
+            }
+            while (length() != i)
+                pop();
+        }
+        return *this;
+    }
 
+    using seqIterator = std::iterator<std::bidirectional_iterator_tag, T>;
+
+    /*
+    template<typename iterator>
+    class seqIterator: std::iterator<std::bidirectional_iterator_tag, T> { //класс итератора
+    private:
+        iterator iter;
+    public:
+        explicit seqIterator(const iterator& other): iter(other) {}
+
+        seqIterator(const seqIterator& other): iter(other.iter) {}
+
+        T& operator*() {
+            return *iter;
+        }
+
+        const T& operator*() const {
+            return *iter;
+        }
+
+        T* operator&() {
+            return &iter;
+        }
+
+        const T* operator&() const {
+            return &iter;
+        }
+
+        bool operator == (const seqIterator<iterator> &other) const {
+            return iter == other.iter;
+        }
+
+        bool operator != (const seqIterator<iterator> &other) const {
+            return iter != other.iter;
+        }
+
+        seqIterator& operator + (int num) const {
+            return iter + num;
+        }
+
+        seqIterator& operator - (int num) const {
+            return iter - num;
+        }
+
+        seqIterator& operator++() const {
+            return iter++;
+        }
+
+        seqIterator& operator++(int) const {
+            return ++iter;
+        }
+
+        seqIterator& operator--() const {
+            return iter--;
+        }
+
+        virtual seqIterator& operator--(int) const {
+            return --iter;
+        }
+    }; //Класс итератора
+    */
     virtual T& getFirst() = 0;
     virtual const T& getFirst() const = 0;
 
@@ -32,7 +112,7 @@ public:
     virtual T& operator [] (size_t index) = 0;
     virtual const T& operator [] (size_t index) const = 0;
 
-    virtual void set(T item, size_t index) = 0;
+    virtual void set(const T& item, size_t index) = 0;
     virtual void swap(size_t index1, size_t index2) = 0;
 
     virtual mySequence<T>& getSubSequence(
@@ -40,15 +120,16 @@ public:
 
     virtual size_t length() const = 0;
 
-    virtual void append (T item) = 0;
-    virtual void prepend(T item) = 0;
-    virtual void insert (T item, size_t index) = 0;
-    virtual void pop(size_t index) = 0;
+    virtual void append (const T& item) = 0;
+    virtual void prepend(const T& item) = 0;
+    virtual void insert (const T& item, size_t index) = 0;
+    virtual T& pop() = 0;
+    virtual T& pop(size_t index) = 0;
 
     virtual mySequence<T>& concat (const mySequence<T>& sequence) = 0;
     virtual mySequence<T>& reverse() = 0;
 
-    virtual size_t find(T item) const = 0;
+    virtual size_t find(const T& item) const = 0;
     virtual size_t find(const mySequence<T>& sequence) const = 0;
 };
 

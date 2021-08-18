@@ -6,6 +6,8 @@
 #include "Sequence/myArraySequence.h"
 #include "Sorting/allSorts.h"
 #include "random"
+#include "BinaryTree/myBinaryHeap.h"
+#include "LinkedList/myLinkedList.h"
 
 template <class...Args>
 int sum(Args&&... args) {
@@ -32,25 +34,35 @@ bool checkCorrect(mySequence<T>& sequence) {
 }
 
 void testSort(size_t length, size_t count, int maxElem,
-              mySequence<int>& (*sort)(mySequence<int>&, bool (*a)(const int&, const int&))) {
+              mySequence<int>& (*sort)(mySequence<int>&, bool (*a)(const int&, const int&)), bool (*isLess)(const int&, const int&)) {
     size_t countErr = 0;
+    bool isCorrectFirst = true;
     for (size_t i = 0; i < count; i++) {
         if (i%100 == 0) {
             std::cout << i << std::endl;
         }
         myArraySequence<int> sequence;
-        size_t len = length;
-        if (len == -1) {
-            len = random()%1025;
+        try {
+            size_t len = length;
+            if (len == -1) {
+                len = random()%1025;
+            }
+            for (size_t j = 0; j < len; j++) {
+                sequence.append(random()%maxElem);
+            }
+            auto seq = sequence;
+            sort(sequence, sortFuncPrivate::isLessDefault);
+            if (!checkCorrect(sequence)) {
+                countErr++;
+                std::cout << countErr<< ": " << seq << "\n    " << sequence << std::endl;
+            }
+            else if (isCorrectFirst) {
+                std::cout << "First correct: " << seq << "\n               " << sequence << std::endl;
+                isCorrectFirst = false;
+            }
         }
-        for (size_t j = 0; j < len; j++) {
-            sequence.append(random()%maxElem);
-        }
-        auto seq = sequence;
-        BatcherSort(sequence);
-        if (!checkCorrect(sequence)) {
-            countErr++;
-            std::cout <<countErr<< ": " << seq << "\n    " << sequence << std::endl;
+        catch (typename mySequence<int>::IndexOutOfRange) {
+            std::cout << "IndexOutOfRange: " << sequence << std::endl;
         }
     }
 }
@@ -87,7 +99,23 @@ int main() {
 //    arraySequence.reverse();
 //    cout << arraySequence << endl;
 //    cout << BatcherSort(arraySequence) << endl;
+//    myBinaryHeap<int> heap;
+    myBinaryTree<int> binaryTree;
+    int arr[] = {1, 3, 4, 5 ,7, 9, -1, -2, 0, -5, -4};
 
-    testSort(-1, 10000, 100, BatcherSort<int>);
+    binaryTree.insert(arr, sizeof(arr) / sizeof(int));
+
+    for (auto &i : binaryTree) {
+        cout << i << ' ';
+    }
+    cout << endl;
+
+    myArraySequence<int> sequence(arr, sizeof(arr) / sizeof(int));
+    cout << sequence << ' ' << sequence.length() << endl;
+    cout << HeapSort(sequence) << endl;
+
+//    cout <<
+
+    testSort(-1, 10000, 100, HeapSort<int>, sortFuncPrivate::isLessDefault);
     return 0;
 }

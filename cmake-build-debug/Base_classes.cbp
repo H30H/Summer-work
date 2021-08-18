@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h">
+			<Option target="Base_classes"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h">
 			<Option target="Base_classes"/>
 		</Unit>
@@ -87,6 +90,15 @@
 			<Option target="Base_classes"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/LinkedList/myStack.h">
 			<Option target="Base_classes"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Map/myMap.h">
@@ -105,6 +117,9 @@
 			<Option target="Base_classes"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/CountingSort.h">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/HeapSort.h">
 			<Option target="Base_classes"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h">

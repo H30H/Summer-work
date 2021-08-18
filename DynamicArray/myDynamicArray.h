@@ -39,31 +39,38 @@ public:
 
     class iterator : public std::iterator<std::bidirectional_iterator_tag, T> { //класс итератора
     private:
-        T* object = nullptr;
+        T* item = nullptr;
     public:
-        explicit iterator(T* item): object(item) {}
+        explicit iterator(T* item): item(item) {}
 
-        iterator(const iterator &other): object(other.object) {}
+        iterator(const iterator &other): item(other.item) {}
 
         iterator& operator = (const iterator &other) {
-            object(other.object);
+            item(other.item);
             return *this;
         }
 
         T &operator*() const {
-            return *object;
+            return *item;
         }
 
-        T *operator->() const {
-            return object;
+        T *operator&() const {
+            return item;
         }
 
         bool operator==(const iterator &other) const {
-            return object == other.object;
+            return item == other.item;
         }
 
         bool operator!=(const iterator &other) const {
-            return object != other.object;
+            return item != other.item;
+        }
+
+        iterator operator + (size_t num) {
+            for (int i = 0; i < num; i++) {
+                operator++();
+            }
+            return *this;
         }
 
         iterator operator + (int num) {
@@ -72,6 +79,13 @@ public:
 
             for (int i = 0; i < num; i++) {
                 operator++();
+            }
+            return *this;
+        }
+
+        iterator operator - (size_t num) {
+            for (int i = 0; i < num; i++) {
+                operator--();
             }
             return *this;
         }
@@ -87,24 +101,24 @@ public:
         }
 
         iterator &operator++() {
-            object++;
+            item++;
             return *this;
         }
 
         iterator operator++(int) {
-            T* res = object;
-            ++object;
+            T* res = item;
+            ++item;
             return iterator(res);
         }
 
         iterator &operator--() {
-            object--;
+            item--;
             return *this;
         }
 
         iterator operator--(int) {
-            T* res = object;
-            ++object;
+            T* res = item;
+            --item;
             return iterator(res);
         }
     }; //Класс итератора
@@ -122,8 +136,8 @@ public:
         copyArr(size, dynamicArray.array, array);
     }
 
-    template<typename U>
-    explicit myDynamicArray(U begin, U end) { //Конструктор через итератор: myDynamicArray<int> dArray(thing.begin(), thing.end())
+    template<typename iterator>
+    explicit myDynamicArray(iterator begin, iterator end) { //Конструктор через итератор: myDynamicArray<int> dArray(thing.begin(), thing.end())
         resize(std::distance(begin, end));
         size_t ind = 0;
         for (auto i = begin; i != end; i++, ind++) {
