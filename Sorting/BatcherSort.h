@@ -20,7 +20,7 @@ namespace sortFuncPrivate {
 
     template<typename T>
     void sortBitonicSequence(mySequence<T>& sequence, size_t from, size_t to,
-                             bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
+                             bool (*isLess)(const T& obj1, const T& obj2)) {
         if (to <= from || to - from < 2) {
             return;
         }
@@ -38,7 +38,7 @@ namespace sortFuncPrivate {
 
     template<typename T>
     void getBitonicSequence(mySequence<T>& sequence, size_t from, size_t to,
-                            bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
+                            bool (*isLess)(const T& obj1, const T& obj2)) {
         if (to <= from || to - from < 2) {
             return;
         }
@@ -70,7 +70,7 @@ namespace sortFuncPrivate {
 
 template<typename T>
 mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t from, size_t to,
-                           bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
+                           bool (*isLess)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2) {
         return sequence;
     }
@@ -105,11 +105,16 @@ mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t from, size_t to,
 }
 
 template<typename T>
-mySequence<T>& BatcherSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
+mySequence<T>& BatcherSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
     if (sequence.length() < 2)
         return sequence;
 
     return BatcherSort(sequence, 0, sequence.length(), isLess);
+}
+
+template<typename T>
+mySequence<T>& BatcherSort(mySequence<T>& sequence) {
+    return BatcherSort(sequence, sortFuncPrivate::isLessDefault);
 }
 
 #endif //BASE_CLASSES_BATCHERSORT_H

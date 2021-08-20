@@ -37,7 +37,7 @@ void testSort(size_t length, size_t count, int maxElem,
               mySequence<int>& (*sort)(mySequence<int>&, bool (*a)(const int&, const int&)), bool (*isLess)(const int&, const int&)) {
     size_t countErr = 0;
     bool isCorrectFirst = true;
-    for (size_t i = 0; i < count; i++) {
+    for (size_t i = 1; i <= count; i++) {
         if (i%100 == 0) {
             std::cout << i << std::endl;
         }
@@ -51,10 +51,14 @@ void testSort(size_t length, size_t count, int maxElem,
                 sequence.append(random()%maxElem);
             }
             auto seq = sequence;
-            sort(sequence, sortFuncPrivate::isLessDefault);
+            sort(sequence, isLess);
             if (!checkCorrect(sequence)) {
                 countErr++;
-                std::cout << countErr<< ": " << seq << "\n    " << sequence << std::endl;
+                std::cout << countErr<< ": " << seq << std::endl;
+                for (size_t k = countErr; k > 0; k/=10) {
+                    std::cout << ' ';
+                }
+                std::cout << "  " << sequence << std::endl;
             }
             else if (isCorrectFirst) {
                 std::cout << "First correct: " << seq << "\n               " << sequence << std::endl;
@@ -101,7 +105,7 @@ int main() {
 //    cout << BatcherSort(arraySequence) << endl;
 //    myBinaryHeap<int> heap;
     myBinaryTree<int> binaryTree;
-    int arr[] = {1, 3, 4, 5 ,7, 9, -1, -2, 0, -5, -4};
+    int arr[] = {83, 86, 77, 15, 93, 35, 86, 92, 49, 21};//{1, 3, 4, 5 ,7, 9, -1, -2, 0, -5, -4};
 
     binaryTree.insert(arr, sizeof(arr) / sizeof(int));
 
@@ -112,10 +116,10 @@ int main() {
 
     myArraySequence<int> sequence(arr, sizeof(arr) / sizeof(int));
     cout << sequence << ' ' << sequence.length() << endl;
-    cout << HeapSort(sequence) << endl;
+    cout << ShellSort(sequence) << endl;
 
 //    cout <<
 
-    testSort(-1, 10000, 100, HeapSort<int>, sortFuncPrivate::isLessDefault);
+    testSort(-1, 10000, 1000, ShellSort<int>, sortFuncPrivate::isLessDefault);
     return 0;
 }

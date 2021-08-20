@@ -5,16 +5,20 @@
 #ifndef BASE_CLASSES_ALLSORTS_H
 #define BASE_CLASSES_ALLSORTS_H
 
-#include "BatcherSort.h"
-#include "BinInsertSort.h"
-#include "BubbleSort.h"
-#include "CountingSort.h"
-#include "HeapSort.h"
-#include "InsertSort.h"
-#include "MergeSort.h"
-#include "SelectionSort.h"
-#include "SelectionSortMod.h"
-#include "SheikerSort.h"
+//TODO: 11, 12, 13
+
+#include "BatcherSort.h"      /// 14
+#include "BinaryTreeSort.h"   /// 8
+#include "BinInsertSort.h"    /// 6
+#include "BubbleSort.h"       /// 1
+#include "CountingSort.h"     /// 5
+#include "HeapSort.h"         /// 10
+#include "InsertSort.h"       /// 3
+#include "MergeSort.h"        /// 9
+#include "SelectionSort.h"    /// 4
+#include "SelectionSortMod.h" /// 7
+#include "SheikerSort.h"      /// 2
+#include "ShellSort.h"        /// 11, 12
 
 
 #endif //BASE_CLASSES_ALLSORTS_H

@@ -14,6 +14,7 @@ CMakeFiles/Base_classes.dir/main.cpp.o: \
  ../Sequence/mySequence.h \
  ../Sorting/BatcherSort.h \
  ../Sorting/BinInsertSort.h \
+ ../Sorting/BinaryTreeSort.h \
  ../Sorting/BubbleSort.h \
  ../Sorting/CountingSort.h \
  ../Sorting/HeapSort.h \
@@ -22,6 +23,7 @@ CMakeFiles/Base_classes.dir/main.cpp.o: \
  ../Sorting/SelectionSort.h \
  ../Sorting/SelectionSortMod.h \
  ../Sorting/SheikerSort.h \
+ ../Sorting/ShellSort.h \
  ../Sorting/allSorts.h \
  ../Sorting/isLessDefault.h \
  ../main.cpp

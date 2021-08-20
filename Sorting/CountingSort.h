@@ -10,7 +10,7 @@
 #include <map>
 
 template<typename T>
-mySequence<T>& CountingSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
+mySequence<T>& CountingSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
     std::map<T, size_t> myMap;
     for (size_t i = 0; i < sequence.length(); i++) {
         if (myMap.find(sequence[i]) != myMap.end()) {
@@ -29,5 +29,9 @@ mySequence<T>& CountingSort(mySequence<T>& sequence, bool (*isLess)(const T& obj
     return sequence;
 }
 
+template<typename T>
+mySequence<T>& CountingSort(mySequence<T>& sequence) {
+    return CountingSort(sequence, sortFuncPrivate::isLessDefault);
+}
 
 #endif //BASE_CLASSES_COUNTINGSORT_H

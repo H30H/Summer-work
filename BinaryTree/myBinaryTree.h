@@ -8,19 +8,22 @@
 #include "random"
 #include "../LinkedList/myQueue.h"
 
-template<typename T>
-class myBinaryTree {
-protected:
-    static bool isLessPrivate(const T& item1, const T& item2) {
+namespace myBinaryTreePrivateFunc{
+    template<typename T>
+    bool isLessPrivate(const T& item1, const T& item2) {
         return item1 < item2;
     }
 
-    static bool isSamePrivate(const T& item1, const T& item2) {
+    template<typename T>
+    bool isSamePrivate(const T& item1, const T& item2) {
         return item1 == item2;
     }
+}
 
-    bool (*isLess)(const T& item1, const T& item2) = isLessPrivate;
-    bool (*isSame)(const T& item1, const T& item2) = isSamePrivate;
+template<typename T>
+class myBinaryTree {
+    bool (*isLess)(const T& item1, const T& item2);
+    bool (*isSame)(const T& item1, const T& item2);
 
 private:
     class Node {
@@ -170,48 +173,53 @@ public:
 
     class objNotItTree{};
 
-    explicit myBinaryTree(bool (*isLessFunc)(const T&, const T&) = isLessPrivate,
-                          bool (*isSameFunc)(const T&, const T&) = isSamePrivate):
-                          isLess(isLessFunc), isSame(isSameFunc) {
-        if (!isLess)
-            isLess = isLessPrivate;
-
-        if (!isSame)
-            isSame = isSamePrivate;
+    explicit myBinaryTree() {
+        isLess = myBinaryTreePrivateFunc::isLessPrivate;
+        isSame = myBinaryTreePrivateFunc::isSamePrivate;
     }
 
-    explicit myBinaryTree(const T& item, bool (*isLessFunc)(const T&, const T&) = isLessPrivate,
-                          bool (*isSameFunc)(const T&, const T&) = isSamePrivate):
+    explicit myBinaryTree(bool (*isLessFunc)(const T&, const T&)):
+                          isLess(isLessFunc) {
+        isSame = myBinaryTreePrivateFunc::isSamePrivate;
+    }
+
+    explicit myBinaryTree(bool (*isLessFunc)(const T&, const T&),
+                          bool (*isSameFunc)(const T&, const T&)):
+                          isLess(isLessFunc), isSame(isSameFunc) {}
+
+
+    explicit myBinaryTree(const T& item, bool (*isLessFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isLessPrivate,
+                          bool (*isSameFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isSamePrivate):
                           isLess(isLessFunc), isSame(isSameFunc), head(new Node(item)) {
         if (!isLess)
-            isLess = isLessPrivate;
+            isLess = myBinaryTreePrivateFunc::isLessPrivate;
 
         if (!isSame)
-            isSame = isSamePrivate;
+            isSame = myBinaryTreePrivateFunc::isSamePrivate;
 
         head(new Node(item));
     }
 
-    explicit myBinaryTree(T *items, size_t size, bool (*isLessFunc)(const T&, const T&) = isLessPrivate,
-                          bool (*isSameFunc)(const T&, const T&) = isSamePrivate):
+    explicit myBinaryTree(T *items, size_t size, bool (*isLessFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isLessPrivate,
+                          bool (*isSameFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isSamePrivate):
                           isLess(isLessFunc), isSame(isSameFunc) {
         if (!isLess)
-            isLess = isLessPrivate;
+            isLess = myBinaryTreePrivateFunc::isLessPrivate;
 
         if (!isSame)
-            isSame = isSamePrivate;
+            isSame = myBinaryTreePrivateFunc::isSamePrivate;
 
         insert(items, size);
     }
 
-    myBinaryTree(const std::initializer_list<T>& list, bool (*isLessFunc)(const T&, const T&) = isLessPrivate,
-                          bool (*isSameFunc)(const T&, const T&) = isSamePrivate):
+    myBinaryTree(const std::initializer_list<T>& list, bool (*isLessFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isLessPrivate,
+                 bool (*isSameFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isSamePrivate):
                           isLess(isLessFunc), isSame(isSameFunc){
         if (!isLess)
-            isLess = isLessPrivate;
+            isLess = myBinaryTreePrivateFunc::isLessPrivate;
 
         if (!isSame)
-            isSame = isSamePrivate;
+            isSame = myBinaryTreePrivateFunc::isSamePrivate;
 
         for (auto i : list) {
             insert(i);
@@ -219,14 +227,14 @@ public:
     }
 
     template<typename iterator>
-    explicit myBinaryTree(iterator begin, iterator end, bool (*isLessFunc)(const T&, const T&) = isLessPrivate,
-                          bool (*isSameFunc)(const T&, const T&) = isSamePrivate):
+    explicit myBinaryTree(iterator begin, iterator end, bool (*isLessFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isLessPrivate,
+                          bool (*isSameFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isSamePrivate):
                           isLess(isLessFunc), isSame(isSameFunc){
         if (!isLessFunc)
-            isLess(isLessPrivate);
+            isLess(myBinaryTreePrivateFunc::isLessPrivate);
 
         if (!isSameFunc)
-            isSame(isSamePrivate);
+            isSame(myBinaryTreePrivateFunc::isSamePrivate);
 
         for (auto i = begin; i != end; i++) {
             insert(*i);
@@ -262,9 +270,6 @@ public:
         Node* node = head;
         Node* prev = nullptr;
         while (node) {
-            if (isSame(item, node->item))
-                return;
-
             prev = node;
             if (isLess(item, node->item))
                 node = node->left;
@@ -367,6 +372,10 @@ public:
     }
 
     virtual iterator begin() {
+        if (!head) {
+            return end();
+        }
+
         Node* leftNode = head;
 
         while(leftNode->left)
@@ -376,6 +385,10 @@ public:
     }
 
     virtual const iterator begin() const {
+        if (!head) {
+            return end();
+        }
+
         Node* leftNode = head;
 
         while(leftNode->left)
@@ -392,6 +405,5 @@ public:
         return iterator(nullptr);
     }
 };
-
 
 #endif //BASE_CLASSES_MYBINARYTREE_H

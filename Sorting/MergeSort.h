@@ -10,7 +10,7 @@
 #include "iostream"
 
 template<typename T>
-mySequence<T>& MergeSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
+mySequence<T>& MergeSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
     if (to - from == 1 || from >= to)
         return sequence;
 
@@ -35,8 +35,13 @@ mySequence<T>& MergeSort(mySequence<T>& sequence, size_t from, size_t to, bool (
 }
 
 template<typename T>
-mySequence<T>& MergeSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
+mySequence<T>& MergeSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
     return MergeSort(sequence, 0, sequence.length(), isLess);
+}
+
+template<typename T>
+mySequence<T>& MergeSort(mySequence<T>& sequence) {
+    return MergeSort(sequence, sortFuncPrivate::isLessDefault);
 }
 
 

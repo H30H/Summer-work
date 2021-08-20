@@ -35,7 +35,7 @@ namespace sortFuncPrivate {
 }
 
 template<typename T>
-mySequence<T>& HeapSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2) = sortFuncPrivate::isLessDefault) {
+mySequence<T>& HeapSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
     if (!isLess)
         isLess = sortFuncPrivate::isLessDefault;
 
@@ -53,6 +53,11 @@ mySequence<T>& HeapSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, c
         sortFuncPrivate::heapify(sequence, i, isLess);
     }
     return sequence;
+}
+
+template<typename T>
+mySequence<T>& HeapSort(mySequence<T>& sequence) {
+    return HeapSort(sequence, sortFuncPrivate::isLessDefault);
 }
 
 #endif //BASE_CLASSES_HEAPSORT_H

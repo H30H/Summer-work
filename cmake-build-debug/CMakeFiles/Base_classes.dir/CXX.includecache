@@ -66,6 +66,16 @@ isLessDefault.h
 ../Sequence/mySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
 
+/cygdrive/c/cc++ labs/Base classes/Sorting/BinaryTreeSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+../BinaryTree/myBinaryTree.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
+cstring
+/cygdrive/c/cc++ labs/Base classes/Sorting/cstring
+
 /cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
 ../Sequence/mySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
@@ -120,9 +130,17 @@ isLessDefault.h
 isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 
+/cygdrive/c/cc++ labs/Base classes/Sorting/ShellSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+
 /cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
 BatcherSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/BatcherSort.h
+BinaryTreeSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/BinaryTreeSort.h
 BinInsertSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/BinInsertSort.h
 BubbleSort.h
@@ -141,6 +159,8 @@ SelectionSortMod.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h
 SheikerSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
+ShellSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/ShellSort.h
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 

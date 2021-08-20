@@ -116,6 +116,9 @@
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/BinInsertSort.h">
 			<Option target="Base_classes"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/BinaryTreeSort.h">
+			<Option target="Base_classes"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/CountingSort.h">
 			<Option target="Base_classes"/>
 		</Unit>
@@ -132,6 +135,9 @@
 			<Option target="Base_classes"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/ShellSort.h">
 			<Option target="Base_classes"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h">
