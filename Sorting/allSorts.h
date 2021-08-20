@@ -5,7 +5,7 @@
 #ifndef BASE_CLASSES_ALLSORTS_H
 #define BASE_CLASSES_ALLSORTS_H
 
-//TODO: 11, 12, 13
+//TODO: 13
 
 #include "BatcherSort.h"      /// 14
 #include "BinaryTreeSort.h"   /// 8
