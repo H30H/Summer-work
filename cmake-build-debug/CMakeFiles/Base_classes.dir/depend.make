@@ -20,6 +20,7 @@ CMakeFiles/Base_classes.dir/main.cpp.o: \
  ../Sorting/HeapSort.h \
  ../Sorting/InsertSort.h \
  ../Sorting/MergeSort.h \
+ ../Sorting/QuickSort.h \
  ../Sorting/SelectionSort.h \
  ../Sorting/SelectionSortMod.h \
  ../Sorting/SheikerSort.h \

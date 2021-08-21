@@ -8,13 +8,16 @@
 #include "cstring"
 #include "iostream"
 
+namespace LinkedListPrivateFunc {
+    template<typename T>
+    bool isSamePrivate(const T& obj1, const T& obj2) {
+        return obj1 == obj2;
+    }
+}
+
 template<typename T>
 class myLinkedList {
 private:
-    static bool isSamePrivate(const T& obj1, const T& obj2) {
-        return obj1 == obj2;
-    }
-
     class element {
     public:
         T item;
@@ -43,7 +46,7 @@ public:
         element* item;
         bool (*isSame)(const T& obj1, const T& obj2);
     public:
-        explicit iterator(element* elem, bool (*isSameFunc)(const T&, const T&) = isSamePrivate): item(elem), isSame(isSameFunc) {}
+        explicit iterator(element* elem, bool (*isSameFunc)(const T&, const T&) = LinkedListPrivateFunc::isSamePrivate): item(elem), isSame(isSameFunc) {}
 
         iterator(const iterator& other): item(other.item) {}
 
@@ -99,36 +102,35 @@ public:
         }
     };
 
-    explicit myLinkedList(bool (*isSameFunc)(const T&, const T&) = isSamePrivate): isSame(isSameFunc) {}
+    explicit myLinkedList(bool (*isSameFunc)(const T&, const T&) = LinkedListPrivateFunc::isSamePrivate): isSame(isSameFunc) {}
 
-    explicit myLinkedList(const T& item, bool (*isSameFunc)(const T&, const T&) = isSamePrivate): isSame(isSameFunc) {
+    explicit myLinkedList(const T& item, bool (*isSameFunc)(const T&, const T&) = LinkedListPrivateFunc::isSamePrivate): isSame(isSameFunc) {
         head = new element(item);
         ending = head;
         size = 1;
     }
 
-    explicit myLinkedList(T arr[], bool (*isSameFunc)(const T&, const T&) = isSamePrivate): isSame(isSameFunc) {
+    explicit myLinkedList(T arr[], bool (*isSameFunc)(const T&, const T&) = LinkedListPrivateFunc::isSamePrivate): isSame(isSameFunc) {
         for (auto &i : arr) {
             append(i);
         }
     }
 
     myLinkedList(std::initializer_list<T> list,
-                 bool (*isSameFunc)(const T&, const T&) = isSamePrivate): isSame(isSameFunc) {
+                 bool (*isSameFunc)(const T&, const T&) = LinkedListPrivateFunc::isSamePrivate): isSame(isSameFunc) {
         for (auto &i : list) {
             append(i);
         }
     }
 
     explicit myLinkedList(T* items, size_t size,
-                          bool (*isSameFunc)(const T&, const T&) = isSamePrivate): isSame(isSameFunc) {
+                          bool (*isSameFunc)(const T&, const T&) = LinkedListPrivateFunc::isSamePrivate): isSame(isSameFunc) {
         for (size_t i = 0; i < size; i++) {
             append(items[i]);
         }
     }
 
     myLinkedList(const myLinkedList<T>& list) {
-        clear();
         for (auto &i : list) {
             append(i);
         }
@@ -216,7 +218,7 @@ public:
     T& pop(size_t index) {
         if (index >= size)
             throw IndexOutOfRange();
-
+        size--;
         element* elem = head;
         element* prev = nullptr;
         for (size_t i = 0; i < index; i++, prev = elem, elem = elem->next);
@@ -226,6 +228,8 @@ public:
         if (prev == nullptr) {
             head = elem->next;
             delete elem;
+            if (size == 0)
+                ending = nullptr;
             return *res;
         }
 

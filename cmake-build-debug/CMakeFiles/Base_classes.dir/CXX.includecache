@@ -112,6 +112,16 @@ isLessDefault.h
 iostream
 /cygdrive/c/cc++ labs/Base classes/Sorting/iostream
 
+/cygdrive/c/cc++ labs/Base classes/Sorting/QuickSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+../LinkedList/myQueue.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
+random
+/cygdrive/c/cc++ labs/Base classes/Sorting/random
+
 /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
 isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
@@ -153,6 +163,8 @@ InsertSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
 MergeSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/MergeSort.h
+QuickSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/QuickSort.h
 SelectionSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
 SelectionSortMod.h

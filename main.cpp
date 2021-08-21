@@ -36,7 +36,8 @@ bool checkCorrect(mySequence<T>& sequence) {
 void testSort(size_t length, size_t count, int maxElem,
               mySequence<int>& (*sort)(mySequence<int>&, bool (*a)(const int&, const int&)), bool (*isLess)(const int&, const int&)) {
     size_t countErr = 0;
-    bool isCorrectFirst = true;
+    bool isCorrectFirst = false;
+    std::cout << "Test sort: " << std::endl;
     for (size_t i = 1; i <= count; i++) {
         if (i%100 == 0) {
             std::cout << i << std::endl;
@@ -54,11 +55,15 @@ void testSort(size_t length, size_t count, int maxElem,
             sort(sequence, isLess);
             if (!checkCorrect(sequence)) {
                 countErr++;
-                std::cout << countErr<< ": " << seq << std::endl;
+                std::cout << "Error " << countErr<< ": " << seq << std::endl;
                 for (size_t k = countErr; k > 0; k/=10) {
                     std::cout << ' ';
                 }
-                std::cout << "  " << sequence << std::endl;
+                std::cout << "        " << sequence;
+                for (int k = 0; k < 20; k++) {
+                    std::cout << '-';
+                }
+                std::cout << std::endl;
             }
             else if (isCorrectFirst) {
                 std::cout << "First correct: " << seq << "\n               " << sequence << std::endl;
@@ -69,6 +74,7 @@ void testSort(size_t length, size_t count, int maxElem,
             std::cout << "IndexOutOfRange: " << sequence << std::endl;
         }
     }
+    std::cout << "Error count: " << countErr << std::endl;
 }
 
 using namespace std;
@@ -105,7 +111,7 @@ int main() {
 //    cout << BatcherSort(arraySequence) << endl;
 //    myBinaryHeap<int> heap;
     myBinaryTree<int> binaryTree;
-    int arr[] = {83, 86, 77, 15, 93, 35, 86, 92, 49, 21};//{1, 3, 4, 5 ,7, 9, -1, -2, 0, -5, -4};
+    int arr[] = {92, 49, 21, 62, 27, 90, 59, 63, 26, 40};//{1, 3, 4, 5 ,7, 9, -1, -2, 0, -5, -4};
 
     binaryTree.insert(arr, sizeof(arr) / sizeof(int));
 
@@ -116,10 +122,10 @@ int main() {
 
     myArraySequence<int> sequence(arr, sizeof(arr) / sizeof(int));
     cout << sequence << ' ' << sequence.length() << endl;
-    cout << ShellSort(sequence) << endl;
+    cout << QuickSort(sequence) << endl << endl;
 
 //    cout <<
 
-    testSort(-1, 10000, 1000, ShellSort<int>, sortFuncPrivate::isLessDefault);
+    testSort(-1, 10000, 1000, QuickSort<int>, sortFuncPrivate::isLessDefault);
     return 0;
 }

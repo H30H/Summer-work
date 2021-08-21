@@ -267,6 +267,7 @@ public:
         if (index >= size)
             throw typename mySequence<T>::IndexOutOfRange();
 
+
         resizePrivate(size+1, 1, index);
         dynamicArray[index] = item;
     }
