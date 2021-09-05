@@ -11,8 +11,9 @@
 
 template<typename T>
 mySequence<T>& MergeSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
-    if (to - from == 1 || from >= to)
+    if (to <= from || to - from < 2) {
         return sequence;
+    }
 
     size_t index = (from + to) / 2;
     MergeSort(sequence, from, index, isLess);
@@ -33,6 +34,12 @@ mySequence<T>& MergeSort(mySequence<T>& sequence, size_t from, size_t to, bool (
     }
     return sequence;
 }
+
+template<typename T>
+mySequence<T>& MergeSort(mySequence<T>& sequence, size_t from, size_t to) {
+    return MergeSort(sequence, from, to, sortFuncPrivate::isLessDefault);
+}
+
 
 template<typename T>
 mySequence<T>& MergeSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {

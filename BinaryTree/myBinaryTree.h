@@ -22,10 +22,10 @@ namespace myBinaryTreePrivateFunc{
 
 template<typename T>
 class myBinaryTree {
+protected:
     bool (*isLess)(const T& item1, const T& item2);
     bool (*isSame)(const T& item1, const T& item2);
 
-private:
     class Node {
     public:
         T item;
@@ -37,12 +37,15 @@ private:
         explicit Node(const T& item): item(item) {}
 
         explicit Node(const T& item, Node* leftNode, Node* rightNode, Node* parentNode):
-            item(item), left(leftNode), right(rightNode), parent(parentNode) {}
+                item(item), left(leftNode), right(rightNode), parent(parentNode) {}
+
+        Node(const Node& other): item(other.item), left(other.left), right(other.right), parent(other.parent) {}
     };
+private:
 
     Node* head = nullptr;
 
-    virtual Node* findPrivate(const T& item) const {
+    Node* findPrivate(const T& item) const {
         Node* res = head;
         while (res) {
             if (isSame(item, res->item))
@@ -63,26 +66,34 @@ public:
     class iterator : public stdIterator {
     private:
         Node* item = nullptr;
+        bool (*isSame)(const T& item1, const T& item2);
     public:
-        explicit iterator(Node* node): item(node) {}
+        iterator(): item(nullptr), isSame(myBinaryTreePrivateFunc::isSamePrivate) {}
 
-        iterator(const iterator &other): item(other.item) {}
+        explicit iterator(Node* node, bool (*isSame)(const T& item1, const T& item2)): item(node), isSame(isSame) {}
+
+        iterator(const iterator &other): item(other.item), isSame(other.isSame) {}
 
         iterator& operator = (const iterator &other) {
-            item(other.item);
+            item = other.item;
+            isSame = other.isSame;
             return *this;
         }
 
-        virtual T &operator*() const {
+        virtual T& operator*() const {
             return item->item;
         }
 
-        virtual T *operator->() const {
+        virtual T* operator->() const {
             return &item->item;
         }
 
         virtual bool operator==(const iterator &other) const {
-            return item == other.item;
+            if (item == nullptr && other.item == nullptr)
+                return true;
+            if (item == nullptr || other.item == nullptr)
+                return false;
+            return isSame(item->item, other.item->item);
         }
 
         virtual bool operator!=(const iterator &other) const {
@@ -133,10 +144,10 @@ public:
             return *this;
         }
 
-        virtual iterator operator++(int) {
+        virtual iterator& operator++(int) {
             Node* res = item;
             operator++();
-            return iterator(res);
+            return * (new iterator(res, isSame));
         }
 
         virtual iterator &operator--() {
@@ -164,14 +175,12 @@ public:
             return *this;
         }
 
-        virtual iterator operator--(int) {
+        virtual iterator& operator--(int) {
             Node* res = item;
             operator--();
-            return iterator(res);
+            return *(new iterator(res, isSame));
         }
     };
-
-    class objNotItTree{};
 
     explicit myBinaryTree() {
         isLess = myBinaryTreePrivateFunc::isLessPrivate;
@@ -179,36 +188,43 @@ public:
     }
 
     explicit myBinaryTree(bool (*isLessFunc)(const T&, const T&)):
-                          isLess(isLessFunc) {
-        isSame = myBinaryTreePrivateFunc::isSamePrivate;
-    }
+                          isLess(isLessFunc),
+                          isSame(myBinaryTreePrivateFunc::isSamePrivate) {}
 
     explicit myBinaryTree(bool (*isLessFunc)(const T&, const T&),
                           bool (*isSameFunc)(const T&, const T&)):
                           isLess(isLessFunc), isSame(isSameFunc) {}
 
+    explicit myBinaryTree(const T& item):
+                          isLess(myBinaryTreePrivateFunc::isLessPrivate),
+                          isSame(myBinaryTreePrivateFunc::isSamePrivate),
+                          head(new Node(item, isSame)) {}
 
-    explicit myBinaryTree(const T& item, bool (*isLessFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isLessPrivate,
-                          bool (*isSameFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isSamePrivate):
-                          isLess(isLessFunc), isSame(isSameFunc), head(new Node(item)) {
-        if (!isLess)
-            isLess = myBinaryTreePrivateFunc::isLessPrivate;
+    explicit myBinaryTree(const T& item,
+                          bool (*isLessFunc)(const T&, const T&)):
+                          isLess(isLessFunc),
+                          isSame(myBinaryTreePrivateFunc::isSamePrivate),
+                          head(new Node(item, isSame)) {}
 
-        if (!isSame)
-            isSame = myBinaryTreePrivateFunc::isSamePrivate;
-
-        head(new Node(item));
+    explicit myBinaryTree(const T& item, bool (*isLessFunc)(const T&, const T&),
+                          bool (*isSameFunc)(const T&, const T&)):
+                          isLess(isLessFunc), isSame(isSameFunc), head(new Node(item, isSame)) {
     }
 
-    explicit myBinaryTree(T *items, size_t size, bool (*isLessFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isLessPrivate,
-                          bool (*isSameFunc)(const T&, const T&) = myBinaryTreePrivateFunc::isSamePrivate):
+    explicit myBinaryTree(T *items, size_t size):
+                          isLess(myBinaryTreePrivateFunc::isLessPrivate),
+                          isSame(myBinaryTreePrivateFunc::isSamePrivate) {
+        insert(items, size);
+    }
+
+    explicit myBinaryTree(T *items, size_t size, bool (*isLessFunc)(const T&, const T&)):
+                          isLess(isLessFunc), isSame(myBinaryTreePrivateFunc::isSamePrivate) {
+        insert(items, size);
+    }
+
+    explicit myBinaryTree(T *items, size_t size, bool (*isLessFunc)(const T&, const T&),
+                          bool (*isSameFunc)(const T&, const T&)):
                           isLess(isLessFunc), isSame(isSameFunc) {
-        if (!isLess)
-            isLess = myBinaryTreePrivateFunc::isLessPrivate;
-
-        if (!isSame)
-            isSame = myBinaryTreePrivateFunc::isSamePrivate;
-
         insert(items, size);
     }
 
@@ -242,22 +258,34 @@ public:
     }
 
     myBinaryTree(const myBinaryTree<T>& tree) {
-        isSame(tree.isSame);
-        isLess(tree.isLess);
+        isSame = tree.isSame;
+        isLess = tree.isLess;
 
         if (tree->head == nullptr)
             return;
 
-        myQueue<Node*> stack(tree->head);
+        myQueue<Node*> queue(tree->head);
 
-        while(stack.length()) {
-            Node* elem = stack.pop();
+        while(queue.length()) {
+            Node* elem = queue.pop();
             if (elem == nullptr)
                 continue;
 
             insert(elem->item);
-            stack.add(elem->left);
-            stack.add(elem->right);
+            queue.add(elem->left);
+            queue.add(elem->right);
+        }
+    }
+
+    ~myBinaryTree() {
+        myQueue<Node*> queue(head);
+        while(queue.length()) {
+            Node* node = queue.pop();
+            if (!node)
+                continue;
+            queue.add(node->left);
+            queue.add(node->right);
+            delete node;
         }
     }
 
@@ -291,12 +319,8 @@ public:
         }
     }
 
-    virtual iterator find(const T& item) {
-        return iterator(findPrivate(item));
-    }
-
-    virtual const iterator find(const T& item) const {
-        return iterator(findPrivate(item));
+    virtual iterator& find(const T& item) const {
+        return * (new iterator(findPrivate(item), isSame));
     }
 
     virtual bool inTree(const T& item) const {
@@ -371,7 +395,7 @@ public:
         delete start;
     }
 
-    virtual iterator begin() {
+    virtual iterator& begin() const {
         if (!head) {
             return end();
         }
@@ -381,28 +405,19 @@ public:
         while(leftNode->left)
             leftNode = leftNode->left;
 
-        return iterator(leftNode);
+        return * (new iterator(leftNode, isSame));
     }
 
-    virtual const iterator begin() const {
-        if (!head) {
-            return end();
-        }
-
-        Node* leftNode = head;
-
-        while(leftNode->left)
-            leftNode = leftNode->left;
-
-        return iterator(leftNode);
+    virtual iterator& end() const {
+        return * (new iterator(nullptr, isSame));
     }
 
-    virtual iterator end() {
-        return iterator(nullptr);
+    virtual typeof(isLess) getLessFunc() const {
+        return isLess;
     }
 
-    virtual const iterator end() const {
-        return iterator(nullptr);
+    virtual typeof(isSame) getSameFunc() const {
+        return isSame;
     }
 };
 

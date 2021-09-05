@@ -29,7 +29,7 @@ namespace sortFuncPrivate {
                                 bool (*isLess)(const T& obj1, const T& obj2)) {
         size_t left = start, right = end - 1;
         size_t index1 = index;
-        bool state = false;   /// == true -> левый больше чем исходный
+        bool state = false;   /// == true -> левый больше чем тот, относительно которого идёт сравнение
         while (left < right) {
             if (left == index) {
                 left++;
@@ -43,7 +43,6 @@ namespace sortFuncPrivate {
             if (state) {
                 if (isLess(sequence[right], sequence[index])) {
                     state = false;
-//                    std::cout << "\tswap: " << left << ", " << right << std::endl;
                     sequence.swap(left, right);
                     left++;
                     right--;
@@ -61,8 +60,6 @@ namespace sortFuncPrivate {
                 }
             }
         }
-//        std::cout << "\tend: " << left << ", " << right << ", " << state << std::endl;
-//        std::cout << " {" << start << ", " << end << "}, {" << index << ", " << index1 << "}: " << sequence << std::endl;
         size_t swapIndex;
         if (state) {
             if (index < left)
@@ -103,58 +100,16 @@ namespace sortFuncPrivate {
 
         sequence.swap(index, swapIndex);
         index = swapIndex;
-        /*if (state) {
-            if (index != left + 1) {
-                T item = sequence[index];
-                sequence.insert(item, left);
-                if (index < left + 1) {
-                    sequence.pop(index);
-                }
-                else {
-                    sequence.pop(index + 1);
-                }
-                index = left;
-            }
-        }
-        else {
-            size_t place;
-            if (left == right) {
-                if (isLess(sequence[index], sequence[left])) {
-                    place = left;
-                }
-                else {
-                    place = left + 1;
-                }
-            }
-            else {
-                place = left;
-            }
-
-            if (place == sequence.length()) {
-                T item = sequence[index];
-                sequence.append(item);
-                sequence.pop(index);
-                index = place - 1;
-            }
-            else if (index != place) {
-                T item = sequence[index];
-                sequence.insert(item, place);
-                if (index < place)
-                    sequence.pop(index);
-                else
-                    sequence.pop(index + 1);
-                if (place == end)
-                    place--;
-                index = place;
-            }
-        }*/
-//        std::cout << " {" << start << ", " << end << "}, {" << index << ", " << index1 << "}: " << sequence << std::endl << std::endl;
         return sequence;
     }
 }
 
 template<typename T>
-mySequence<T>& QuickSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>& QuickSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+    if (to <= from || to - from < 2) {
+        return sequence;
+    }
+
     struct interval {
         size_t start;
         size_t end;
@@ -167,27 +122,34 @@ mySequence<T>& QuickSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, 
             return start == other.start && end == other.end;
         }
     };
-//    std::cout << "Quick start: " << sequence << std::endl;
 
-    myQueue<interval> queue(interval(0, sequence.length()));
+    myQueue<interval> queue(interval(from, to));
 
     while (queue.length() > 0) {
         auto inter = queue.pop();
         if (inter.start + 1 >= inter.end)
             continue;
-//        std::cout << " interval: " << inter.start << ", " << inter.end << std::endl;
         size_t index = sortFuncPrivate::randomIndex(inter.start, inter.end);
         sortFuncPrivate::SortInterval(sequence, inter.start, inter.end, index, isLess);
         queue.add(interval(inter.start, index));
         queue.add(interval(index + 1, inter.end));
     }
-//    std::cout << "Quick end" << std::endl;
     return sequence;
 }
 
 template<typename T>
+mySequence<T>& QuickSort(mySequence<T>& sequence, size_t from, size_t to) {
+    return QuickSort(sequence, from, to, sortFuncPrivate::isLessDefault);
+}
+
+template<typename T>
+mySequence<T>& QuickSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+    return QuickSort(sequence, 0, sequence.length(), isLess);
+}
+
+template<typename T>
 mySequence<T>& QuickSort(mySequence<T>& sequence) {
-    return QuickSort(sequence, sortFuncPrivate::isLessDefault);
+    return QuickSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 
 #endif //BASE_CLASSES_QUICKSORT_H

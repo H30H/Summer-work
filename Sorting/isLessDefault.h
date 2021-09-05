@@ -12,5 +12,9 @@ namespace sortFuncPrivate {
         return obj1 < obj2;
     }
 
+    template<typename T>
+    bool isTreeSameFunc(const T& obj1, const T& obj2) {
+        return false;
+    }
 }
 #endif //BASE_CLASSES_ISLESSDEFAULT_H

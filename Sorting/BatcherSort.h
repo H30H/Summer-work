@@ -69,8 +69,7 @@ namespace sortFuncPrivate {
 }
 
 template<typename T>
-mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t from, size_t to,
-                           bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2) {
         return sequence;
     }
@@ -105,10 +104,12 @@ mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t from, size_t to,
 }
 
 template<typename T>
-mySequence<T>& BatcherSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    if (sequence.length() < 2)
-        return sequence;
+mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t start, size_t end) {
+    return BatcherSort(sequence, start, end, sortFuncPrivate::isLessDefault);
+}
 
+template<typename T>
+mySequence<T>& BatcherSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
     return BatcherSort(sequence, 0, sequence.length(), isLess);
 }
 

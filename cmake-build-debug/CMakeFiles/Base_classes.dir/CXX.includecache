@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myAVLTree.h
+myBinaryTree.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
+../LinkedList/myStack.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myStack.h
+../LinkedList/myQueue.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
+
 /cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h
 myBinaryTree.h
 /cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
@@ -37,6 +45,14 @@ iostream
 /cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
 myLinkedList.h
 /cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
+
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myStack.h
+myLinkedList.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
+
+/cygdrive/c/cc++ labs/Base classes/Map/myMap.h
+../BinaryTree/myAVLTree.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myAVLTree.h
 
 /cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
 mySequence.h
@@ -73,8 +89,6 @@ isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
 ../BinaryTree/myBinaryTree.h
 /cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
-cstring
-/cygdrive/c/cc++ labs/Base classes/Sorting/cstring
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
 ../Sequence/mySequence.h
@@ -87,8 +101,8 @@ isLessDefault.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 ../Sequence/mySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
-map
--
+../Map/myMap.h
+/cygdrive/c/cc++ labs/Base classes/Map/myMap.h
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/HeapSort.h
 isLessDefault.h
@@ -181,6 +195,8 @@ iostream
 -
 tuple
 -
+utility
+-
 vector
 -
 iterator
@@ -197,4 +213,8 @@ BinaryTree/myBinaryHeap.h
 /cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h
 LinkedList/myLinkedList.h
 /cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
+BinaryTree/myAVLTree.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myAVLTree.h
+Map/myMap.h
+/cygdrive/c/cc++ labs/Base classes/Map/myMap.h
 

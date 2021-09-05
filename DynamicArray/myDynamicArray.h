@@ -50,11 +50,11 @@ public:
             return *this;
         }
 
-        T &operator*() const {
+        T& operator*() {
             return *item;
         }
 
-        T *operator&() const {
+        T* operator->() {
             return item;
         }
 
@@ -163,6 +163,13 @@ public:
         delete[] array;
     }
 
+    myDynamicArray<T>& operator = (const myDynamicArray<T>& dynamicArray) {
+        delete[] array;
+        resize(dynamicArray.size);
+        copyArr(size, dynamicArray.array, array);
+        return *this;
+    }
+
     T& get(size_t index) {
         if (index >= size)
             throw indexOutOfRange();
@@ -233,28 +240,6 @@ public:
         delete[] array;
         array = newArr;
         size = newSize;
-    }
-
-    bool operator == (const myDynamicArray<T>& dynamicArray) const {
-        if (size != dynamicArray.size)
-            return false;
-
-        for (int i = 0; i < size; i++) {
-            if (array[i] != dynamicArray.array[i])
-                return false;
-        }
-        return true;
-    }
-
-    bool operator != (const myDynamicArray<T>& dynamicArray) const {
-        return !(operator==(dynamicArray));
-    }
-
-    myDynamicArray<T>& operator = (const myDynamicArray<T>& dynamicArray) {
-        delete[] array;
-        resize(dynamicArray.size);
-        copyArr(size, dynamicArray.array, array);
-        return *this;
     }
 
     size_t length() const {

@@ -9,10 +9,14 @@
 #include "../Sequence/mySequence.h"
 
 template<typename T>
-mySequence<T>& SelectionSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    for (size_t i = 1; i < sequence.length(); i++) {
+mySequence<T>& SelectionSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+    if (to <= from || to - from < 2) {
+        return sequence;
+    }
+
+    for (size_t i = from+1; i < to; i++) {
         size_t index_min = i-1;
-        for (size_t j = i; j < sequence.length(); j++) {
+        for (size_t j = i; j < to; j++) {
             if (isLess(sequence[j], sequence[index_min])) {
                 index_min = j;
             }
@@ -24,8 +28,18 @@ mySequence<T>& SelectionSort(mySequence<T>& sequence, bool (*isLess)(const T& ob
 }
 
 template<typename T>
+mySequence<T>& SelectionSort(mySequence<T>& sequence, size_t from, size_t to) {
+    return SelectionSort(sequence, from, to, sortFuncPrivate::isLessDefault);
+}
+
+template<typename T>
+mySequence<T>& SelectionSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+    return SelectionSort(sequence, 0, sequence.length(), isLess);
+}
+
+template<typename T>
 mySequence<T>& SelectionSort(mySequence<T>& sequence) {
-    return SelectionSort(sequence, sortFuncPrivate::isLessDefault);
+    return SelectionSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 
 #endif //BASE_CLASSES_SELECTIONSORT_H

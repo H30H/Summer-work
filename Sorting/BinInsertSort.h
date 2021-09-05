@@ -9,8 +9,8 @@
 #include "../Sequence/mySequence.h"
 
 template<typename T>
-mySequence<T>& BinInsertSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    if (sequence.length() < 2)
+mySequence<T>& BinInsertSort(mySequence<T>& sequence, size_t start, size_t end, bool (*isLess)(const T& obj1, const T& obj2)) {
+    if (end <= start || end - start < 2)
         return sequence;
 
     if (isLess(sequence[1], sequence[0])) {
@@ -40,8 +40,18 @@ mySequence<T>& BinInsertSort(mySequence<T>& sequence, bool (*isLess)(const T& ob
 }
 
 template<typename T>
+mySequence<T>& BinInsertSort(mySequence<T>& sequence, size_t from, size_t to) {
+    return BinInsertSort(sequence, from, to, sortFuncPrivate::isLessDefault);
+}
+
+template<typename T>
+mySequence<T>& BinInsertSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+    return BinInsertSort(sequence, 0, sequence.length(), isLess);
+}
+
+template<typename T>
 mySequence<T>& BinInsertSort(mySequence<T>& sequence) {
-    return BinInsertSort(sequence, sortFuncPrivate::isLessDefault);
+    return BinInsertSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 
 #endif //BASE_CLASSES_BININSERTSORT_H

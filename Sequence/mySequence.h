@@ -39,67 +39,27 @@ public:
         return *this;
     }
 
-    using seqIterator = std::iterator<std::bidirectional_iterator_tag, T>;
+//    using seqIterator = std::iterator<std::bidirectional_iterator_tag, T>;
 
-    /*
-    template<typename iterator>
     class seqIterator: std::iterator<std::bidirectional_iterator_tag, T> { //класс итератора
-    private:
-        iterator iter;
     public:
-        explicit seqIterator(const iterator& other): iter(other) {}
+        virtual T& operator*() const = 0;
 
-        seqIterator(const seqIterator& other): iter(other.iter) {}
+        virtual T* operator->() const = 0;
 
-        T& operator*() {
-            return *iter;
-        }
+        virtual seqIterator& operator + (int num) = 0;
 
-        const T& operator*() const {
-            return *iter;
-        }
+        virtual seqIterator& operator - (int num) = 0;
 
-        T* operator&() {
-            return &iter;
-        }
+        virtual seqIterator& operator++() = 0;
 
-        const T* operator&() const {
-            return &iter;
-        }
+        virtual seqIterator& operator++(int) = 0;
 
-        bool operator == (const seqIterator<iterator> &other) const {
-            return iter == other.iter;
-        }
+        virtual seqIterator& operator--() = 0;
 
-        bool operator != (const seqIterator<iterator> &other) const {
-            return iter != other.iter;
-        }
+        virtual seqIterator& operator--(int) = 0;
+    }; //Класс итератора для последовательностей
 
-        seqIterator& operator + (int num) const {
-            return iter + num;
-        }
-
-        seqIterator& operator - (int num) const {
-            return iter - num;
-        }
-
-        seqIterator& operator++() const {
-            return iter++;
-        }
-
-        seqIterator& operator++(int) const {
-            return ++iter;
-        }
-
-        seqIterator& operator--() const {
-            return iter--;
-        }
-
-        virtual seqIterator& operator--(int) const {
-            return --iter;
-        }
-    }; //Класс итератора
-    */
     virtual T& getFirst() = 0;
     virtual const T& getFirst() const = 0;
 
@@ -126,17 +86,17 @@ public:
     virtual T& pop() = 0;
     virtual T& pop(size_t index) = 0;
 
-    virtual mySequence<T>& concat (const mySequence<T>& sequence) = 0;
+    virtual mySequence<T>& concat(const mySequence<T>& sequence) = 0;
     virtual mySequence<T>& reverse() = 0;
 
-    virtual size_t find(const T& item) const = 0;
-    virtual size_t find(const mySequence<T>& sequence) const = 0;
+    virtual seqIterator& begin() const = 0;
+    virtual seqIterator& end() const = 0;
 };
 
 template<typename T>
 std::ostream& operator << (std::ostream& cout, const mySequence<T>& arraySequence) {
     cout << "{";
-    for (int i = 0; i < arraySequence.length(); i++) {
+    for (size_t i = 0; i < arraySequence.length(); i++) {
         cout << arraySequence[i];
         if (i == arraySequence.length() - 1)
             break;

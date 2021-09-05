@@ -1,5 +1,6 @@
 #include <iostream>
 #include <tuple>
+#include <utility>
 #include <vector>
 #include <iterator>
 #include "DynamicArray/myDynamicArray.h"
@@ -8,6 +9,8 @@
 #include "random"
 #include "BinaryTree/myBinaryHeap.h"
 #include "LinkedList/myLinkedList.h"
+#include "BinaryTree/myAVLTree.h"
+#include "Map/myMap.h"
 
 template <class...Args>
 int sum(Args&&... args) {
@@ -77,11 +80,32 @@ void testSort(size_t length, size_t count, int maxElem,
     std::cout << "Error count: " << countErr << std::endl;
 }
 
+template<typename T>
+void printTree(const myBinaryTree<T>& tree) {
+    std::cout << '{';
+    for (auto i : tree) {
+        std::cout << i << ' ';
+    }
+    std::cout << "\b\b}" << std::endl;
+}
+
 using namespace std;
 
 int main() {
     vector<int> v{1, 2, 3, 4, 5};
     vector<int> v1(v.begin(), v.end());
+
+    struct testStruct {
+        int a;
+        bool b;
+        string c;
+
+        testStruct(int a, bool b, string c) : a(a), b(b), c(std::move(c)) {}
+    };
+
+
+    vector<testStruct> vex{testStruct(1, true, "abc"), testStruct(2, false, "true"), testStruct(3, false, "false")};
+
     int u;
     myDynamicArray<int> dynamicArray(v.begin(), v.end());
     cout << dynamicArray << ' ' << dynamicArray.length() << endl;
@@ -115,17 +139,49 @@ int main() {
 
     binaryTree.insert(arr, sizeof(arr) / sizeof(int));
 
-    for (auto &i : binaryTree) {
-        cout << i << ' ';
-    }
-    cout << endl;
+    printTree(binaryTree);
+
+    myAVLTree<int> tree(binaryTree);
+
+    printTree(tree);
 
     myArraySequence<int> sequence(arr, sizeof(arr) / sizeof(int));
-    cout << sequence << ' ' << sequence.length() << endl;
-    cout << QuickSort(sequence) << endl << endl;
+//    cout << sequence << ' ' << sequence.length() << endl;
+//    cout << QuickSort(sequence) << endl << endl;
 
 //    cout <<
 
-    testSort(-1, 10000, 1000, QuickSort<int>, sortFuncPrivate::isLessDefault);
+    testSort(-1, 10000, 1000, BatcherSort<int>, sortFuncPrivate::isLessDefault);
+    //TODO попробовать написать альтернативу мёрджа через свапы и посмотреть на время работы
+    /*
+    myAVLTree<int> tree;
+    int num = 0, k;
+    for (int i = 0; i <= 10; i++) {
+        tree.insert(i);
+        cout << tree << endl;
+    }
+
+    cout << "{";
+    for (size_t j = 0; j < 10000; j++) {
+        for (auto i: tree) {
+            cout << i << ", ";
+        }
+        cout << "\b\b}\n";
+    }
+
+    cout << tree << endl;
+    while (num != -1) {
+        cin >> num;
+        cin >> k;
+        if (num == 0) {
+            tree.insert(k);
+        }
+        else {
+            tree.remove(k);
+        }
+        cout << tree << endl;
+    }
+    /* */
+
     return 0;
 }

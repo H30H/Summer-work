@@ -35,29 +35,43 @@ namespace sortFuncPrivate {
 }
 
 template<typename T>
-mySequence<T>& HeapSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    if (!isLess)
-        isLess = sortFuncPrivate::isLessDefault;
-
-    if (sequence.length() < 2)
+mySequence<T>& HeapSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+    if (to <= from || to - from < 2) {
         return sequence;
+    }
 
     myBinaryHeap<T> binaryHeap(isLess);
-    for (size_t i = 0; i < sequence.length(); i++) {
+    for (size_t i = from; i < to; i++) {
         binaryHeap.insert(sequence[i]);
     }
-    sequence = binaryHeap.getSequence();
 
-    for (size_t i = sequence.length() - 1; i > 0; i--) {
-        sequence.swap(0, i);
-        sortFuncPrivate::heapify(sequence, i, isLess);
+    myArraySequence<T> sortSeq = binaryHeap.getSequence();
+
+    for (size_t i = sortSeq.length() - 1; i > 0; i--) {
+        sortSeq.swap(0, i);
+        sortFuncPrivate::heapify(sortSeq, i, isLess);
     }
+
+    for (size_t i = from, j = 0; i < to; i++, j++) {
+        sequence[i] = sortSeq[j];
+    }
+
     return sequence;
 }
 
 template<typename T>
+mySequence<T>& HeapSort(mySequence<T>& sequence, size_t from, size_t to) {
+    return HeapSort(sequence, from, to, sortFuncPrivate::isLessDefault);
+}
+
+template<typename T>
+mySequence<T>& HeapSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+    return HeapSort(sequence, 0, sequence.length(), isLess);
+}
+
+template<typename T>
 mySequence<T>& HeapSort(mySequence<T>& sequence) {
-    return HeapSort(sequence, sortFuncPrivate::isLessDefault);
+    return HeapSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 
 #endif //BASE_CLASSES_HEAPSORT_H

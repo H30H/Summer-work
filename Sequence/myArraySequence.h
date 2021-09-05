@@ -45,7 +45,9 @@ private:
     }
 
 public:
-    class iterator: std::iterator<std::bidirectional_iterator_tag, T> { //класс итератора
+    using seqIterator = typename mySequence<T>::seqIterator;
+
+    class iterator: public mySequence<T>::seqIterator/*std::iterator<std::bidirectional_iterator_tag, T>*/ { //класс итератора
     private:
         T* item = nullptr;
     public:
@@ -60,19 +62,11 @@ public:
             return *this;
         }
 
-        T& operator*() {
+        T& operator*() const {
             return *item;
         }
 
-        const T& operator*() const {
-            return *item;
-        }
-
-        T* operator&() {
-            return item;
-        }
-
-        const T* operator&() const {
+        T* operator->() const {
             return item;
         }
 
@@ -84,7 +78,7 @@ public:
             return item != other.item;
         }
 
-        iterator& operator + (int num) const {
+        iterator& operator + (int num) {
             if (num < 0)
                 return operator-(-num);
 
@@ -94,7 +88,7 @@ public:
             return *this;
         }
 
-        iterator& operator - (int num) const {
+        iterator& operator - (int num) {
             if (num < 0)
                 return operator+(-num);
 
@@ -104,23 +98,23 @@ public:
             return *this;
         }
 
-        iterator& operator++() const {
+        iterator& operator++() {
             item++;
             return *this;
         }
 
-        iterator& operator++(int) const {
+        iterator& operator++(int) {
             T* res = item;
             ++item;
             return *(new iterator(res));
         }
 
-        iterator& operator--() const {
+        iterator& operator--() {
             item--;
             return *this;
         }
 
-        iterator& operator--(int) const {
+        iterator& operator--(int) {
             T* res = item;
             --item;
             return *(new iterator(res));
@@ -238,8 +232,7 @@ public:
         dynamicArray.swap(index1, index2);
     }
 
-    myArraySequence<T>& getSubSequence(
-            size_t startIndex, size_t endIndex) const {
+    mySequence<T>& getSubSequence(size_t startIndex, size_t endIndex) const {
         if (startIndex >= size)
             throw typename mySequence<T>::IndexOutOfRange();
         if (endIndex > size)
@@ -254,22 +247,53 @@ public:
     }
 
     void append (const T& item) {
-        resizePrivate(size+1);
-        dynamicArray[size-1] = item;
+        if (size != 0 && &item >= &dynamicArray[0] && &item <= &dynamicArray[dynamicArray.length() - 1]) { //добавляется элемент из массива
+            size_t indexItem = ((size_t)&item - (size_t)&dynamicArray[0]) / sizeof(T);
+            resizePrivate(size+1);
+            dynamicArray[size-1] = dynamicArray[indexItem];
+        }
+        else {
+            resizePrivate(size+1);
+            dynamicArray[size-1] = item;
+        }
     }
 
     void prepend(const T& item) {
-        resizePrivate(size+1, 1);
-        dynamicArray[0] = item;
+        if (size != 0 && &item >= &dynamicArray[0] && &item <= &dynamicArray[dynamicArray.length() - 1]) { //добавляется элемент из массива
+            size_t indexItem = ((size_t)&item - (size_t)&dynamicArray[0]) / sizeof(T);
+            resizePrivate(size+1, 1);
+            dynamicArray[0] = dynamicArray[indexItem + 1];
+        }
+        else {
+            resizePrivate(size+1, 1);
+            dynamicArray[0] = item;
+        }
     }
 
     void insert (const T& item, size_t index) {
-        if (index >= size)
+        if (index > size)
             throw typename mySequence<T>::IndexOutOfRange();
+        if (index == 0) {
+            prepend(item);
+            return;
+        }
+        if (index == size) {
+            append(item);
+            return;
+        }
 
-
-        resizePrivate(size+1, 1, index);
-        dynamicArray[index] = item;
+        if (&item >= &dynamicArray[0] && &item <= &dynamicArray[dynamicArray.length() - 1]) {       //добавляется элемент из массива
+            size_t itemIndex = ((size_t)&item - (size_t)&dynamicArray[0]) / sizeof(T);
+            resizePrivate(size+1, 1, index);
+            if (itemIndex > index)
+                itemIndex++;
+            dynamicArray[index] = dynamicArray[itemIndex];
+        }
+        else {
+            resizePrivate(size+1, 1, index);
+            dynamicArray[index] = item;
+        }
+//        dynamicArray[index] = item;
     }
 
     T& pop() {
@@ -302,44 +326,12 @@ public:
          return *this;
     }
 
-    size_t find(const T& item) const {
-        for (size_t i = 0; i < size; i++) {
-            if (item == dynamicArray[i])
-                return i;
-        }
-        return -1;
+    seqIterator& begin() const {
+        return *(new iterator(dynamicArray.begin().operator->()));
     }
 
-    size_t find(const mySequence<T>& sequence) const {
-        if (sequence.length() > size) {
-            return -1;
-        }
-        for (size_t i = 0, j = 0; i + sequence.length() - j < size; i++) {
-            if (dynamicArray[i] == sequence[j])
-                j++;
-            else
-                j = 0;
-
-            if (j == sequence.length())
-                return i - j + 1;
-        }
-
-        return -1;
-    }
-
-    iterator& begin() {
-        return iterator(&dynamicArray.begin());
-    }
-
-    const iterator& begin() const {
-        return iterator(&dynamicArray.begin());
-    }
-
-    iterator& end() {
-        return iterator(&dynamicArray.begin() + size);
-    }
-    const iterator& end() const {
-        return iterator(&dynamicArray.begin() + size);
+    seqIterator& end() const {
+        return *(new iterator(dynamicArray.begin().operator->()));
     }
 };
 

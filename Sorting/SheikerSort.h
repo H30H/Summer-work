@@ -9,9 +9,13 @@
 #include "isLessDefault.h"
 
 template<typename T>
-mySequence<T>& SheikerSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>& SheikerSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+    if (to <= from || to - from < 2) {
+        return sequence;
+    }
+
     bool isChanged = true;
-    size_t min = 0, max = sequence.length() - 1;
+    size_t min = from, max = to - 1;
     while (isChanged) {
         isChanged = false;
         for (size_t i = min + 1; i <= max; i++) {
@@ -35,8 +39,18 @@ mySequence<T>& SheikerSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1
 }
 
 template<typename T>
+mySequence<T>& SheikerSort(mySequence<T>& sequence, size_t from, size_t to) {
+    return SheikerSort(sequence, from, to, sortFuncPrivate::isLessDefault);
+}
+
+template<typename T>
+mySequence<T>& SheikerSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
+    return SheikerSort(sequence, 0, sequence.length(), isLess);
+}
+
+template<typename T>
 mySequence<T>& SheikerSort(mySequence<T>& sequence) {
-    return SheikerSort(sequence, sortFuncPrivate::isLessDefault);
+    return SheikerSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 
 #endif //BASE_CLASSES_SHEIKERSORT_H
