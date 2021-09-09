@@ -54,11 +54,21 @@ public:
                 break;
 
             switch (state) {
+                default:
+                    break;
                 case 1:
                     getArray(memory, getRandomInt);
                     break;
                 case 2:
                     checkArray(memory, getRandomInt);
+                    break;
+                case 3:
+                    sortSequence(memory, allSorts);
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    std::cout << "В разработке... (Coming soon)" << std::endl;
                     break;
             }
 
