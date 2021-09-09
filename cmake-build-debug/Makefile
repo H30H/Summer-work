@@ -129,30 +129,6 @@ Base_classes/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/build
 .PHONY : Base_classes/fast
 
-Sorting/sortingMenu.o: Sorting/sortingMenu.cpp.o
-.PHONY : Sorting/sortingMenu.o
-
-# target to build an object file
-Sorting/sortingMenu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sorting/sortingMenu.cpp.o
-.PHONY : Sorting/sortingMenu.cpp.o
-
-Sorting/sortingMenu.i: Sorting/sortingMenu.cpp.i
-.PHONY : Sorting/sortingMenu.i
-
-# target to preprocess a source file
-Sorting/sortingMenu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sorting/sortingMenu.cpp.i
-.PHONY : Sorting/sortingMenu.cpp.i
-
-Sorting/sortingMenu.s: Sorting/sortingMenu.cpp.s
-.PHONY : Sorting/sortingMenu.s
-
-# target to generate assembly for a file
-Sorting/sortingMenu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sorting/sortingMenu.cpp.s
-.PHONY : Sorting/sortingMenu.cpp.s
-
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -186,9 +162,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Base_classes"
-	@echo "... Sorting/sortingMenu.o"
-	@echo "... Sorting/sortingMenu.i"
-	@echo "... Sorting/sortingMenu.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

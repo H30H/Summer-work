@@ -190,6 +190,10 @@ ShellSort.h
 
 /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
 
+/cygdrive/c/cc++ labs/Base classes/Sorting/menu/sortingMenu.h
+../allSorts.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
+
 /cygdrive/c/cc++ labs/Base classes/main.cpp
 iostream
 -
@@ -217,4 +221,6 @@ BinaryTree/myAVLTree.h
 /cygdrive/c/cc++ labs/Base classes/BinaryTree/myAVLTree.h
 Map/myMap.h
 /cygdrive/c/cc++ labs/Base classes/Map/myMap.h
+Sorting/menu/sortingMenu.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/menu/sortingMenu.h
 

@@ -15,10 +15,10 @@ public:
         if (size == 0)
             size = 1;
 
-        while (size < newSize)
+        while (size <= newSize)
             size *= 2;
 
-        while (size > newSize * 2) {
+        while (size > newSize * 2 && size != 1) {
             size /= 2;
         }
 
@@ -41,6 +41,9 @@ private:
     void resizePrivate(size_t newSize, long intent, size_t index) {
         auto dynSize = resizeFunc(0, newSize);
         size = newSize;
+        if (dynamicArray.length() == dynSize && intent == 0 && index == 0) {
+            return;
+        }
         dynamicArray.resize(dynSize, intent, index);
     }
 
@@ -141,7 +144,7 @@ public:
         }
     }
     myArraySequence(std::initializer_list<T> list) {
-        dynamicArray = myDynamicArray<int>(list);
+        dynamicArray = myDynamicArray<T>(list);
         resizePrivate(dynamicArray.length());
     }
 
@@ -155,6 +158,13 @@ public:
         for (size_t i = 0; i < sequence.length(); i++) {
             append(sequence[i]);
         }
+    }
+
+    myArraySequence<T>& operator=(const myArraySequence<T>& arraySequence ) {
+        size = arraySequence.size;
+        dynamicArray = arraySequence.dynamicArray;
+        resizeFunc = arraySequence.resizeFunc;
+        return *this;
     }
 
     T& getFirst() {

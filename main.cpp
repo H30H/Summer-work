@@ -11,6 +11,7 @@
 #include "LinkedList/myLinkedList.h"
 #include "BinaryTree/myAVLTree.h"
 #include "Map/myMap.h"
+#include "Sorting/menu/sortingMenu.h"
 
 template <class...Args>
 int sum(Args&&... args) {
@@ -92,6 +93,11 @@ void printTree(const myBinaryTree<T>& tree) {
 using namespace std;
 
 int main() {
+//    return 0;
+//
+    mySortMenuClass::mainMenu();
+    return 0;
+
     vector<int> v{1, 2, 3, 4, 5};
     vector<int> v1(v.begin(), v.end());
 
@@ -182,6 +188,19 @@ int main() {
         cout << tree << endl;
     }
     /* */
+
+    struct point {
+        int x;
+        int y;
+        double value;
+    };
+
+    struct matrix {
+        std::vector<point> vec;
+    };
+
+    auto *array = new point[5];
+    array[0] = point{1, 1, 1};
 
     return 0;
 }

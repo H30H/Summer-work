@@ -15,13 +15,13 @@ private:
     size_t size = 0;
     T* array = nullptr;
 
-    static void copyArr(size_t count, T* from, T* to) {
+    static void copyArr(size_t count, const T* from, T* to) {
         for (size_t i = 0; i < count; i++) {
             to[i] = from[i];
         }
     }
 
-    static void copyArr(size_t count, T* from, T* to, long intent) {
+    static void copyArr(size_t count, const T* from, T* to, long intent) {
         if (intent < 0) {
             for (size_t i = 0, j = -intent; j < count; i++, j++) {
                 to[i] = from[j];
@@ -148,8 +148,9 @@ public:
     myDynamicArray(std::initializer_list<T> list) { //Конструктор через массив (прикольная вещь): myDynamicArray<int> dArray{1, 2, 3, 4, 5};
         resize(list.size());
         size_t ind = 0;
-        for (auto i = list.begin(); i != list.end(); i++, ind++) {
-            array[ind] = *i;
+        for (auto &i : list) {
+            array[ind] = i;
+            ind++;
         }
     }
 
@@ -188,7 +189,7 @@ public:
         if (index >= size)
             throw indexOutOfRange();
 
-        array[index] = size;
+        array[index] = item;
     }
 
     T& operator [] (size_t index) {
@@ -215,8 +216,8 @@ public:
     void resize(size_t newSize, long intent) {
         if (newSize == 0) {
             delete[] array;
-            size = 0;
             array = nullptr;
+            size = 0;
             return;
         }
 
@@ -229,8 +230,15 @@ public:
     }
 
     void resize(size_t newSize, long intent, size_t index) {
-        if ((index >= newSize && index + intent >= newSize) || index > size) {
+        if ((index >= newSize && (long) index + intent >= newSize) || index > size) {
             throw indexOutOfRange();
+        }
+
+        if (newSize == 0) {
+            delete[] array;
+            array = nullptr;
+            size = 0;
+            return;
         }
 
         T* newArr = new T[newSize];
@@ -260,6 +268,34 @@ public:
         memcpy(array + index1, array + index2, sizeof(T));
         memcpy(array + index2, item, sizeof(T));
         free(item);
+    }
+
+    void move(size_t index1, size_t index2) {  //перемещает элемент с индексом 1 на место с индексом 2
+        if (index1 >= size)
+            throw indexOutOfRange();
+        if (index2 >= size)
+            throw indexOutOfRange();
+
+        if (index1 == index2)
+            return;
+
+        size_t count;
+        if (index1 > index2) {
+            count = index1 - index2;
+            T *items = (T*) malloc(count * sizeof(T));
+            memcpy(items, array + index2, count);
+            memcpy(array + index2, array + index1, sizeof(T));
+            memcpy(array + index2 + 1, items, count * sizeof(T));
+            free(items);
+        }
+        else {
+            count = index1 - index2;
+            T *items = (T*) malloc(count * sizeof(T));
+            memcpy(items, array + index2, count);
+            memcpy(array + index2, array + index1, sizeof(T));
+            memcpy(array + index2 + 1, items, count * sizeof(T));
+            free(items);
+        }
     }
 
     iterator begin() const { //Функция для итератора, возвращает итератор, указывающий на начало

@@ -1,8 +1,10 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.19)
 project(Base_classes)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Base_classes main.cpp DynamicArray/myDynamicArray.h Sequence/mySequence.h Sequence/myArraySequence.h Sorting/isLessDefault.h Sorting/InsertSort.h Sorting/allSorts.h Sorting/SelectionSort.h Sorting/SelectionSortMod.h BinaryTree/myBinaryTree.h Map/myMap.h Sorting/CountingSort.h Sorting/BinInsertSort.h Sorting/MergeSort.h Sorting/BatcherSort.h BinaryTree/myBinaryHeap.h LinkedList/myLinkedList.h LinkedList/myStack.h LinkedList/myQueue.h Sorting/HeapSort.h Sorting/BinaryTreeSort.h Sorting/ShellSort.h Sorting/QuickSort.h Sequence/myLinkedSequence.h BinaryTree/myAVLTree.h Sorting/sortingMenu.cpp Sorting/sortingMenu.h)
+add_executable(Base_classes
+        main.cpp
+        )
 
 #add_executable(Base_classes test.cpp)

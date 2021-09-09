@@ -1,7 +1,6 @@
 file(REMOVE_RECURSE
   "Base_classes.exe"
   "Base_classes.pdb"
-  "CMakeFiles/Base_classes.dir/Sorting/sortingMenu.cpp.o"
   "CMakeFiles/Base_classes.dir/main.cpp.o"
   "libBase_classes.dll.a"
 )
