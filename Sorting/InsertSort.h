@@ -14,13 +14,19 @@ mySequence<T>& InsertSort(mySequence<T>& sequence, size_t from, size_t to, bool 
         return sequence;
     }
 
+    size_t index;
+
     for (size_t i = from + 1; i < to; i++) {
+        index = i;
         for (size_t j = i; j > from; j--) {
-            if (isLess(sequence[j], sequence[j-1]))
-                sequence.swap(j-1, j);
+            if (isLess(sequence[i], sequence[j-1]))
+                --index;
             else
                 break;
         }
+
+        if (i != index)
+            sequence.move(i, index);
     }
     return sequence;
 }

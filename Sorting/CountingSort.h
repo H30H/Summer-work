@@ -25,7 +25,7 @@ mySequence<T>& CountingSort(mySequence<T>& sequence, size_t from, size_t to, boo
         }
     }
     size_t count = from;
-    for (auto it = map.begin(); it != map.end(); it++) {
+    for (auto it = map.begin(); it != map.end(); ++it) {
         for (size_t i = 0; i < it->item; i++, count++) {
             sequence[count] = it->key;
         }

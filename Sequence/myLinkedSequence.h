@@ -153,11 +153,11 @@ public:
         linkedList.insert(item, index);
     }
 
-    T& pop() {
+    T pop() {
         return linkedList.pop();
     }
 
-    T& pop(size_t index) {
+    T pop(size_t index) {
         return linkedList.pop(index);
     }
 

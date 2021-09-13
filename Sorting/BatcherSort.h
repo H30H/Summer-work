@@ -8,6 +8,7 @@
 #include "isLessDefault.h"
 #include "../Sequence/mySequence.h"
 #include "../Sequence/myArraySequence.h"
+#include "../LinkedList/myQueue.h"
 #include <cmath>
 #include <iostream>
 
@@ -25,15 +26,36 @@ namespace sortFuncPrivate {
             return;
         }
 
-        size_t index = from + (to - from) / 2;
+        struct indexes {
+            size_t from;
+            size_t to;
 
-        for (size_t i = from, j = index; j < to; i++, j++) {
-            if (isLess(sequence[j], sequence[i])) {
-                sequence.swap(i, j);
+            bool operator == (const indexes& other) const {
+                return from == other.from && to == other.to;
             }
+        };
+
+        myQueue<indexes> queue(indexes{from, to});
+        size_t index;
+        while (queue.length()) {
+            auto interval = queue.pop();
+
+            if (interval.to <= interval.from || interval.to - interval.from < 2) {
+                continue;
+            }
+
+            index = interval.from + (interval.to - interval.from) / 2;
+//            std::cout << "interval: " << interval.from << ", " << index << ", " << interval.to << std::endl;
+
+            for (size_t i = interval.from, j = index; j < interval.to; i++, j++) {
+                if (isLess(sequence[j], sequence[i])) {
+                    sequence.swap(i, j);
+                }
+            }
+
+            queue.add(indexes{interval.from, index});
+            queue.add(indexes{index, interval.to});
         }
-        sortBitonicSequence(sequence, from, index, isLess);
-        sortBitonicSequence(sequence, index, to, isLess);
     }
 
     template<typename T>
@@ -55,8 +77,9 @@ namespace sortFuncPrivate {
         size_t ind1 = from, ind2 = index;
         while(ind1 != index && ind2 != to) {
             if (isLess(sequence[ind2], sequence[ind1])) {
-                sequence.insert(sequence[ind2], ind1);
-                sequence.pop(ind2+1);
+                sequence.move(ind2, ind1);
+//                sequence.insert(sequence[ind2], ind1);
+//                sequence.pop(ind2+1);
                 ind1++;
                 ind2++;
                 index++;
@@ -79,7 +102,7 @@ mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t from, size_t to, bool
     if (!sortFuncPrivate::checkLog2(size)) { //если размер отрезка не равен степени двойки
         myArraySequence<size_t> indexes(from);
         while (size != 0) {                  //сортировка вложенных отрезков, длиной степени двойки
-            auto index = (size_t) pow(2, (size_t) log2(size));
+            auto index = (size_t) pow(2, static_cast<size_t>(log2(size)));
             size -= index;
             index += indexes.getLast();
             BatcherSort(sequence, indexes.getLast(), index, isLess);

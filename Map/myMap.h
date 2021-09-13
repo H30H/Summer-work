@@ -144,11 +144,11 @@ public:
         avlTree.remove(obj(key, isLess, isSame));
     }
 
-    typename myAVLTree<obj>::iterator& begin() const {
+    typename myAVLTree<obj>::iterator begin() const {
         return avlTree.begin();
     }
 
-    typename myAVLTree<obj>::iterator& end() const {
+    typename myAVLTree<obj>::iterator end() const {
         return avlTree.end();
     }
 };

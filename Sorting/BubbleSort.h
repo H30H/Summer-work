@@ -13,18 +13,17 @@ mySequence<T>& BubbleSort(mySequence<T>& sequence, size_t from, size_t to, bool 
     if (to <= from || to - from < 2) {
         return sequence;
     }
-
     bool isChanged = true;
-    size_t count = to - from;
+
     while(isChanged) {
         isChanged = false;
-        for (size_t i = from+1; i < count; i++) {
+        for (size_t i = from+1; i < to; i++) {
             if (isLess(sequence[i], sequence[i-1])) {
                 isChanged = true;
                 sequence.swap(i-1, i);
             }
         }
-        count--;
+        to--;
     }
     return sequence;
 }

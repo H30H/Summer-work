@@ -39,26 +39,7 @@ public:
         return *this;
     }
 
-//    using seqIterator = std::iterator<std::bidirectional_iterator_tag, T>;
-
-    class seqIterator: std::iterator<std::bidirectional_iterator_tag, T> { //класс итератора
-    public:
-        virtual T& operator*() const = 0;
-
-        virtual T* operator->() const = 0;
-
-        virtual seqIterator& operator + (int num) = 0;
-
-        virtual seqIterator& operator - (int num) = 0;
-
-        virtual seqIterator& operator++() = 0;
-
-        virtual seqIterator& operator++(int) = 0;
-
-        virtual seqIterator& operator--() = 0;
-
-        virtual seqIterator& operator--(int) = 0;
-    }; //Класс итератора для последовательностей
+    using seqIterator = std::iterator<std::bidirectional_iterator_tag, T>;
 
     virtual T& getFirst() = 0;
     virtual const T& getFirst() const = 0;
@@ -74,6 +55,7 @@ public:
 
     virtual void set(const T& item, size_t index) = 0;
     virtual void swap(size_t index1, size_t index2) = 0;
+    virtual void move(size_t indexFrom, size_t indexTo) = 0;
 
     virtual mySequence<T>& getSubSequence(
             size_t startIndex, size_t endIndex) const = 0;
@@ -83,14 +65,12 @@ public:
     virtual void append (const T& item) = 0;
     virtual void prepend(const T& item) = 0;
     virtual void insert (const T& item, size_t index) = 0;
-    virtual T& pop() = 0;
-    virtual T& pop(size_t index) = 0;
+    virtual T pop() = 0;
+    virtual T pop(size_t index) = 0;
 
     virtual mySequence<T>& concat(const mySequence<T>& sequence) = 0;
     virtual mySequence<T>& reverse() = 0;
-
-    virtual seqIterator& begin() const = 0;
-    virtual seqIterator& end() const = 0;
+    virtual void clear() = 0;
 };
 
 template<typename T>

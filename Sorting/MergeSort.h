@@ -22,8 +22,9 @@ mySequence<T>& MergeSort(mySequence<T>& sequence, size_t from, size_t to, bool (
     size_t ind1 = from, ind2 = index;
     while(ind1 != index && ind2 != to) {
         if (isLess(sequence[ind2], sequence[ind1])) {
-            sequence.insert(sequence[ind2], ind1);
-            sequence.pop(ind2+1);
+            sequence.move(ind2, ind1);
+//            sequence.insert(sequence[ind2], ind1);
+//            sequence.pop(ind2+1);
             ind1++;
             ind2++;
             index++;

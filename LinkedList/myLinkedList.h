@@ -251,11 +251,11 @@ public:
         return elem->item;
     }
 
-    T& pop() {
+    T pop() {
         return pop(size - 1);
     }
 
-    T& pop(size_t index) {
+    T pop(size_t index) {
         if (index >= size)
             throw IndexOutOfRange();
         size--;
@@ -263,27 +263,27 @@ public:
         element* prev = nullptr;
         for (size_t i = 0; i < index; i++, prev = elem, elem = elem->next);
 
-        auto *res = new T(elem->item);
+       T res = elem->item;
 
         if (prev == nullptr) {
             head = elem->next;
             delete elem;
             if (size == 0)
                 ending = nullptr;
-            return *res;
+            return res;
         }
 
         if (elem == ending) {
             ending = prev;
             delete elem;
             prev->next = nullptr;
-            return *res;
+            return res;
         }
 
         prev->next = elem->next;
         delete elem;
 
-        return *res;
+        return res;
     }
 
     T& operator [] (size_t index) {

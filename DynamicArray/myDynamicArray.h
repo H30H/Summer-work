@@ -270,30 +270,30 @@ public:
         free(item);
     }
 
-    void move(size_t index1, size_t index2) {  //перемещает элемент с индексом 1 на место с индексом 2
-        if (index1 >= size)
+    void move(size_t indexFrom, size_t indexTo) {  //перемещает элемент с индексом 1 на место с индексом 2
+        if (indexFrom >= size)
             throw indexOutOfRange();
-        if (index2 >= size)
+        if (indexTo >= size)
             throw indexOutOfRange();
 
-        if (index1 == index2)
+        if (indexFrom == indexTo)
             return;
 
         size_t count;
-        if (index1 > index2) {
-            count = index1 - index2;
+        if (indexFrom > indexTo) {
+            count = indexFrom - indexTo;
             T *items = (T*) malloc(count * sizeof(T));
-            memcpy(items, array + index2, count);
-            memcpy(array + index2, array + index1, sizeof(T));
-            memcpy(array + index2 + 1, items, count * sizeof(T));
+            memcpy(items, array + indexTo, count * sizeof(T));
+            memcpy(array + indexTo, array + indexFrom, sizeof(T));
+            memcpy(array + indexTo + 1, items, count * sizeof(T));
             free(items);
         }
         else {
-            count = index1 - index2;
+            count = indexTo - indexFrom;
             T *items = (T*) malloc(count * sizeof(T));
-            memcpy(items, array + index2, count);
-            memcpy(array + index2, array + index1, sizeof(T));
-            memcpy(array + index2 + 1, items, count * sizeof(T));
+            memcpy(items, array + indexFrom + 1, count * sizeof(T));
+            memcpy(array + indexTo, array + indexFrom, sizeof(T));
+            memcpy(array + indexFrom, items, count * sizeof(T));
             free(items);
         }
     }

@@ -144,13 +144,13 @@ public:
             return *this;
         }
 
-        virtual iterator& operator++(int) {
+        virtual iterator operator++(int) {
             Node* res = item;
             operator++();
-            return * (new iterator(res, isSame));
+            return iterator(res, isSame);
         }
 
-        virtual iterator &operator--() {
+        virtual iterator& operator--() {
             if (!item)
                 return *this;
 
@@ -175,10 +175,10 @@ public:
             return *this;
         }
 
-        virtual iterator& operator--(int) {
+        virtual iterator operator--(int) {
             Node* res = item;
             operator--();
-            return *(new iterator(res, isSame));
+            return iterator(res, isSame);
         }
     };
 
@@ -319,8 +319,8 @@ public:
         }
     }
 
-    virtual iterator& find(const T& item) const {
-        return * (new iterator(findPrivate(item), isSame));
+    virtual iterator find(const T& item) const {
+        return iterator(findPrivate(item), isSame);
     }
 
     virtual bool inTree(const T& item) const {
@@ -395,7 +395,7 @@ public:
         delete start;
     }
 
-    virtual iterator& begin() const {
+    iterator begin() const {
         if (!head) {
             return end();
         }
@@ -405,11 +405,11 @@ public:
         while(leftNode->left)
             leftNode = leftNode->left;
 
-        return * (new iterator(leftNode, isSame));
+        return iterator(leftNode, isSame);
     }
 
-    virtual iterator& end() const {
-        return * (new iterator(nullptr, isSame));
+    iterator end() const {
+        return iterator(nullptr, isSame);
     }
 
     virtual typeof(isLess) getLessFunc() const {

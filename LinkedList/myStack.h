@@ -44,7 +44,7 @@ public:
         return linkedList.get(0);
     }
 
-    T& pop() {
+    T pop() {
         return linkedList.pop(0);
     }
 

@@ -110,9 +110,9 @@ public:
         }
     }
 
-    virtual T& popMax() {
+    virtual T popMax() {
         heap.swap(0, heap.length() - 1);
-        T& res = heap.pop();
+        T res = heap.pop();
         heapify(0);
         return res;
     }

@@ -11,7 +11,7 @@
 #define strK 5
 
 template<typename T>
-class myAVLTree: public myBinaryTree<T> {
+class myAVLTree {
 protected:
     bool (*isLess)(const T& obj1, const T& obj2);
     bool (*isSame)(const T& obj1, const T& obj2);
@@ -351,7 +351,7 @@ private:
     }
 public:
 //    using iterator = typename myBinaryTree<T>::iterator;
-    class iterator : public myBinaryTree<T>::iterator {
+    class iterator {
     private:
         Node* item = nullptr;
         bool (*isSame)(const T& item1, const T& item2);
@@ -366,11 +366,11 @@ public:
             return *this;
         }
 
-        T& operator*() const override {
+        virtual T& operator*() const {
             return item->item;
         }
 
-        T* operator->() const override {
+        virtual T* operator->() const {
             return &item->item;
         }
 
@@ -386,7 +386,7 @@ public:
             return !operator==(other);
         }
 
-        iterator& operator + (long int num) override {
+        virtual iterator& operator + (long int num) {
             if (num < 0)
                 return operator-(-num);
 
@@ -396,7 +396,7 @@ public:
             return *this;
         }
 
-        iterator& operator - (long int num) override {
+        virtual iterator& operator - (long int num) {
             if (num < 0)
                 return operator+(-num);
 
@@ -406,7 +406,7 @@ public:
             return *this;
         }
 
-        iterator& operator++() override {
+        virtual iterator& operator++() {
             if (!item)
                 return *this;
 
@@ -430,13 +430,13 @@ public:
             return *this;
         }
 
-        iterator& operator++(int) override {
+        virtual iterator operator++(int) {
             Node* res = item;
             operator++();
-            return * (new iterator(res, isSame));
+            return iterator(res, isSame);
         }
 
-        iterator &operator--() override {
+        virtual iterator &operator--() {
             if (!item)
                 return *this;
 
@@ -461,10 +461,10 @@ public:
             return *this;
         }
 
-        iterator& operator--(int) override {
+        virtual iterator operator--(int) {
             Node* res = item;
             operator--();
-            return *(new iterator(res, isSame));
+            return iterator(res, isSame);
         }
     };
 
@@ -532,7 +532,7 @@ public:
         }
     }
 
-    void insert(const T& item) override {
+    virtual void insert(const T& item) {
         if (head == nullptr) {
             head = new Node(item);
             return;
@@ -566,20 +566,20 @@ public:
         balanceStack(stack);
     }
 
-    void insert(T* arr, size_t size) override {
+    virtual void insert(T* arr, size_t size) {
         for (size_t i = 0; i < size; i++)
             insert(arr[i]);
     }
 
-    iterator& find(const T& item) const override {
-        return *(new iterator(findPrivate(item), isSame));
+    virtual iterator find(const T& item) const {
+        return iterator(findPrivate(item), isSame);
     }
 
-    bool inTree(const T& item) const override {
+    virtual bool inTree(const T& item) const {
         return findPrivate(item) != nullptr;
     }
 
-    void remove(const T& item) override {
+    virtual void remove(const T& item) {
         myStack<Node*> stack;
         Node* node = findPrivate(item, stack);
         if (!node)
@@ -646,17 +646,17 @@ public:
         balanceStack(stack);
     }
 
-    iterator& begin() const override {
+    iterator begin() const {
         if (!head)
             return end();
         Node* start = head;
         while(start->left)
             start = start->left;
-        return *(new iterator(start, isSame));
+        return iterator(start, isSame);
     }
 
-    iterator& end() const override {
-        return *(new iterator(nullptr, isSame));
+    iterator end() const {
+        return iterator(nullptr, isSame);
     }
 
     typeof(isLess) getLessFunc() const {

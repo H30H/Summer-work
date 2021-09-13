@@ -129,6 +129,30 @@ Base_classes/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/build
 .PHONY : Base_classes/fast
 
+Timer/myTimer.o: Timer/myTimer.cpp.o
+.PHONY : Timer/myTimer.o
+
+# target to build an object file
+Timer/myTimer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Timer/myTimer.cpp.o
+.PHONY : Timer/myTimer.cpp.o
+
+Timer/myTimer.i: Timer/myTimer.cpp.i
+.PHONY : Timer/myTimer.i
+
+# target to preprocess a source file
+Timer/myTimer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Timer/myTimer.cpp.i
+.PHONY : Timer/myTimer.cpp.i
+
+Timer/myTimer.s: Timer/myTimer.cpp.s
+.PHONY : Timer/myTimer.s
+
+# target to generate assembly for a file
+Timer/myTimer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Timer/myTimer.cpp.s
+.PHONY : Timer/myTimer.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Base_classes"
+	@echo "... Timer/myTimer.o"
+	@echo "... Timer/myTimer.i"
+	@echo "... Timer/myTimer.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

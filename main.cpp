@@ -93,8 +93,6 @@ void printTree(const myBinaryTree<T>& tree) {
 using namespace std;
 
 int main() {
-//    return 0;
-//
     mySortMenuClass::mainMenu();
     return 0;
 
@@ -147,17 +145,19 @@ int main() {
 
     printTree(binaryTree);
 
-    myAVLTree<int> tree(binaryTree);
-
-    printTree(tree);
-
     myArraySequence<int> sequence(arr, sizeof(arr) / sizeof(int));
 //    cout << sequence << ' ' << sequence.length() << endl;
 //    cout << QuickSort(sequence) << endl << endl;
 
 //    cout <<
+//    std::cout << sequence << std::endl;
+//    sequence.move(0, 5);
+//    std::cout << sequence << std::endl;
+//    sequence.move(5, 0);
+//    std::cout << sequence << std::endl;
 
-    testSort(-1, 10000, 1000, BatcherSort<int>, sortFuncPrivate::isLessDefault);
+
+    testSort(1000, 10000, 1000, InsertSort<int>, sortFuncPrivate::isLessDefault);
     //TODO попробовать написать альтернативу мёрджа через свапы и посмотреть на время работы
     /*
     myAVLTree<int> tree;
@@ -188,19 +188,6 @@ int main() {
         cout << tree << endl;
     }
     /* */
-
-    struct point {
-        int x;
-        int y;
-        double value;
-    };
-
-    struct matrix {
-        std::vector<point> vec;
-    };
-
-    auto *array = new point[5];
-    array[0] = point{1, 1, 1};
 
     return 0;
 }

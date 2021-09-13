@@ -13,11 +13,11 @@ mySequence<T>& BinInsertSort(mySequence<T>& sequence, size_t start, size_t end, 
     if (end <= start || end - start < 2)
         return sequence;
 
-    if (isLess(sequence[1], sequence[0])) {
-        sequence.swap(0, 1);
+    if (isLess(sequence[start+1], sequence[start])) {
+        sequence.swap(start, start+1);
     }
 
-    for (size_t i = 2; i < sequence.length(); i++) {
+    for (size_t i = start+2; i < end; i++) {
         size_t min = 0, max = i;
         size_t last = -1;
         while (min != max) {
