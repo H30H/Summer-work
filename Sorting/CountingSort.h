@@ -10,12 +10,12 @@
 #include "../Map/myMap.h"
 
 template<typename T>
-mySequence<T>& CountingSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>* CountingSort(const mySequence<T>& sequence, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2) {
-        return sequence;
+        return sequence.copy();
     }
 
-    myMap<T, size_t> map(isLess, sortFuncPrivate::isTreeSameFunc);
+    myMap<T, size_t> map(cmp, sortFuncPrivate::isTreeSameFunc);
     for (size_t i = from; i < to; i++) {
         if (map.find(sequence[i]) != map.end()) {
             map[sequence[i]] += 1;
@@ -24,27 +24,30 @@ mySequence<T>& CountingSort(mySequence<T>& sequence, size_t from, size_t to, boo
             map.insert(sequence[i], 1);
         }
     }
+
+    mySequence<T>* resSequence = sequence.copy();
+
     size_t count = from;
     for (auto it = map.begin(); it != map.end(); ++it) {
         for (size_t i = 0; i < it->item; i++, count++) {
-            sequence[count] = it->key;
+            resSequence->operator[](count) = it->key;
         }
     }
-    return sequence;
+    return resSequence;
 }
 
 template<typename T>
-mySequence<T>& CountingSort(mySequence<T>& sequence, size_t from, size_t to) {
+mySequence<T>* CountingSort(const mySequence<T>& sequence, size_t from, size_t to) {
     return CountingSort(sequence, from, to, sortFuncPrivate::isLessDefault);
 }
 
 template<typename T>
-mySequence<T>& CountingSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    return CountingSort(sequence, 0, sequence.length(), isLess);
+mySequence<T>* CountingSort(const mySequence<T>& sequence, bool (*cmp)(const T& obj1, const T& obj2)) {
+    return CountingSort(sequence, 0, sequence.length(), cmp);
 }
 
 template<typename T>
-mySequence<T>& CountingSort(mySequence<T>& sequence) {
+mySequence<T>* CountingSort(const mySequence<T>& sequence) {
     return CountingSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 
