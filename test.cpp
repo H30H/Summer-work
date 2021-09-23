@@ -1,170 +1,122 @@
-//
-// Created by Grisha on 02.09.2021.
-//
-/*
 #include <iostream>
+#include <math.h>
+
 using namespace std;
 
-class Device {
+class Parallelogram {
+private:
+    size_t _length;
+    size_t _width;
+    double _angle;
 public:
-    // constructor
-    Device() {
-        cout << "Device constructor called" << endl;
+    Parallelogram(size_t length, size_t width, double angle): _length(length), _width(width), _angle(angle) {}
+
+    virtual size_t getLength() const {
+        return _length;
     }
-    // destructor
-    ~Device() {
-        cout << "Device destructor called" << endl;
+
+    virtual size_t getWidth() const {
+        return _width;
+    }
+
+    virtual double getAngle() const {
+        return _angle;
+    }
+
+    virtual void setLength(size_t length) {
+        _length = length;
+    }
+
+    virtual void setWidth(size_t width) {
+        _width = width;
+    }
+
+    virtual void setAngle(double angle) {
+        _angle = angle;
+    }
+
+    virtual double getArea() const {
+        return (_length * _width * sin(_angle));
     }
 };
 
-class Computer: public Device {
+class Rectable: private Parallelogram {
 public:
-    Computer() {
-        cout << "Computer constructor called" << endl;
+    Rectable(size_t length, size_t width): Parallelogram(length, width, 2*M_PI) {}
+
+    size_t getLength() const override {
+        return Parallelogram::getLength();
     }
-    ~Computer() {
-        cout << "Computer destructor called" << endl;
+
+    size_t getWidth() const override {
+        return Parallelogram::getWidth();
+    }
+
+    void setLength(size_t size) override {
+        Parallelogram::setLength(size);
+    }
+
+    void setWidth(size_t size) override {
+        Parallelogram::setWidth(size);
+    }
+
+    double getArea() const override {
+        return Parallelogram::getArea();
+    }
+private:
+    double getAngle() const override {
+        throw std::exception();
+    }
+
+    void setAngle(double angle) override {
+        throw std::exception();
     }
 };
 
-class Laptop: public Computer {
+class Diamond: private Parallelogram {
 public:
-    Laptop() {
-        cout << "Laptop constructor called" << endl;
+    Diamond(size_t size, double angle): Parallelogram(size, size, angle) {}
+
+    size_t getLength() const override {
+        return Parallelogram::getLength();
     }
-    ~Laptop() {
-        cout << "Laptop destructor called" << endl;
+
+    void setLength(size_t size) override {
+        Parallelogram::setLength(size);
+        Parallelogram::setWidth(size);
     }
+
+    double getAngle() const override {
+        return Parallelogram::getAngle();
+    }
+
+    void setAngle(double angle) override {
+        Parallelogram::setAngle(angle);
+    }
+
+    double getArea() const override {
+        return Parallelogram::getArea();
+    }
+private:
+    size_t getWidth() const override {
+        throw std::exception();
+    }
+
+    void setWidth(size_t size) override {
+        throw std::exception();
+    }
+};
+
+class Square: virtual public Rectable, virtual public Diamond {
+public:
+    explicit Square(size_t size) : Rectable(size, size), Diamond(size, 2*M_PI) {}
+
+    using Diamond::getLength;
+    using Diamond::setLength;
+
+    using Rectable::getArea;
 };
 
 int main() {
-    cout << "\tConstructors" << endl;
-    Laptop Laptop_instance;
-    cout << "\tDestructors" << endl;
     return 0;
 }
-/**/
-
-#include "iostream"
-
-using namespace std;
-
-class k1 {
-public:
-    int* arr = nullptr;
-    size_t size = 0;
-    const int u = 123;
-
-    k1() {
-        cout << "k1 constructor " << u << endl;
-    }
-
-    k1(int* arr, size_t size): arr(arr), size(size) {
-        cout << "k1 constructor" << endl;
-    }
-
-    virtual void set(int item, size_t index) {
-        if (index >= size)
-            return;
-
-        arr[index] = item;
-    }
-
-    virtual int get(size_t index) {
-        if (index >= size)
-            return 0;
-
-        return arr[index];
-    }
-
-    void print() {
-        cout << "{";
-        for (size_t i = 0; i < size; i++) {
-            cout << get(i) << ", ";
-        }
-        cout << "\b\b}" << endl;
-    }
-};
-
-class k2: public k1 {
-public:
-    k2() {
-        cout << "k2 constructor " << u << endl;
-    }
-
-    explicit k2(int* arr, size_t size) {
-        this->arr = arr;
-        this->size = size;
-        cout << "k2 constructor" << endl;
-    }
-
-    void set(int item, size_t index) override {
-        if (index >= size)
-            return;
-
-        arr[size-index] = item;
-    }
-
-    int get(size_t index) override {
-        if (index >= size)
-            return 0;
-
-        return arr[size-index-1];
-    }
-};
-
-class k3: public k2 {
-public:
-    k3() {
-        cout << "k3 constructor " << u << endl;
-    }
-
-    explicit k3(int* arr, size_t size) {
-        this->arr = arr;
-        this->size = size;
-        cout << "k3 constructor" << endl;
-    }
-
-    void set(int item, size_t index) final {
-        if (index >= size)
-            return;
-
-        if (index < size / 2)
-            arr[index*2] = item;
-        else {
-            arr[index-size/2+(index+1)%2] = item;
-        }
-    }
-
-    int get(size_t index) final {
-        if (index >= size)
-            return 0;
-
-        if (index < size / 2)
-            return arr[index*2];
-        else {
-            return arr[index-size/2+(index+1)%2];
-        }
-    }
-};
-
-int getGlobal(k1& k, int index) {
-    return k.get(index);
-}
-
-int main() {
-    int a1[] = {0, 1, 2, 3, 4};
-
-    k1 b1(a1, 5);
-    k2 b2(a1, 5);
-    k3 b3(a1, 5);
-
-    b1.print();
-    b2.print();
-    b3.print();
-
-    cout << getGlobal(b1, 1) << endl;
-    cout << getGlobal(b2, 1) << endl;
-    cout << getGlobal(b3, 1) << endl;
-}
-/**/

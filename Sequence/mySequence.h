@@ -6,6 +6,7 @@
 #define BASE_CLASSES_MYSEQUENCE_H
 
 #include <iostream>
+#include "../SmartPointer/mySmartPointer.h"
 
 template<typename T>
 class mySequence {
@@ -33,7 +34,7 @@ public:
             for (i; i < sequence.length(); i++) {
                 operator[](i) = sequence[i];
             }
-            while (length() != i)
+            while (i != length())
                 pop();
         }
         return *this;
@@ -41,14 +42,9 @@ public:
 
     using seqIterator = std::iterator<std::bidirectional_iterator_tag, T>;
 
-    virtual T& getFirst() = 0;
-    virtual const T& getFirst() const = 0;
-
-    virtual T& getLast() = 0;
-    virtual const T& getLast() const = 0;
-
-    virtual T& get(size_t index) = 0;
-    virtual const T& get(size_t index) const = 0;
+    virtual T getFirst() const = 0;
+    virtual T getLast() const = 0;
+    virtual T get(size_t index) const = 0;
 
     virtual T& operator [] (size_t index) = 0;
     virtual const T& operator [] (size_t index) const = 0;
@@ -71,19 +67,28 @@ public:
     virtual mySequence<T>& concat(const mySequence<T>& sequence) = 0;
     virtual mySequence<T>& reverse() = 0;
     virtual void clear() = 0;
+
+    virtual mySequence<T>* copy(bool clear = false) const = 0;
 };
 
 template<typename T>
-std::ostream& operator << (std::ostream& cout, const mySequence<T>& arraySequence) {
+std::ostream& operator << (std::ostream& cout, const mySequence<T>& sequence) {
     cout << "{";
-    for (size_t i = 0; i < arraySequence.length(); i++) {
-        cout << arraySequence[i];
-        if (i == arraySequence.length() - 1)
+    for (size_t i = 0; i < sequence.length(); i++) {
+        cout << sequence[i];
+        if (i == sequence.length() - 1)
             break;
 
         cout << ", ";
     }
     return cout << "}";
+}
+
+std::ostream& operator << (std::ostream& cout, const mySequence<char>& sequence) {
+    for (size_t i = 0; i < sequence.length(); i++) {
+        cout << sequence[i];
+    }
+    return cout;
 }
 
 #endif //BASE_CLASSES_MYSEQUENCE_H

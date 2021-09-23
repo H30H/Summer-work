@@ -12,8 +12,15 @@
 template<typename T>
 class myDynamicArray {
 private:
-    size_t size = 0;
-    T* array = nullptr;
+    template<typename t1, typename t2>
+    struct cmpType {
+        static const bool item = false;
+    };
+
+    template<typename u>
+    struct cmpType<u, u> {
+        static const bool item = true;
+    };
 
     static void copyArr(size_t count, const T* from, T* to) {
         for (size_t i = 0; i < count; i++) {
@@ -34,6 +41,26 @@ private:
         }
     }
 
+    template<typename U, typename ...Args>
+    void appendItems(size_t index, const U& item, Args...args) {
+        appendItems(index, item);
+        appendItems(index + 1, args...);
+    }
+
+    template<typename U>
+    void appendItems(size_t index, const U& item) {
+        if (cmpType<T, U>::item) {
+            array[index] = item;
+            return;
+        }
+        else {
+            array[index] = static_cast<const T&>(item);
+        }
+    }
+
+    size_t size = 0;                       //размер массива
+    T* array = nullptr;                    //сам массив
+    T* swapBuff = (T*) malloc(sizeof(T));  //буфер для свапа
 public:
     class indexOutOfRange{};
 
@@ -154,6 +181,12 @@ public:
         }
     }
 
+    template <typename U, typename ...Args>
+    explicit myDynamicArray(const U& item, Args... args) {
+        resize(sizeof...(args) + 1);
+        appendItems(0, item, args...);
+    }
+
     myDynamicArray(T* arr, size_t count) {  //Конструктор через массив и его длину
         size = count;
         array = new T[count];
@@ -162,6 +195,7 @@ public:
 
     ~myDynamicArray(){ //Деструктор
         delete[] array;
+        free(swapBuff);
     }
 
     myDynamicArray<T>& operator = (const myDynamicArray<T>& dynamicArray) {
@@ -171,21 +205,14 @@ public:
         return *this;
     }
 
-    T& get(size_t index) {
+    T get(size_t index) const {
         if (index >= size)
             throw indexOutOfRange();
 
         return array[index];
     }
 
-    const T& get(size_t index) const {
-        if (index >= size)
-            throw indexOutOfRange();
-
-        return array[index];
-    }
-
-    void set(T item, size_t index) {
+    void set(const T& item, size_t index) {
         if (index >= size)
             throw indexOutOfRange();
 
@@ -263,11 +290,15 @@ public:
         if (index1 == index2)
             return;
 
-        T* item = (T*) malloc(sizeof(T));
-        memcpy(item, array + index1, sizeof(T));
-        memcpy(array + index1, array + index2, sizeof(T));
-        memcpy(array + index2, item, sizeof(T));
-        free(item);
+//        T* item = (T*) malloc(sizeof(T));
+        memcpy(swapBuff, array + index1, sizeof(T));
+        memcpy(array + index1, array + index2, sizeof(T));    //более универсальный варик
+        memcpy(array + index2, swapBuff, sizeof(T));
+//        free(item);
+
+//        T item = array[index1];
+//        array[index1] = array[index2];                     //самый лёгкий варик
+//        array[index2] = item;
     }
 
     void move(size_t indexFrom, size_t indexTo) {  //перемещает элемент с индексом 1 на место с индексом 2
@@ -282,7 +313,7 @@ public:
         size_t count;
         if (indexFrom > indexTo) {
             count = indexFrom - indexTo;
-            T *items = (T*) malloc(count * sizeof(T));
+            T *items = (T*) malloc(count * sizeof(T));                 //TODO: Посоветоваться с В.В., может стоит эту память тоже выделить заранее, как у swap
             memcpy(items, array + indexTo, count * sizeof(T));
             memcpy(array + indexTo, array + indexFrom, sizeof(T));
             memcpy(array + indexTo + 1, items, count * sizeof(T));

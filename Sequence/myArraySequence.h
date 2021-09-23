@@ -167,42 +167,21 @@ public:
         return *this;
     }
 
-    T& getFirst() {
+    T getFirst() const {
         if (size == 0)
             throw typename mySequence<T>::IndexOutOfRange();
 
         return dynamicArray[0];
     }
 
-    const T& getFirst() const {
-        if (size == 0)
-            throw typename mySequence<T>::IndexOutOfRange();
-
-        return dynamicArray[0];
-    }
-
-    T& getLast() {
+    T getLast() const {
         if (size == 0)
             throw typename mySequence<T>::IndexOutOfRange();
 
         return dynamicArray[size - 1];
     }
 
-    const T& getLast() const {
-        if (size == 0)
-            throw typename mySequence<T>::IndexOutOfRange();
-
-        return dynamicArray[size - 1];
-    }
-
-    T& get(size_t index) {
-        if (index >= size)
-            throw typename mySequence<T>::IndexOutOfRange();
-
-        return dynamicArray.get(index);
-    }
-
-    const T& get(size_t index) const {
+    T get(size_t index) const {
         if (index >= size)
             throw typename mySequence<T>::IndexOutOfRange();
 
@@ -343,6 +322,12 @@ public:
     void clear() {
         dynamicArray.resize(0);
         size = 0;
+    }
+
+    mySequence<T>* copy(bool clear = false) const {
+        if (clear)
+            return (new myArraySequence<T>());
+        return (new myArraySequence<T>(*this));
     }
 
     iterator begin() const {

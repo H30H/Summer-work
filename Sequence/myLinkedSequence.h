@@ -172,6 +172,12 @@ public:
         linkedList.reverse();
         return *this;
     }
+
+    mySmartPointer<myLinkedSequence<T>> copy(bool clear = false) const {
+        if (clear)
+            return new myLinkedSequence<T>;
+        return new myLinkedSequence<T>(*this);
+    }
 };
 
 

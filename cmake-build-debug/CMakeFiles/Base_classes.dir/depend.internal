@@ -8,6 +8,7 @@ CMakeFiles/Base_classes.dir/main.cpp.o
  /cygdrive/c/cc++ labs/Base classes/BinaryTree/myAVLTree.h
  /cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h
  /cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
+ /cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
  /cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
  /cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
  /cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
@@ -15,6 +16,7 @@ CMakeFiles/Base_classes.dir/main.cpp.o
  /cygdrive/c/cc++ labs/Base classes/Map/myMap.h
  /cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
  /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+ /cygdrive/c/cc++ labs/Base classes/SmartPointer/mySmartPointer.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/BatcherSort.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/BinInsertSort.h
  /cygdrive/c/cc++ labs/Base classes/Sorting/BinaryTreeSort.h

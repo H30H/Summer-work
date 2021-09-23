@@ -8,6 +8,7 @@ CMakeFiles/Base_classes.dir/main.cpp.o: \
  ../BinaryTree/myAVLTree.h \
  ../BinaryTree/myBinaryHeap.h \
  ../BinaryTree/myBinaryTree.h \
+ ../Console/myConsole.h \
  ../DynamicArray/myDynamicArray.h \
  ../LinkedList/myLinkedList.h \
  ../LinkedList/myQueue.h \
@@ -15,6 +16,7 @@ CMakeFiles/Base_classes.dir/main.cpp.o: \
  ../Map/myMap.h \
  ../Sequence/myArraySequence.h \
  ../Sequence/mySequence.h \
+ ../SmartPointer/mySmartPointer.h \
  ../Sorting/BatcherSort.h \
  ../Sorting/BinInsertSort.h \
  ../Sorting/BinaryTreeSort.h \
