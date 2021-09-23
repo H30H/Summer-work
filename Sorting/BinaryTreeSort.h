@@ -10,11 +10,11 @@
 #include "../BinaryTree/myBinaryTree.h"
 
 template<typename T>
-mySequence<T>& BinaryTreeSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>* BinaryTreeSort(const mySequence<T>& sequence, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2)
-        return sequence;
+        return sequence.copy();
 
-    myBinaryTree<T> binaryTree(isLess, sortFuncPrivate::isTreeSameFunc<T>);
+    myBinaryTree<T> binaryTree(cmp, sortFuncPrivate::isTreeSameFunc<T>);
 
     for (size_t i = from; i < to; i++) {
         binaryTree.insert(sequence[i]);
@@ -22,26 +22,28 @@ mySequence<T>& BinaryTreeSort(mySequence<T>& sequence, size_t from, size_t to, b
 
     size_t index = from;
 
+    mySequence<T>* resSequence = sequence.copy();
+
     for (auto &i : binaryTree) {
-        sequence[index++] = i;
+        resSequence->operator[](index++) = i;
     }
 
-    return sequence;
+    return resSequence;
 }
 
 template<typename T>
-mySequence<T>& BinaryTreeSort(mySequence<T>& sequence, size_t start, size_t end) {
+mySequence<T>* BinaryTreeSort(const mySequence<T>& sequence, size_t start, size_t end) {
     return BinaryTreeSort(sequence, start, end, sortFuncPrivate::isLessDefault);
 }
 
 
 template<typename T>
-mySequence<T>& BinaryTreeSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    return BinaryTreeSort(sequence, 0, sequence.length(), isLess);
+mySequence<T>* BinaryTreeSort(const mySequence<T>& sequence, bool (*cmp)(const T& obj1, const T& obj2)) {
+    return BinaryTreeSort(sequence, 0, sequence.length(), cmp);
 }
 
 template<typename T>
-mySequence<T>& BinaryTreeSort(mySequence<T>& sequence) {
+mySequence<T>* BinaryTreeSort(const mySequence<T>& sequence) {
     return BinaryTreeSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 

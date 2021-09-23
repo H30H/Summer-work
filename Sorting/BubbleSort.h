@@ -9,37 +9,40 @@
 #include "isLessDefault.h"
 
 template<typename T>
-mySequence<T>& BubbleSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>* BubbleSort(const mySequence<T>& sequence, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2) {
-        return sequence;
+        return sequence.copy();
     }
     bool isChanged = true;
+
+    mySequence<T>* resSequence = sequence.copy();
 
     while(isChanged) {
         isChanged = false;
         for (size_t i = from+1; i < to; i++) {
-            if (isLess(sequence[i], sequence[i-1])) {
+            if (cmp(resSequence->operator[](i), resSequence->operator[](i-1))) {
                 isChanged = true;
-                sequence.swap(i-1, i);
+                resSequence->swap(i - 1, i);
             }
         }
         to--;
     }
-    return sequence;
+
+    return resSequence;
 }
 
 template<typename T>
-mySequence<T>& BubbleSort(mySequence<T>& sequence, size_t from, size_t to) {
+mySequence<T>* BubbleSort(const mySequence<T>& sequence, size_t from, size_t to) {
     return BubbleSort(sequence, from, to, sortFuncPrivate::isLessDefault);
 }
 
 template<typename T>
-mySequence<T>& BubbleSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    return BubbleSort(sequence, 0, sequence.length(), isLess);
+mySequence<T>* BubbleSort(const mySequence<T>& sequence, bool (*cmp)(const T& obj1, const T& obj2)) {
+    return BubbleSort(sequence, 0, sequence.length(), cmp);
 }
 
 template<typename T>
-mySequence<T>& BubbleSort(mySequence<T>& sequence) {
+mySequence<T>* BubbleSort(const mySequence<T>& sequence) {
     return BubbleSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 

@@ -26,7 +26,7 @@ namespace sortFuncPrivate {
 
     template<typename T>
     mySequence<T>& SortInterval(mySequence<T>& sequence, size_t start, size_t end, size_t& index,
-                                bool (*isLess)(const T& obj1, const T& obj2)) {
+                                bool (*cmp)(const T& obj1, const T& obj2)) {
         size_t left = start, right = end - 1;
         size_t index1 = index;
         bool state = false;   /// == true -> левый больше чем тот, относительно которого идёт сравнение
@@ -41,7 +41,7 @@ namespace sortFuncPrivate {
             }
 
             if (state) {
-                if (isLess(sequence[right], sequence[index])) {
+                if (cmp(sequence[right], sequence[index])) {
                     state = false;
                     sequence.swap(left, right);
                     left++;
@@ -52,7 +52,7 @@ namespace sortFuncPrivate {
                 }
             }
             else {
-                if (isLess(sequence[index], sequence[left])) {
+                if (cmp(sequence[index], sequence[left])) {
                     state = true;
                 }
                 else {
@@ -74,7 +74,7 @@ namespace sortFuncPrivate {
             if (left == right) {
                 if (left == index)
                     swapIndex = left;
-                else if (isLess(sequence[index], sequence[left])) {
+                else if (cmp(sequence[index], sequence[left])) {
                     if (index < left) {
                         swapIndex = left - 1;
                     }
@@ -105,9 +105,9 @@ namespace sortFuncPrivate {
 }
 
 template<typename T>
-mySequence<T>& QuickSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>* QuickSort(const mySequence<T>& sequence, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2) {
-        return sequence;
+        return sequence.copy();
     }
 
     struct interval {
@@ -124,31 +124,33 @@ mySequence<T>& QuickSort(mySequence<T>& sequence, size_t from, size_t to, bool (
     };
 
     myQueue<interval> queue(interval(from, to));
+    
+    mySequence<T>* resSequence = sequence.copy();
 
     while (queue.length() > 0) {
         auto inter = queue.pop();
         if (inter.start + 1 >= inter.end)
             continue;
         size_t index = sortFuncPrivate::randomIndex(inter.start, inter.end);
-        sortFuncPrivate::SortInterval(sequence, inter.start, inter.end, index, isLess);
+        sortFuncPrivate::SortInterval(*resSequence, inter.start, inter.end, index, cmp);
         queue.add(interval(inter.start, index));
         queue.add(interval(index + 1, inter.end));
     }
-    return sequence;
+    return resSequence;
 }
 
 template<typename T>
-mySequence<T>& QuickSort(mySequence<T>& sequence, size_t from, size_t to) {
+mySequence<T>* QuickSort(const mySequence<T>& sequence, size_t from, size_t to) {
     return QuickSort(sequence, from, to, sortFuncPrivate::isLessDefault);
 }
 
 template<typename T>
-mySequence<T>& QuickSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    return QuickSort(sequence, 0, sequence.length(), isLess);
+mySequence<T>* QuickSort(const mySequence<T>& sequence, bool (*cmp)(const T& obj1, const T& obj2)) {
+    return QuickSort(sequence, 0, sequence.length(), cmp);
 }
 
 template<typename T>
-mySequence<T>& QuickSort(mySequence<T>& sequence) {
+mySequence<T>* QuickSort(const mySequence<T>& sequence) {
     return QuickSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 

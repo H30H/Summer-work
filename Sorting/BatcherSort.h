@@ -21,7 +21,7 @@ namespace sortFuncPrivate {
 
     template<typename T>
     void sortBitonicSequence(mySequence<T>& sequence, size_t from, size_t to,
-                             bool (*isLess)(const T& obj1, const T& obj2)) {
+                             bool (*cmp)(const T& obj1, const T& obj2)) {
         if (to <= from || to - from < 2) {
             return;
         }
@@ -48,7 +48,7 @@ namespace sortFuncPrivate {
 //            std::cout << "interval: " << interval.from << ", " << index << ", " << interval.to << std::endl;
 
             for (size_t i = interval.from, j = index; j < interval.to; i++, j++) {
-                if (isLess(sequence[j], sequence[i])) {
+                if (cmp(sequence[j], sequence[i])) {
                     sequence.swap(i, j);
                 }
             }
@@ -60,23 +60,23 @@ namespace sortFuncPrivate {
 
     template<typename T>
     void getBitonicSequence(mySequence<T>& sequence, size_t from, size_t to,
-                            bool (*isLess)(const T& obj1, const T& obj2)) {
+                            bool (*cmp)(const T& obj1, const T& obj2)) {
         if (to <= from || to - from < 2) {
             return;
         }
 
         for (size_t i = from, j = to - 1; i < j; i++, j--) {
-            if (isLess(sequence[j], sequence[i]))
+            if (cmp(sequence[j], sequence[i]))
                 sequence.swap(i, j);
         }
     }
 
     template<typename T>
     void mergeSequence(mySequence<T>& sequence, size_t from, size_t to, size_t index,
-                       bool (*isLess)(const T& obj1, const T& obj2)) {
+                       bool (*cmp)(const T& obj1, const T& obj2)) {
         size_t ind1 = from, ind2 = index;
         while(ind1 != index && ind2 != to) {
-            if (isLess(sequence[ind2], sequence[ind1])) {
+            if (cmp(sequence[ind2], sequence[ind1])) {
                 sequence.move(ind2, ind1);
 //                sequence.insert(sequence[ind2], ind1);
 //                sequence.pop(ind2+1);
@@ -92,52 +92,60 @@ namespace sortFuncPrivate {
 }
 
 template<typename T>
-mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>* BatcherSort(const mySequence<T>& sequence, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2) {
-        return sequence;
+        return sequence.copy();
     }
 
     size_t size = to - from;
 
     if (!sortFuncPrivate::checkLog2(size)) { //если размер отрезка не равен степени двойки
         myArraySequence<size_t> indexes(from);
+        auto resSequence = sequence.copy(true);
         while (size != 0) {                  //сортировка вложенных отрезков, длиной степени двойки
             auto index = (size_t) pow(2, static_cast<size_t>(log2(size)));
             size -= index;
             index += indexes.getLast();
-            BatcherSort(sequence, indexes.getLast(), index, isLess);
+            auto sorted = BatcherSort(sequence, indexes.getLast(), index, cmp);
+            for (size_t i = indexes.getLast(); i < index; i++) {
+                resSequence->append(sorted->operator[](i));
+            }
+
             indexes.append(index);
+            delete sorted;
         }
 
         for (size_t i = indexes.length() - 1, j = 1; i >= 2; i--, j++) { //сортировка отсортированных отрезков
-            sortFuncPrivate::mergeSequence(sequence, indexes[i-2], indexes.getLast(), indexes[i-1], isLess);
+            sortFuncPrivate::mergeSequence(*resSequence, indexes[i - 2], indexes.getLast(), indexes[i - 1], cmp);
         }
-        return sequence;
+        return resSequence;
     }
+
+    auto resSequence = sequence.copy();
 
     for (size_t i = 2; i <= size; i*=2) { //сортировка отрезков, длина которых равна степени двойки
         for (size_t j = from; j + i <= to; j += i) {
-            sortFuncPrivate::getBitonicSequence(sequence, j, j+i, isLess);             //преобразование отрезка к битонической последовательности
-            sortFuncPrivate::sortBitonicSequence(sequence, j, j + i/2, isLess);        //сортировка левой части
-            sortFuncPrivate::sortBitonicSequence(sequence, j + i/2, j+i, isLess);      //сортировка правой части
+            sortFuncPrivate::getBitonicSequence(*resSequence, j, j + i, cmp);             //преобразование отрезка к битонической последовательности
+            sortFuncPrivate::sortBitonicSequence(*resSequence, j, j + i / 2, cmp);        //сортировка левой части
+            sortFuncPrivate::sortBitonicSequence(*resSequence, j + i / 2, j + i, cmp);      //сортировка правой части
         }
     }
 
-    return sequence;
+    return resSequence;
 }
 
 template<typename T>
-mySequence<T>& BatcherSort(mySequence<T>& sequence, size_t start, size_t end) {
+mySequence<T>* BatcherSort(const mySequence<T>& sequence, size_t start, size_t end) {
     return BatcherSort(sequence, start, end, sortFuncPrivate::isLessDefault);
 }
 
 template<typename T>
-mySequence<T>& BatcherSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    return BatcherSort(sequence, 0, sequence.length(), isLess);
+mySequence<T>* BatcherSort(const mySequence<T>& sequence, bool (*cmp)(const T& obj1, const T& obj2)) {
+    return BatcherSort(sequence, 0, sequence.length(), cmp);
 }
 
 template<typename T>
-mySequence<T>& BatcherSort(mySequence<T>& sequence) {
+mySequence<T>* BatcherSort(const mySequence<T>& sequence) {
     return BatcherSort(sequence, sortFuncPrivate::isLessDefault);
 }
 

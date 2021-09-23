@@ -9,12 +9,14 @@
 #include "../Sequence/mySequence.h"
 
 template<typename T>
-mySequence<T>& BinInsertSort(mySequence<T>& sequence, size_t start, size_t end, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>* BinInsertSort(const mySequence<T>& sequence, size_t start, size_t end, bool (*cmp)(const T& obj1, const T& obj2)) {
     if (end <= start || end - start < 2)
-        return sequence;
+        return sequence.copy();
 
-    if (isLess(sequence[start+1], sequence[start])) {
-        sequence.swap(start, start+1);
+    mySequence<T>* resSequence = sequence.copy();
+
+    if (cmp(resSequence->operator[](start+1), resSequence->operator[](start))) {
+        resSequence->swap(start, start+1);
     }
 
     for (size_t i = start+2; i < end; i++) {
@@ -22,7 +24,7 @@ mySequence<T>& BinInsertSort(mySequence<T>& sequence, size_t start, size_t end, 
         size_t last = -1;
         while (min != max) {
             size_t index = (min + max) / 2;
-            if (isLess(sequence[i], sequence[index]))
+            if (cmp(resSequence->operator[](i), resSequence->operator[](index)))
                 max = index;
             else
                 min = index;
@@ -33,24 +35,24 @@ mySequence<T>& BinInsertSort(mySequence<T>& sequence, size_t start, size_t end, 
         }
 
         for (size_t j = max; j < i; j++) {
-            sequence.swap(j, i);
+            resSequence->swap(j, i);
         }
     }
-    return sequence;
+    return resSequence;
 }
 
 template<typename T>
-mySequence<T>& BinInsertSort(mySequence<T>& sequence, size_t from, size_t to) {
+mySequence<T>* BinInsertSort(const mySequence<T>& sequence, size_t from, size_t to) {
     return BinInsertSort(sequence, from, to, sortFuncPrivate::isLessDefault);
 }
 
 template<typename T>
-mySequence<T>& BinInsertSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    return BinInsertSort(sequence, 0, sequence.length(), isLess);
+mySequence<T>* BinInsertSort(const mySequence<T>& sequence, bool (*cmp)(const T& obj1, const T& obj2)) {
+    return BinInsertSort(sequence, 0, sequence.length(), cmp);
 }
 
 template<typename T>
-mySequence<T>& BinInsertSort(mySequence<T>& sequence) {
+mySequence<T>* BinInsertSort(const mySequence<T>& sequence) {
     return BinInsertSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 

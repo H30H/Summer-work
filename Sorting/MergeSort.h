@@ -9,22 +9,48 @@
 #include "../Sequence/mySequence.h"
 #include "iostream"
 
+namespace sortFuncPrivate {
+    template<typename T>
+    void MergeSort(mySequence<T>& sequence, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
+        if (to <= from || to - from < 2) {
+            return;
+        }
+
+        size_t index = (from + to) / 2;
+        MergeSort(sequence, from, index, cmp);
+        MergeSort(sequence, index, to, cmp);
+
+        size_t ind1 = from, ind2 = index;
+        while(ind1 != index && ind2 != to) {
+            if (cmp(sequence[ind2], sequence[ind1])) {
+                sequence.move(ind2, ind1);
+                ind1++;
+                ind2++;
+                index++;
+            }
+            else {
+                ind1++;
+            }
+        }
+    }
+}
+
 template<typename T>
-mySequence<T>& MergeSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>* MergeSort(const mySequence<T>& sequence, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2) {
-        return sequence;
+        return sequence.copy();
     }
 
+    mySequence<T>* resSequence = sequence.copy();
+
     size_t index = (from + to) / 2;
-    MergeSort(sequence, from, index, isLess);
-    MergeSort(sequence, index, to, isLess);
+    sortFuncPrivate::MergeSort(*resSequence, from, index, cmp);
+    sortFuncPrivate::MergeSort(*resSequence, index, to, cmp);
 
     size_t ind1 = from, ind2 = index;
     while(ind1 != index && ind2 != to) {
-        if (isLess(sequence[ind2], sequence[ind1])) {
-            sequence.move(ind2, ind1);
-//            sequence.insert(sequence[ind2], ind1);
-//            sequence.pop(ind2+1);
+        if (cmp(resSequence->operator[](ind2), resSequence->operator[](ind1))) {
+            resSequence->move(ind2, ind1);
             ind1++;
             ind2++;
             index++;
@@ -33,22 +59,22 @@ mySequence<T>& MergeSort(mySequence<T>& sequence, size_t from, size_t to, bool (
             ind1++;
         }
     }
-    return sequence;
+    return resSequence;
 }
 
 template<typename T>
-mySequence<T>& MergeSort(mySequence<T>& sequence, size_t from, size_t to) {
+mySequence<T>* MergeSort(const mySequence<T>& sequence, size_t from, size_t to) {
     return MergeSort(sequence, from, to, sortFuncPrivate::isLessDefault);
 }
 
 
 template<typename T>
-mySequence<T>& MergeSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    return MergeSort(sequence, 0, sequence.length(), isLess);
+mySequence<T>* MergeSort(const mySequence<T>& sequence, bool (*cmp)(const T& obj1, const T& obj2)) {
+    return MergeSort(sequence, 0, sequence.length(), cmp);
 }
 
 template<typename T>
-mySequence<T>& MergeSort(mySequence<T>& sequence) {
+mySequence<T>* MergeSort(const mySequence<T>& sequence) {
     return MergeSort(sequence, sortFuncPrivate::isLessDefault);
 }
 

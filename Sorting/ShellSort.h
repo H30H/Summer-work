@@ -10,11 +10,11 @@
 
 namespace sortFuncPrivate {
     template<typename T>
-    mySequence<T>& InsertSort(mySequence<T>& sequence, size_t interval, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+    void InsertSort(mySequence<T>& sequence, size_t interval, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
         for (size_t j = 0; j < interval; j++) {
             for (size_t i2 = j + interval; i2 < to; i2 += interval) {
                 for (size_t i1 = i2 - interval; i1 >= from; i1 -= interval) {
-                    if (isLess(sequence[i1 + interval], sequence[i1]))
+                    if (cmp(sequence[i1 + interval], sequence[i1]))
                         sequence.swap(i1, i1 + interval);
                     else
                         break;
@@ -24,42 +24,44 @@ namespace sortFuncPrivate {
                 }
             }
         }
-        return sequence;
+
     }
 }
 
 template<typename T>
-mySequence<T>& ShellSort(mySequence<T>& sequence, mySequence<size_t>& intervals, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>* ShellSort(const mySequence<T>& sequence, mySequence<size_t>& intervals, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2) {
-        return sequence;
+        return sequence.copy();
     }
+
+    mySequence<T>* resSequence = sequence.copy();
 
     for (size_t i = 0; i < intervals.length(); i++) {
-        sortFuncPrivate::InsertSort(sequence, intervals[i], from, to, isLess);
+        sortFuncPrivate::InsertSort(*resSequence, intervals[i], from, to, cmp);
     }
 
-    return sequence;
+    return resSequence;
 }
 
 template<typename T>
-mySequence<T>& ShellSort(mySequence<T>& sequence, mySequence<size_t>& intervals, size_t from, size_t to) {
+mySequence<T>* ShellSort(const mySequence<T>& sequence, mySequence<size_t>& intervals, size_t from, size_t to) {
     return ShellSort(sequence, intervals, from, to, sortFuncPrivate::isLessDefault);
 }
 
 template<typename T>
-mySequence<T>& ShellSort(mySequence<T>& sequence, mySequence<size_t>& intervals, bool (*isLess)(const T& obj1, const T& obj2)) {
-    return ShellSort(sequence, intervals, 0, sequence.length(), isLess);
+mySequence<T>* ShellSort(const mySequence<T>& sequence, mySequence<size_t>& intervals, bool (*cmp)(const T& obj1, const T& obj2)) {
+    return ShellSort(sequence, intervals, 0, sequence.length(), cmp);
 }
 
 template<typename T>
-mySequence<T>& ShellSort(mySequence<T>& sequence, mySequence<size_t>& intervals) {
+mySequence<T>* ShellSort(const mySequence<T>& sequence, mySequence<size_t>& intervals) {
     return ShellSort(sequence, intervals, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 
 template<typename T>
-mySequence<T>& ShellSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>* ShellSort(const mySequence<T>& sequence, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2) {
-        return sequence;
+        return sequence.copy();
     }
 
     myArraySequence<size_t> intervals; //формирование последовательности Седжвика для сортировки Шелла
@@ -88,21 +90,21 @@ mySequence<T>& ShellSort(mySequence<T>& sequence, size_t from, size_t to, bool (
         intervals.prepend(predLast);
     }
 
-    return ShellSort(sequence, intervals, from, to, isLess);
+    return ShellSort(sequence, intervals, from, to, cmp);
 }
 
 template<typename T>
-mySequence<T>& ShellSort(mySequence<T>& sequence, size_t from, size_t to) {
+mySequence<T>* ShellSort(const mySequence<T>& sequence, size_t from, size_t to) {
     return ShellSort(sequence, from, to, sortFuncPrivate::isLessDefault);
 }
 
 template<typename T>
-mySequence<T>& ShellSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    return ShellSort(sequence, 0, sequence.length(), isLess);
+mySequence<T>* ShellSort(const mySequence<T>& sequence, bool (*cmp)(const T& obj1, const T& obj2)) {
+    return ShellSort(sequence, 0, sequence.length(), cmp);
 }
 
 template<typename T>
-mySequence<T>& ShellSort(mySequence<T>& sequence) {
+mySequence<T>* ShellSort(const mySequence<T>& sequence) {
     return ShellSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 

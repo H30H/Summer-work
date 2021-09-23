@@ -9,19 +9,21 @@
 #include "isLessDefault.h"
 
 template<typename T>
-mySequence<T>& SheikerSort(mySequence<T>& sequence, size_t from, size_t to, bool (*isLess)(const T& obj1, const T& obj2)) {
+mySequence<T>* SheikerSort(const mySequence<T>& sequence, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
     if (to <= from || to - from < 2) {
-        return sequence;
+        return sequence.copy();
     }
+
+    mySequence<T>* resSequence = sequence.copy();
 
     bool isChanged = true;
     size_t min = from, max = to - 1;
     while (isChanged) {
         isChanged = false;
         for (size_t i = min + 1; i <= max; i++) {
-            if (isLess(sequence[i], sequence[i-1])) {
+            if (cmp(resSequence->operator[](i), resSequence->operator[](i-1))) {
                 isChanged = true;
-                sequence.swap(i-1, i);
+                resSequence->swap(i-1, i);
             }
         }
         if (!isChanged)
@@ -29,27 +31,27 @@ mySequence<T>& SheikerSort(mySequence<T>& sequence, size_t from, size_t to, bool
         max--;
         isChanged = false;
         for (size_t i = max; i >= min + 1; i--) {
-            if (isLess(sequence[i], sequence[i-1])) {
+            if (cmp(resSequence->operator[](i), resSequence->operator[](i-1))) {
                 isChanged = true;
-                sequence.swap(i-1, i);
+                resSequence->swap(i-1, i);
             }
         }
     }
-    return sequence;
+    return resSequence;
 }
 
 template<typename T>
-mySequence<T>& SheikerSort(mySequence<T>& sequence, size_t from, size_t to) {
+mySequence<T>* SheikerSort(const mySequence<T>& sequence, size_t from, size_t to) {
     return SheikerSort(sequence, from, to, sortFuncPrivate::isLessDefault);
 }
 
 template<typename T>
-mySequence<T>& SheikerSort(mySequence<T>& sequence, bool (*isLess)(const T& obj1, const T& obj2)) {
-    return SheikerSort(sequence, 0, sequence.length(), isLess);
+mySequence<T>* SheikerSort(const mySequence<T>& sequence, bool (*cmp)(const T& obj1, const T& obj2)) {
+    return SheikerSort(sequence, 0, sequence.length(), cmp);
 }
 
 template<typename T>
-mySequence<T>& SheikerSort(mySequence<T>& sequence) {
+mySequence<T>* SheikerSort(const mySequence<T>& sequence) {
     return SheikerSort(sequence, 0, sequence.length(), sortFuncPrivate::isLessDefault);
 }
 
