@@ -14,6 +14,7 @@ CMakeFiles/Base_classes.dir/main.cpp.o: \
  ../LinkedList/myQueue.h \
  ../LinkedList/myStack.h \
  ../Map/myMap.h \
+ ../Sequence/ArraySequenceTest.h \
  ../Sequence/myArraySequence.h \
  ../Sequence/mySequence.h \
  ../SmartPointer/mySmartPointer.h \

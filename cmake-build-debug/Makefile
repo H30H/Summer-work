@@ -129,6 +129,54 @@ Base_classes/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/build
 .PHONY : Base_classes/fast
 
+Sequence/ArraySequenceTest.o: Sequence/ArraySequenceTest.cpp.o
+.PHONY : Sequence/ArraySequenceTest.o
+
+# target to build an object file
+Sequence/ArraySequenceTest.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sequence/ArraySequenceTest.cpp.o
+.PHONY : Sequence/ArraySequenceTest.cpp.o
+
+Sequence/ArraySequenceTest.i: Sequence/ArraySequenceTest.cpp.i
+.PHONY : Sequence/ArraySequenceTest.i
+
+# target to preprocess a source file
+Sequence/ArraySequenceTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sequence/ArraySequenceTest.cpp.i
+.PHONY : Sequence/ArraySequenceTest.cpp.i
+
+Sequence/ArraySequenceTest.s: Sequence/ArraySequenceTest.cpp.s
+.PHONY : Sequence/ArraySequenceTest.s
+
+# target to generate assembly for a file
+Sequence/ArraySequenceTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Sequence/ArraySequenceTest.cpp.s
+.PHONY : Sequence/ArraySequenceTest.cpp.s
+
+Tests/TestFuncs.o: Tests/TestFuncs.cpp.o
+.PHONY : Tests/TestFuncs.o
+
+# target to build an object file
+Tests/TestFuncs.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Tests/TestFuncs.cpp.o
+.PHONY : Tests/TestFuncs.cpp.o
+
+Tests/TestFuncs.i: Tests/TestFuncs.cpp.i
+.PHONY : Tests/TestFuncs.i
+
+# target to preprocess a source file
+Tests/TestFuncs.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Tests/TestFuncs.cpp.i
+.PHONY : Tests/TestFuncs.cpp.i
+
+Tests/TestFuncs.s: Tests/TestFuncs.cpp.s
+.PHONY : Tests/TestFuncs.s
+
+# target to generate assembly for a file
+Tests/TestFuncs.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Base_classes.dir/build.make CMakeFiles/Base_classes.dir/Tests/TestFuncs.cpp.s
+.PHONY : Tests/TestFuncs.cpp.s
+
 Timer/myTimer.o: Timer/myTimer.cpp.o
 .PHONY : Timer/myTimer.o
 
@@ -186,6 +234,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Base_classes"
+	@echo "... Sequence/ArraySequenceTest.o"
+	@echo "... Sequence/ArraySequenceTest.i"
+	@echo "... Sequence/ArraySequenceTest.s"
+	@echo "... Tests/TestFuncs.o"
+	@echo "... Tests/TestFuncs.i"
+	@echo "... Tests/TestFuncs.s"
 	@echo "... Timer/myTimer.o"
 	@echo "... Timer/myTimer.i"
 	@echo "... Timer/myTimer.s"

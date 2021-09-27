@@ -8,6 +8,7 @@ add_executable(
         main.cpp
         Timer/myTimer.cpp
         #test.cpp
-        )
+        Sequence/ArraySequenceTest.cpp
+        Tests/TestFuncs.cpp Tests/TestFuncs.h)
 
 #add_executable(Base_classes test.cpp)

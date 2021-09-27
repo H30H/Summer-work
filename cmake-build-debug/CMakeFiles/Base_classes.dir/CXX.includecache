@@ -58,6 +58,10 @@ myLinkedList.h
 ../BinaryTree/myAVLTree.h
 /cygdrive/c/cc++ labs/Base classes/BinaryTree/myAVLTree.h
 
+/cygdrive/c/cc++ labs/Base classes/Sequence/ArraySequenceTest.h
+../Console/myConsole.h
+/cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
+
 /cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
 mySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
@@ -211,6 +215,8 @@ windows.h
 -
 ../../Console/myConsole.h
 /cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
+../../Sequence/ArraySequenceTest.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/ArraySequenceTest.h
 
 /cygdrive/c/cc++ labs/Base classes/Timer/myTimer.h
 chrono

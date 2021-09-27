@@ -9,6 +9,7 @@
 #include "../../Timer/myTimer.h"
 #include <windows.h>
 #include "../../Console/myConsole.h"
+#include "../../Sequence/ArraySequenceTest.h"
 
 class mySortMenuClass {
 public:
@@ -103,6 +104,7 @@ public:
                     std::cout << "В разработке... (Coming soon)" << std::endl;
                     myConsole::applyDefaultColor();
                     myConsole::moveCursorDown(8);
+//                    myArraySequenceTest(1000, true);
 //                    update = true;
                     break;
             }
@@ -916,7 +918,6 @@ private:
                     myConsole::changeTextColor(0, 255, 0);
                 std::cout << "    " << sorts[i].sortName << " done!";
                 if (errors != 0) {
-//                    myConsole::changeTextColor(255, 0, 0);
                     std::cout << " (" << errors << " ошибок)";
                 }
                 myConsole::applyDefaultColor();

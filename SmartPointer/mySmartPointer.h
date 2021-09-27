@@ -7,12 +7,12 @@
 
 #include "iostream"
 
+//TODO доделать копирование, не выделяется память через new (мб просто ошибка синтаксиса)
+
 template<typename T>
 class mySmartPointer {
-    using uint = unsigned int;
-
     T* pointer = nullptr;
-    uint* usage = nullptr;
+    size_t* usage = nullptr;
 
     void deletePointer() {
         if (*usage == 1) {
@@ -26,16 +26,15 @@ public:
 
     };
 
-    mySmartPointer(): usage(new uint(1)) {}
+    mySmartPointer(): usage(new size_t(1)) {}
 
-    explicit mySmartPointer(T* pointer): pointer(pointer), usage(new uint(1)) {}
+    explicit mySmartPointer(T* pointer): pointer(pointer), usage(new size_t(1)) {}
 
     template<typename U>
     explicit mySmartPointer(U* ptr) {
-
         while (true) {
             try {
-                usage = new uint;
+                usage = new size_t;
                 break;
             }
             catch (std::exception& ba) {
@@ -56,7 +55,7 @@ public:
         deletePointer();
     }
 
-    mySmartPointer<T>& operator = (mySmartPointer<T>& other) {
+    mySmartPointer<T>& operator = (const mySmartPointer<T>& other) {
         deletePointer();
 
         pointer = other.pointer;
@@ -66,11 +65,11 @@ public:
         return *this;
     }
 
-    mySmartPointer<T> operator = (T* ptr) {
+    mySmartPointer<T>& operator = (T* ptr) {
         deletePointer();
 
         pointer = ptr;
-        usage = new uint(1);
+        usage = new size_t(1);
 
         return *this;
     }

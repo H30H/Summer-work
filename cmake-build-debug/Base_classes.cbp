@@ -80,6 +80,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sequence/ArraySequenceTest.cpp">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Sequence/ArraySequenceTest.h">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Tests/TestFuncs.cpp">
+			<Option target="Base_classes"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Tests/TestFuncs.h">
+			<Option target="Base_classes"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/cc++ labs/Base classes/Timer/myTimer.cpp">
 			<Option target="Base_classes"/>
 		</Unit>
