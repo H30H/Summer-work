@@ -13,6 +13,7 @@
 #include "Sorting/menu/sortingMenu.h"
 #include "Timer/myTimer.h"
 #include "Console/myConsole.h"
+#include "thread"
 
 bool compare(const int& obj1, const int& obj2) {
     return obj1 > obj2;
@@ -204,9 +205,111 @@ void u() {
     }
     /* */
 }
+/*
+struct point {
+    int x;
+    int y;
+};
+
+bool copm(const point& p1, const point& p2) {
+    return p1.x < p2.x;
+}
+*/
+
+void bubbleSort(myArraySequence<int>& sequence, size_t from, size_t to) {
+    bool changed = true;
+    size_t delta = 0;
+    while(changed) {
+        changed = false;
+        for (size_t i = from+1; i < to - delta; i++) {
+            if (sequence[i] < sequence[i-1]) {
+                changed = true;
+                sequence.swap(i, i-1);
+            }
+        }
+        delta++;
+    }
+}
+
+template<typename T>
+void QuickSort2(mySequence<T>& sequence, size_t from, size_t to, bool (*cmp)(const T& obj1, const T& obj2)) {
+    if (to <= from || to - from < 2) {
+        return;
+    }
+
+    struct interval {
+        size_t start;
+        size_t end;
+
+        interval(size_t start, size_t end): start(start), end(end) {}
+
+        interval(const interval& other): start(other.start), end(other.end) {}
+
+        bool operator == (const interval& other) const {
+            return start == other.start && end == other.end;
+        }
+    };
+
+    myQueue<interval> queue(interval(from, to));
+
+    while (queue.length() > 0) {
+        auto inter = queue.pop();
+        if (inter.start + 1 >= inter.end)
+            continue;
+        size_t index = sortFuncPrivate::randomIndex(inter.start, inter.end);
+        sortFuncPrivate::SortInterval(sequence, inter.start, inter.end, index, cmp);
+        queue.add(interval(inter.start, index));
+        queue.add(interval(index + 1, inter.end));
+    }
+}
+
+int threads = 0;
+
+void QuickSortThread(mySequence<int>& sequence, size_t from, size_t to, bool (*cmp)(const int& obj1, const int& obj2)) {
+    if (to <= from || to - from < 2) {
+        return;
+    }
+
+    size_t index = sortFuncPrivate::randomIndex(from, to);
+    sortFuncPrivate::SortInterval(sequence, from, to, index, cmp);
+
+    if (threads >= thread::hardware_concurrency()) {
+        QuickSortThread(sequence, from, index, cmp);
+        QuickSortThread(sequence, index, to, cmp);
+        return;
+    }
+
+    thread t1(QuickSortThread, std::ref(sequence), from, index, cmp);
+    thread t2(QuickSortThread, std::ref(sequence), index, to, cmp);
+    threads += 2;
+    t1.join();
+    t2.join();
+    threads -= 2;
+}
 
 int main() {
-    mySortMenuClass::mainMenu();
+
+//    string skipSymbol;         //при открытии консоли в фулл экран вводиться '\0'... (костыль чтоб не портить вывод меню)
+//    getline(cin, skipSymbol, '\0');
+//    mySortMenuClass::mainMenu();
+
+    myArraySequence<int> sequence1;
+    myArraySequence<int> sequence2;
+    for (int i = 0; i < 10000000; i++) {
+        sequence1.append(rand());
+        sequence2.append(rand());
+    }
+
+    myTimer timer;
+    QuickSort2(sequence1, 0, sequence1.length(), sortFuncPrivate::isLessDefault);
+    auto time1 = timer.time();
+
+    timer.reset();
+
+    QuickSortThread(sequence2, 0, sequence2.length(), sortFuncPrivate::isLessDefault);
+    auto time2 = timer.time();
+
+    cout << time1 << ' ' << time2 << endl;
 //    u();
     return 0;
 }

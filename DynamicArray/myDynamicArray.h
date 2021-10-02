@@ -313,19 +313,25 @@ public:
         size_t count;
         if (indexFrom > indexTo) {
             count = indexFrom - indexTo;
-            T *items = (T*) malloc(count * sizeof(T));                 //TODO: Посоветоваться с В.В., может стоит эту память тоже выделить заранее, как у swap
-            memcpy(items, array + indexTo, count * sizeof(T));
-            memcpy(array + indexTo, array + indexFrom, sizeof(T));
-            memcpy(array + indexTo + 1, items, count * sizeof(T));
-            free(items);
+            memcpy(swapBuff, array + indexFrom, sizeof(T));
+            memmove(array + indexTo + 1, array + indexTo, sizeof(T) * count);
+            memcpy(array + indexTo, swapBuff, sizeof(T));
+//            T *items = (T*) malloc(count * sizeof(T));                 //TODO: Посоветоваться с В.В., может стоит эту память тоже выделить заранее, как у swap
+//            memcpy(items, array + indexTo, count * sizeof(T));
+//            memcpy(array + indexTo, array + indexFrom, sizeof(T));
+//            memcpy(array + indexTo + 1, items, count * sizeof(T));
+//            free(items);
         }
         else {
             count = indexTo - indexFrom;
-            T *items = (T*) malloc(count * sizeof(T));
-            memcpy(items, array + indexFrom + 1, count * sizeof(T));
-            memcpy(array + indexTo, array + indexFrom, sizeof(T));
-            memcpy(array + indexFrom, items, count * sizeof(T));
-            free(items);
+            memcpy(swapBuff, array + indexFrom, sizeof(T));
+            memmove(array + indexFrom, array + indexFrom + 1, sizeof(T) * count);
+            memcpy(array + indexTo, swapBuff, sizeof(T));
+//            T *items = (T*) malloc(count * sizeof(T));
+//            memcpy(items, array + indexFrom + 1, count * sizeof(T));
+//            memcpy(array + indexTo, array + indexFrom, sizeof(T));
+//            memcpy(array + indexFrom, items, count * sizeof(T));
+//            free(items);
         }
     }
 

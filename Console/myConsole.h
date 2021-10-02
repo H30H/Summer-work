@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+// All these commands were taken from the ANSI-Escape table
+
 struct myConsole {
     template<typename T, typename...Args>
     static void print(const T& item, Args...args) {

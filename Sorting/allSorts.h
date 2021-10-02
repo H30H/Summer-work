@@ -18,7 +18,7 @@
 #include "QuickSort.h"        /// 13
 #include "SelectionSort.h"    /// 4
 #include "SelectionSortMod.h" /// 7
-#include "SheikerSort.h"      /// 2
+#include "ShakerSort.h"       /// 2
 #include "ShellSort.h"        /// 11, 12
 
 

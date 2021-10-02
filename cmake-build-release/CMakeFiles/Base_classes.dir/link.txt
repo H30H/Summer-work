@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -O3 -DNDEBUG -Wl,--enable-auto-import CMakeFiles/Base_classes.dir/main.cpp.o CMakeFiles/Base_classes.dir/Timer/myTimer.cpp.o CMakeFiles/Base_classes.dir/Sequence/ArraySequenceTest.cpp.o CMakeFiles/Base_classes.dir/Tests/TestFuncs.cpp.o -o Base_classes.exe -Wl,--out-implib,libBase_classes.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

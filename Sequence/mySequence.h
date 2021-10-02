@@ -72,7 +72,7 @@ public:
 };
 
 template<typename T>
-std::ostream& operator << (std::ostream& cout, const mySequence<T>& sequence) {
+static std::ostream& operator << (std::ostream& cout, const mySequence<T>& sequence) {
     cout << "{";
     for (size_t i = 0; i < sequence.length(); i++) {
         cout << sequence[i];
@@ -84,7 +84,7 @@ std::ostream& operator << (std::ostream& cout, const mySequence<T>& sequence) {
     return cout << "}";
 }
 
-std::ostream& operator << (std::ostream& cout, const mySequence<char>& sequence) {
+static std::ostream& operator << (std::ostream& cout, const mySequence<char>& sequence) {
     for (size_t i = 0; i < sequence.length(); i++) {
         cout << sequence[i];
     }

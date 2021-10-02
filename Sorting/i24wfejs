@@ -1,7 +1,0 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-struct element {
-    int x;
-    int y;
-};

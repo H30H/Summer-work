@@ -61,6 +61,10 @@ myLinkedList.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/ArraySequenceTest.h
 ../Console/myConsole.h
 /cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
+myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+../Tests/TestFuncs.h
+/cygdrive/c/cc++ labs/Base classes/Tests/TestFuncs.h
 
 /cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
 mySequence.h
@@ -164,7 +168,7 @@ isLessDefault.h
 ../Sequence/mySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
 
-/cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/ShakerSort.h
 ../Sequence/mySequence.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
 isLessDefault.h
@@ -199,8 +203,8 @@ SelectionSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
 SelectionSortMod.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h
-SheikerSort.h
-/cygdrive/c/cc++ labs/Base classes/Sorting/SheikerSort.h
+ShakerSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/ShakerSort.h
 ShellSort.h
 /cygdrive/c/cc++ labs/Base classes/Sorting/ShellSort.h
 
@@ -217,6 +221,12 @@ windows.h
 /cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
 ../../Sequence/ArraySequenceTest.h
 /cygdrive/c/cc++ labs/Base classes/Sequence/ArraySequenceTest.h
+
+/cygdrive/c/cc++ labs/Base classes/Tests/TestFuncs.h
+random
+/cygdrive/c/cc++ labs/Base classes/Tests/random
+../Console/myConsole.h
+/cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
 
 /cygdrive/c/cc++ labs/Base classes/Timer/myTimer.h
 chrono
@@ -253,4 +263,6 @@ Timer/myTimer.h
 /cygdrive/c/cc++ labs/Base classes/Timer/myTimer.h
 Console/myConsole.h
 /cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
+thread
+/cygdrive/c/cc++ labs/Base classes/thread
 

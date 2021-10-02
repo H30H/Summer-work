@@ -14,33 +14,34 @@
 class mySortMenuClass {
 public:
     static void mainMenu() {
-        myArraySequence<mySortList> allSorts
+        myArraySequence<mySortInfo> allSorts
                 {
-                        mySortList{"BatcherSort", BatcherSort, BatcherSort},
-                        mySortList{"BinaryTreeSort", BinaryTreeSort, BinaryTreeSort},
-                        mySortList{"BinInsertSort", BinInsertSort, BinInsertSort},
-                        mySortList{"BubbleSort", BubbleSort, BubbleSort},
-                        mySortList{"CountingSort", CountingSort, CountingSort},
-                        mySortList{"HeapSort", HeapSort, HeapSort},
-                        mySortList{"InsertSort", InsertSort, InsertSort},
-                        mySortList{"MergeSort", MergeSort, MergeSort},
-                        mySortList{"QuickSort", QuickSort, QuickSort},
-                        mySortList{"SelectionSort", SelectionSort, SelectionSort},
-                        mySortList{"SelectionSortMod", SelectionSortMod, SelectionSortMod},
-                        mySortList{"SheikerSort", SheikerSort, SheikerSort},
-                        mySortList{"ShellSort", ShellSort, ShellSort}
+                        mySortInfo{"BatcherSort", BatcherSort, BatcherSort},
+                        mySortInfo{"BinaryTreeSort", BinaryTreeSort, BinaryTreeSort},
+                        mySortInfo{"BinInsertSort", BinInsertSort, BinInsertSort},
+                        mySortInfo{"BubbleSort", BubbleSort, BubbleSort},
+                        mySortInfo{"CountingSort", CountingSort, CountingSort},
+                        mySortInfo{"HeapSort", HeapSort, HeapSort},
+                        mySortInfo{"InsertSort", InsertSort, InsertSort},
+                        mySortInfo{"MergeSort", MergeSort, MergeSort},
+                        mySortInfo{"QuickSort", QuickSort, QuickSort},
+                        mySortInfo{"SelectionSort", SelectionSort, SelectionSort},
+                        mySortInfo{"SelectionSortMod", SelectionSortMod, SelectionSortMod},
+                        mySortInfo{"ShakerSort", ShakerSort, ShakerSort},
+                        mySortInfo{"ShellSort", ShellSort, ShellSort}
                 };
 
         myArraySequence<mySequence<int>*> memory;
-        myArraySequence<bool> compareArray;
+        myArraySequence<bool> includeInComparison;
+
         for (size_t i = 0; i < allSorts.length(); i++)
-            compareArray.append(false);
+            includeInComparison.append(false);
 
         size_t state = 0;
 
-        for (size_t i = 0; i < allSorts.length(); i++) {
-            compareArray.append(false);
-        }
+//        for (size_t i = 0; i < allSorts.length(); i++) {
+//            includeInComparison.append(false);
+//        }
 
         bool update = true;
 
@@ -49,7 +50,7 @@ public:
             contextMenu(update, state, memory.length());
             std::cout << ": ";
             bool good;
-            state = getItem(good);
+            state = readItem(good);
 
             if (!good) {
                 continue;
@@ -94,7 +95,7 @@ public:
                     sortSequence(memory, allSorts);
                     break;
                 case 4:
-                    compareTime(allSorts, compareArray);
+                    compareTime(allSorts, includeInComparison);
                     update = true;
                     break;
                 case 5:
@@ -112,7 +113,7 @@ public:
         }
     }
 private:
-    struct mySortList {
+    struct mySortInfo {
         std::string sortName;
         mySequence<int>* (*sortFunc)(const mySequence<int>& sequence) = nullptr;
         mySequence<int>* (*sortFuncIndex)(const mySequence<int>& sequence, size_t from, size_t to) = nullptr;
@@ -122,18 +123,17 @@ private:
         return rand();
     }
 
-    static size_t getItem(bool& good) {
-        const size_t length = 100;
-        char* c = new char[length];
-        std::cin.getline(c, 100);
+    static size_t readItem(bool& good) {
+        std::string str;
+        getline( std::cin, str);
         std::cin.clear();
         size_t i = 0;
 
-        while (i < length && c[i] < '0' && c[i] > '9' && c[i] != '\0') {
+        while (i < str.length() && (str[i] < '0' || str[i] > '9')) {
             i++;
         }
 
-        if (i == length || c[i] == '\0') {
+        if (i == str.length() || str[i] == '\0') {
             good = false;
             return -1;
         }
@@ -141,19 +141,19 @@ private:
         size_t res = 0;
         good = true;
 
-        for (i; i < length; i++) {
-            if (c[i] < '0' || c[i] > '9')
+        for (i; i < str.length(); i++) {
+            if (str[i] < '0' || str[i] > '9')
                 break;
             res *= 10;
-            res += c[i] - '0';
+            res += str[i] - '0';
         }
 
         return res;
     }
 
-    static size_t getItem() {
+    static size_t readItem() {
         bool k;
-        return getItem(k);
+        return readItem(k);
     }
 
     static void contextMenu(bool& update, size_t state, size_t length) {
@@ -206,7 +206,7 @@ private:
 //1
 
     template<typename T>
-    static myArraySequence<T> getRandomArray(size_t size, T (*randomFunc)()) {
+    static myArraySequence<T> createRandomArray(size_t size, T (*randomFunc)()) {
         myArraySequence<T> arraySequence;
         for (size_t i = 0; i < size; i++) {
             arraySequence.append(randomFunc());
@@ -222,14 +222,14 @@ private:
             std::cout << "1::В памяти не обнаружено массивов. ";
         std::cout << "Введите количество элементов нового массива." << std::endl << ": ";
         size_t size, state;
-        size = getItem();
+        size = readItem();
         myArraySequence<T> arraySequence;
 
         if (size == 0) {
             std::cout << "Вы действительно хотите добавить ПУСТОЙ массив? (0 - нет, 1 - да)" << std::endl;
             while (state > 1) {
                 std::cout << ": ";
-                state = getItem();
+                state = readItem();
                 if (state > 1) {
                     stateError();
                     continue;
@@ -251,7 +251,7 @@ private:
         state = 2;
         while (state > 1) {
             std::cout << ": ";
-            state = getItem();
+            state = readItem();
             if (state > 1) {
                 stateError();
             }
@@ -259,14 +259,14 @@ private:
 
 
         if (state) {
-            arraySequence = getRandomArray(size, randomFunc);
+            arraySequence = createRandomArray(size, randomFunc);
         }
         else {
             std::cout << " Введите \"" << size << "\" элементов нового массива." << std::endl;
             for (size_t i = 0; i < size; i++) {
                 T k;
                 std::cout << "\t: ";
-                state = getItem();
+                state = readItem();
                 arraySequence.append(k);
             }
         }
@@ -275,7 +275,7 @@ private:
         state = 2;
         while (state > 1) {
             std::cout << ": ";
-            state = getItem();
+            state = readItem();
             if (state > 1) {
                 stateError();
                 continue;
@@ -303,11 +303,11 @@ private:
             checkArrayMenu();
             std::cout << ": ";
             size_t state;
-            state = getItem();
-            if (state == 5)
+            state = readItem();
+            if (state == 6)
                 break;
 
-            if (state > 5 || state == 0) {
+            if (state > 6 || state == 0) {
                 stateError();
                 continue;
             }
@@ -353,7 +353,7 @@ private:
         std::cout << "В памяти храниться \"" << memory.length() << "\" элементов. Введите индекс массива, который необходимо вывести" << std::endl;
         std::cout << ": ";
         size_t index;
-        index = getItem();
+        index = readItem();
 
         if (index >= memory.length()) {
             std::cout << "Индекс превышает размер памяти!" << std::endl;
@@ -371,7 +371,7 @@ private:
         std::cout << "В памяти находится \"" << memory.length() << "\" масивов. Введите индекс первого массива" << std::endl;
         std::cout << ": ";
         size_t index1, index2;
-        index1 = getItem();
+        index1 = readItem();
 
         if (index1 >= memory.length()) {
             std::cout << "Индекс превышает размер памяти!" << std::endl;
@@ -380,7 +380,7 @@ private:
 
         std::cout << "Введите индекс второго массива" << std::endl;
         std::cout << ": ";
-        index2 = getItem();
+        index2 = readItem();
 
         if (index2 >= memory.length()) {
             std::cout << "Индекс превышает размер памяти!" << std::endl;
@@ -403,7 +403,7 @@ private:
         std::cout << ": ";
 
         size_t index, state;
-        index = getItem();
+        index = readItem();
 
         if (index >= memory.length()) {
             std::cout << "Индекс превышает размер памяти!" << std::endl;
@@ -413,7 +413,7 @@ private:
         state = 2;
         while (state > 1) {
             std::cout << ": ";
-            state = getItem();
+            state = readItem();
             if (state > 1) {
                 stateError();
             }
@@ -431,7 +431,7 @@ private:
         std::cout << "В памяти находится \"" << memory.length() << "\" масивов. Введите индекс массива для изменения" << std::endl;
         std::cout << ": ";
         size_t index, state = 1;
-        index = getItem();
+        index = readItem();
 
         if (index >= memory.length()) {
             std::cout << "Индекс превышает размер памяти!" << std::endl;
@@ -441,7 +441,7 @@ private:
         while (state) {
             editContexMenu();
             std::cout << ": ";
-            state = getItem();
+            state = readItem();
 
             if (state > 8 || state == 0) {
                 stateError();
@@ -584,7 +584,7 @@ private:
     static void copyArray(myArraySequence<mySequence<T>*>& memory) {
         std::cout << "Введите индекс массива для копирования" << std::endl << ": ";
         size_t index, state = 2;
-        index = getItem();
+        index = readItem();
         if (index >= memory.length()) {
             std::cout << " Индекс превышает размер памяти!" << std::endl;
             return;
@@ -593,7 +593,7 @@ private:
         std::cout << "Вы точно хотите скопировать массив " << *memory[index] << "? (0 - нет, 1 - да)";
         while (state > 1) {
             std::cout << ": ";
-            state = getItem();
+            state = readItem();
             if (state > 1)
                 stateError();
         }
@@ -607,7 +607,7 @@ private:
 
     //3
     template<typename T>
-    static void sortSequence(myArraySequence<mySequence<T>*> memory, myArraySequence<mySortList>& sorts) {
+    static void sortSequence(myArraySequence<mySequence<T>*>& memory, myArraySequence<mySortInfo>& sorts) {
         if (memory.length() == 0) {
 //            std::cout << "В памяти не обнаружено массивов. Для начала запишите массив в память!" << std::endl;
             return;
@@ -615,7 +615,7 @@ private:
         std::cout << "В памяти находится \"" << memory.length() << "\" массивов. Введите индекс массива, который необходимо отсортировать" << std::endl;
         size_t index, state, indexFrom, indexTo;
         std::cout << ": ";
-        index = getItem();
+        index = readItem();
         if (index >= memory.length()) {
             indexError();
             return;
@@ -626,21 +626,21 @@ private:
         state = 2;
         while (state > 1) {
             std::cout << ": ";
-            state = getItem();
+            state = readItem();
             if (state > 1)
                 stateError();
         }
 
         if (state) {
             std::cout << "Введите индекс нижней границы" << std::endl << ": ";
-            indexFrom = getItem();
+            indexFrom = readItem();
             if (indexFrom >= memory[index]->length()) {
                 indexError("массива");
                 return;
             }
 
             std::cout << "Введите индекс верхней границы" << std::endl << ": ";
-            indexTo = getItem();
+            indexTo = readItem();
             if (indexTo > memory[index]->length()) {
                 indexError("массива");
                 return;
@@ -656,10 +656,10 @@ private:
             std::cout << "\t" << i << ": " + sorts[i-1].sortName << std::endl;
         }
 
-        state = sorts.length() + 1;
+        state = 0;
         while (state == 0 || state > sorts.length() + 1) {
             std::cout << ": ";
-            state = getItem();
+            state = readItem();
             if (state == 0 || state > sorts.length()) {
                 stateError();
             }
@@ -728,7 +728,7 @@ private:
     }
 
     //4
-    static void compareTime(const myArraySequence<mySortList>& sorts, myArraySequence<bool>& compSorts) {
+    static void compareTime(const myArraySequence<mySortInfo>& sorts, myArraySequence<bool>& compSorts) {
         size_t state = 1;
         char c;
 
@@ -751,7 +751,7 @@ private:
         while (size != 0) {
             std::cin.clear();
             std::cout << ": ";
-            size = getItem();
+            size = readItem();
             if (size != 0)
                 arraySizes.append(size);
         }
@@ -765,7 +765,7 @@ private:
 
         size_t sortCount;
         std::cout << ": ";
-        sortCount = getItem();
+        sortCount = readItem();
         if (sortCount == 0) {
             std::cout << "Нулевое количество массивов!" << std::endl;
             return;
@@ -778,10 +778,13 @@ private:
             times.append(getSortsTime(sorts, compSorts, i, sortCount));
         }
 
+        myConsole::changeTextColor(255, 127, 0);
+        std::cout << "Таблица времени сортировок (в милисекундах)" << std::endl;
+        myConsole::applyDefaultColor();
         std::cout << getTable(sorts, compSorts, arraySizes, times) << std::endl;
     }
 
-    static void getSorts(const myArraySequence<mySortList>& sorts, myArraySequence<bool>& compSorts) {
+    static void getSorts(const myArraySequence<mySortInfo>& sorts, myArraySequence<bool>& compSorts) {
         bool error = false;
         size_t state = 1;
         size_t maxState = -1;
@@ -790,7 +793,7 @@ private:
         contextMenuCompareTime(sorts, compSorts, true);
         while (true) {
             std::cout << ": ";
-            state = getItem();
+            state = readItem();
 
             if (state == 0)
                 break;
@@ -852,7 +855,7 @@ private:
         }
     }
 
-    static void contextMenuCompareTime(const myArraySequence<mySortList>& sorts, const myArraySequence<bool>& compSorts, bool first) {
+    static void contextMenuCompareTime(const myArraySequence<mySortInfo>& sorts, const myArraySequence<bool>& compSorts, bool first) {
 //        if (!first) {
 //            for (size_t i = 0; i < compSorts.length(); i++) {
 //                clear();
@@ -887,7 +890,7 @@ private:
         myConsole::applyDefaultColor();
     }
 
-    static myArraySequence<double> getSortsTime(const myArraySequence<mySortList>& sorts, const myArraySequence<bool>& compSorts, size_t size, size_t count) {
+    static myArraySequence<double> getSortsTime(const myArraySequence<mySortInfo>& sorts, const myArraySequence<bool>& compSorts, size_t size, size_t count) {
         myArraySequence<myArraySequence<int>> arrays;
         myArraySequence<double> res;
         for (size_t j = 0; j < count; j++) {
@@ -909,7 +912,7 @@ private:
                     time += tm;
 //                    std::cout << tm << std::endl;
                 }
-                res.append(time / (double)count);
+                res.append(time / (double)count * 1000);
                 myConsole::moveCursorUp();
                 myConsole::applyDefaultColor();
                 if (errors != 0)
@@ -927,7 +930,7 @@ private:
         return res;
     }
 
-    static double getOneSortTime(const mySortList& sort, const myArraySequence<int>& seq, size_t count, size_t& errors) {
+    static double getOneSortTime(const mySortInfo& sort, const myArraySequence<int>& seq, size_t count, size_t& errors) {
         myTimer timer;
         auto sortArray = sort.sortFunc(seq);
         double time = timer.time();
@@ -949,7 +952,7 @@ private:
         return res;
     }
 
-    static std::string getTable(const myArraySequence<mySortList>& sorts,
+    static std::string getTable(const myArraySequence<mySortInfo>& sorts,
                                 const myArraySequence<bool>& compSorts,
                                 const myArraySequence<size_t>& sizes,
                                 const myArraySequence<myArraySequence<double>>& values) {
@@ -1006,34 +1009,6 @@ private:
         }
         size++;
     }
-
-    static void clear() {
-        // CSI[2J clears screen, CSI[H moves the cursor to top-left corner
-        std::cout << "\x1B[2J\x1B[H";
-    }
-
-    static void clearLastRow(int row) {
-        // получаем хэндл окна консоли
-        HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-        // получаем данные из буфера вывода консоли
-        CONSOLE_SCREEN_BUFFER_INFO csbi;
-
-        // получаем координаты строки для очистки
-        COORD cursorCoords = csbi.dwCursorPosition;
-        if (cursorCoords.Y == 0)
-            return;
-
-        COORD coord = { 0, static_cast<short>(row)};
-
-        GetConsoleScreenBufferInfo(hStdOut, &csbi);
-        // заполняем строку пробелами
-        SetConsoleCursorPosition(hStdOut, coord);
-        std::cout << "1111111111111";
-        FillConsoleOutputCharacter(hStdOut, ' ', 80, coord, nullptr);
-        // сбрасываем позицию курсора
-        SetConsoleCursorPosition(hStdOut, csbi.dwCursorPosition);
-    }
 };
 
 
@@ -1053,7 +1028,7 @@ public:
                         mySortList{"QuickSort", QuickSort, QuickSort},
                         mySortList{"SelectionSort", SelectionSort, SelectionSort},
                         mySortList{"SelectionSortMod", SelectionSortMod, SelectionSortMod},
-                        mySortList{"SheikerSort", SheikerSort, SheikerSort},
+                        mySortList{"ShakerSort", ShakerSort, ShakerSort},
                         mySortList{"ShellSort", ShellSort, ShellSort}
                 };
 
