@@ -801,21 +801,15 @@ private:
             if (state == maxState || state > sorts.length()) {
                 myConsole::moveCursorUp();
                 myConsole::removeLine();
-//                std::cout << "\x1B[1A";  //переместиться на строку вверх
-//                std::cout << "\x1B[K";   //убрать текущий ввод
 
                 if (error) {
                     continue;
                 }
                 myConsole::moveCursorUp(sorts.length() + 2);
                 myConsole::changeTextColor(255, 0, 0);
-//                std::cout << std::string("\x1B[") + std::to_string(sorts.length() + 2) + "A"; //переместиться на строку с ошибкой
-//                std::cout << "\x1B[0;31;40m";  //поменять цвет на красный
                 stateError();
                 myConsole::moveCursorDown(sorts.length() + 1);
                 myConsole::applyDefaultColor();
-//                std::cout << "\x1b[0;0m";
-//                std::cout << std::string("\x1B[") + std::to_string(sorts.length() + 1) + "B"; //переместиться на строку с вводом
                 error = true;
                 continue;
             }

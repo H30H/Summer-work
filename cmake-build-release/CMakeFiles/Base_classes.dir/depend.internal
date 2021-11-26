@@ -17,5 +17,36 @@ CMakeFiles/Base_classes.dir/Tests/TestFuncs.cpp.o
 CMakeFiles/Base_classes.dir/Timer/myTimer.cpp.o
  /cygdrive/c/cc++ labs/Base classes/Timer/myTimer.cpp
  /cygdrive/c/cc++ labs/Base classes/Timer/myTimer.h
-CMakeFiles/Base_classes.dir/test.cpp.o
- /cygdrive/c/cc++ labs/Base classes/test.cpp
+CMakeFiles/Base_classes.dir/main.cpp.o
+ /cygdrive/c/cc++ labs/Base classes/BinaryTree/myAVLTree.h
+ /cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h
+ /cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
+ /cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
+ /cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
+ /cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
+ /cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
+ /cygdrive/c/cc++ labs/Base classes/LinkedList/myStack.h
+ /cygdrive/c/cc++ labs/Base classes/Map/myMap.h
+ /cygdrive/c/cc++ labs/Base classes/Sequence/ArraySequenceTest.h
+ /cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+ /cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+ /cygdrive/c/cc++ labs/Base classes/SmartPointer/mySmartPointer.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/BatcherSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/BinInsertSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/BinaryTreeSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/CountingSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/HeapSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/MergeSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/QuickSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/ShakerSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/ShellSort.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+ /cygdrive/c/cc++ labs/Base classes/Sorting/menu/sortingMenu.h
+ /cygdrive/c/cc++ labs/Base classes/Tests/TestFuncs.h
+ /cygdrive/c/cc++ labs/Base classes/Timer/myTimer.h
+ /cygdrive/c/cc++ labs/Base classes/main.cpp

@@ -30,9 +30,9 @@ struct myConsole {
     static void changeBackgroundColor(char R, char G, char B) {
         std::string res("\x1B[");
         res += "48;2;";     // change background color mode
-        res += std::to_string((int) R) + ';';
-        res += std::to_string((int) G) + ';';
-        res += std::to_string((int) B) + 'm';
+        res += std::to_string(R%256) + ';';
+        res += std::to_string(G%256) + ';';
+        res += std::to_string(B%256) + 'm';
         std::cout << res;
     }
 

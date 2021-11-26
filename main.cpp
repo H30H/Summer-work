@@ -287,12 +287,65 @@ void QuickSortThread(mySequence<int>& sequence, size_t from, size_t to, bool (*c
     threads -= 2;
 }
 
+static void getString(std::basic_istream<char>& stream, std::string& str) {
+    char c;
+    while (c != '\n') {
+        stream.get(c);
+        if (c == '\n')
+            return;
+        if (c == '\0') {
+            stream.clear();
+            continue;
+        }
+
+        str += c;
+    }
+}
+
 int main() {
 
 //    string skipSymbol;         //при открытии консоли в фулл экран вводиться '\0'... (костыль чтоб не портить вывод меню)
 //    getline(cin, skipSymbol, '\0');
+    std::string str;
+    getString(std::cin, str);
 //    mySortMenuClass::mainMenu();
+    int r = 255, g = 0, b = 0;
+    int delta = 5;
+    int dr = -delta, dg = delta, db = 0;
+    for (int i = 0; i < 1000; i++) {
+        myConsole::changeTextColor(r, g, b);
+        r += dr, g += dg, b += db;
+        if (r < 0) {
+            r = 0;
+            dr = 0;
+            dg = -delta;
+            db = delta;
+            g = 255;
+        }
+        if (g < 0) {
+            g = 0;
+            dg = 0;
+            db = -delta;
+            dr = delta;
+            b = 255;
+        }
+        if (b < 0) {
+            b = 0;
+            db = 0;
+            dr = -delta;
+            dg = delta;
+            r = 255;
+        }
+        std::cout << "@";
+    }
 
+    std::cin >> r;
+    std::cin >> r;
+    std::cin >> r;
+    std::cin >> r;
+    std::cin >> r;
+    std::cin >> r;
+/*
     myArraySequence<int> sequence1;
     myArraySequence<int> sequence2;
     for (int i = 0; i < 10000000; i++) {
@@ -311,5 +364,6 @@ int main() {
 
     cout << time1 << ' ' << time2 << endl;
 //    u();
+ */
     return 0;
 }

@@ -6,9 +6,263 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/cc++ labs/Base classes/test.cpp
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myAVLTree.h
+myBinaryTree.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
+../LinkedList/myStack.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myStack.h
+../LinkedList/myQueue.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
+
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h
+myBinaryTree.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
+../Sequence/myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+iostream
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/iostream
+
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
+random
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/random
+../LinkedList/myQueue.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
+
+/cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
 iostream
 -
-math.h
+
+/cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
+iostream
 -
+iterator
+-
+cstring
+-
+
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
+cstring
+/cygdrive/c/cc++ labs/Base classes/LinkedList/cstring
+iostream
+/cygdrive/c/cc++ labs/Base classes/LinkedList/iostream
+
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
+myLinkedList.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
+
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myStack.h
+myLinkedList.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
+
+/cygdrive/c/cc++ labs/Base classes/Map/myMap.h
+../BinaryTree/myAVLTree.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myAVLTree.h
+
+/cygdrive/c/cc++ labs/Base classes/Sequence/ArraySequenceTest.h
+../Console/myConsole.h
+/cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
+myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+../Tests/TestFuncs.h
+/cygdrive/c/cc++ labs/Base classes/Tests/TestFuncs.h
+
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+../DynamicArray/myDynamicArray.h
+/cygdrive/c/cc++ labs/Base classes/DynamicArray/myDynamicArray.h
+
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+iostream
+-
+../SmartPointer/mySmartPointer.h
+/cygdrive/c/cc++ labs/Base classes/SmartPointer/mySmartPointer.h
+
+/cygdrive/c/cc++ labs/Base classes/SmartPointer/mySmartPointer.h
+iostream
+/cygdrive/c/cc++ labs/Base classes/SmartPointer/iostream
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/BatcherSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+../Sequence/myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+../LinkedList/myQueue.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
+cmath
+-
+iostream
+-
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/BinInsertSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/BinaryTreeSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+../BinaryTree/myBinaryTree.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryTree.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/CountingSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+../Map/myMap.h
+/cygdrive/c/cc++ labs/Base classes/Map/myMap.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/HeapSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+../BinaryTree/myBinaryHeap.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/MergeSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+iostream
+/cygdrive/c/cc++ labs/Base classes/Sorting/iostream
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/QuickSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+../LinkedList/myQueue.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myQueue.h
+random
+/cygdrive/c/cc++ labs/Base classes/Sorting/random
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/ShakerSort.h
+../Sequence/mySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/mySequence.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/ShellSort.h
+isLessDefault.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+../Sequence/myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
+BatcherSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/BatcherSort.h
+BinaryTreeSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/BinaryTreeSort.h
+BinInsertSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/BinInsertSort.h
+BubbleSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
+CountingSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/CountingSort.h
+HeapSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/HeapSort.h
+InsertSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/InsertSort.h
+MergeSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/MergeSort.h
+QuickSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/QuickSort.h
+SelectionSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSort.h
+SelectionSortMod.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/SelectionSortMod.h
+ShakerSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/ShakerSort.h
+ShellSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/ShellSort.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/isLessDefault.h
+
+/cygdrive/c/cc++ labs/Base classes/Sorting/menu/sortingMenu.h
+../allSorts.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/allSorts.h
+../../Timer/myTimer.h
+/cygdrive/c/cc++ labs/Base classes/Timer/myTimer.h
+windows.h
+-
+../../Console/myConsole.h
+/cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
+../../Sequence/ArraySequenceTest.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/ArraySequenceTest.h
+
+/cygdrive/c/cc++ labs/Base classes/Tests/TestFuncs.h
+random
+/cygdrive/c/cc++ labs/Base classes/Tests/random
+../Console/myConsole.h
+/cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
+
+/cygdrive/c/cc++ labs/Base classes/Timer/myTimer.h
+chrono
+-
+
+/cygdrive/c/cc++ labs/Base classes/main.cpp
+iostream
+-
+tuple
+-
+utility
+-
+vector
+-
+iterator
+-
+Sequence/myArraySequence.h
+/cygdrive/c/cc++ labs/Base classes/Sequence/myArraySequence.h
+Sorting/BubbleSort.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/BubbleSort.h
+random
+/cygdrive/c/cc++ labs/Base classes/random
+BinaryTree/myBinaryHeap.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myBinaryHeap.h
+LinkedList/myLinkedList.h
+/cygdrive/c/cc++ labs/Base classes/LinkedList/myLinkedList.h
+BinaryTree/myAVLTree.h
+/cygdrive/c/cc++ labs/Base classes/BinaryTree/myAVLTree.h
+Map/myMap.h
+/cygdrive/c/cc++ labs/Base classes/Map/myMap.h
+Sorting/menu/sortingMenu.h
+/cygdrive/c/cc++ labs/Base classes/Sorting/menu/sortingMenu.h
+Timer/myTimer.h
+/cygdrive/c/cc++ labs/Base classes/Timer/myTimer.h
+Console/myConsole.h
+/cygdrive/c/cc++ labs/Base classes/Console/myConsole.h
+thread
+/cygdrive/c/cc++ labs/Base classes/thread
 
